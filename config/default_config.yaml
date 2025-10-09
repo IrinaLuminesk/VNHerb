@@ -1,0 +1,30 @@
+GPUS: (0,1,2,3)
+WORKERS: 4
+PRINT_FREQ: 1
+
+DATASET:
+  DATASET_NAME: CIFAR10
+  ROOT: "../datasets"
+  ROOT_FOLDER: "./datasets/Cifar10"
+  TRAIN_FOLDER: "./datasets/train"
+  TEST_FOLDER: "./datasets/test"
+  ZIP_FOLDER: "./datasets/Cifar10.zip"
+  SELECTION_RATIO: 1
+  SPLIT_RATIO: 0.7
+
+TRAIN:
+  IMAGE_SIZE: [224, 224]
+  BATCH_SIZE: 32
+  SHUFFLE: True
+  BEGIN_EPOCH: 0
+  END_EPOCH: 1
+  LAST_EPOCH: 0
+  OPTIMIZER: "AdamW"
+  MEAN: [0.48667304, 0.47782094, 0.44596779]
+  STD: [0.20571293, 0.20116103, 0.20227837]
+  RESUME: False
+
+
+TEST:
+  BATCH_SIZE: 32
+
