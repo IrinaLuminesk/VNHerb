@@ -23,7 +23,7 @@ def build_model(model_type, num_classes):
                 model = vgg19(weights=vgg19_weights)
 
                 vgg19_classifier = list(model.classifier.children())[:6]
-                in_features = model.classifier[6]
+                in_features = model.classifier[6].in_features
 
                 model.classifier = nn.Sequential(
                     *vgg19_classifier,
