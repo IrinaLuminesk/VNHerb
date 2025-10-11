@@ -5,7 +5,8 @@ from model import Model
 from utils.Utilities import YAML_Reader, get_mean_std
 
 import torch
-from torchvision import datasets, transforms
+from torchvision import datasets
+from torchvision.transforms import v2
 from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
@@ -50,28 +51,28 @@ def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_si
     return training_loader, testing_loader
 
 def Get_Transform(mean: list, std: list):
-    training_transform = transforms.Compose([
-        transforms.Resize((256, 256)),
-        transforms.RandomChoice([
-            transforms.RandomHorizontalFlip(p=1.0),
-            transforms.RandomVerticalFlip(p=1.0),
-            transforms.RandomRotation(degrees=15, interpolation=transforms.InterpolationMode.BILINEAR),
-            transforms.RandomAffine(degrees=0, translate=(0.5, 0.1)),
-            transforms.RandomResizedCrop((256, 256), scale=(0.5, 1.1), ratio=(1.0, 1.0)),
-            transforms.ColorJitter(brightness=0.25, contrast=0.25, saturation=0.25, hue=0.25),
-            transforms.Lambda(lambda x: x),
+    training_transform = v2.Compose([
+        v2.Resize((256, 256)),
+        v2.RandomChoice([
+            v2.RandomHorizontalFlip(p=1.0),
+            v2.RandomVerticalFlip(p=1.0),
+            v2.RandomRotation(degrees=15, interpolation=v2.InterpolationMode.BILINEAR),
+            v2.RandomAffine(degrees=0, translate=(0.5, 0.1)),
+            v2.RandomResizedCrop((256, 256), scale=(0.5, 1.1), ratio=(1.0, 1.0)),
+            v2.ColorJitter(brightness=0.25, contrast=0.25, saturation=0.25, hue=0.25),
+            v2.Lambda(lambda x: x),
             ]),
-            transforms.ToTensor(),
-            transforms.Normalize(
+            v2.ToTensor(),
+            v2.Normalize(
                 mean=mean,
                 std=std
             )
     ])
 
-    testing_transform = transforms.Compose([
-        transforms.Resize((256, 256)),
-        transforms.ToTensor(),
-        transforms.Normalize(
+    testing_transform = v2.Compose([
+        v2.Resize((256, 256)),
+        v2.ToTensor(),
+        v2.Normalize(
             mean=mean,
             std=std
         )
