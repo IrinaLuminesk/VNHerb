@@ -1,5 +1,5 @@
 import torch.nn as nn
-from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet201_Weights, vgg19, VGG19_Weights
+from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet201_Weights, vgg19, VGG19_Weights, convnext_large, ConvNeXt_Large_Weights
 
 def build_model(model_type, num_classes):
         match model_type:
@@ -30,9 +30,19 @@ def build_model(model_type, num_classes):
                     nn.Linear(in_features, num_classes, bias=True)
                 )
                 return model
+            case "convnext":
+                convnext_weight = ConvNeXt_Large_Weights.DEFAULT
+                model = convnext_large(weights= convnext_weight)
+
+                convnext_classifier = list(model.classifier.children())[:2]
+                in_features = model.classifier[2].in_features
+
+                model.classifier = nn.Sequential(
+                    *convnext_classifier,
+                    nn.Linear(in_features, num_classes, bias=True)
+                )
+                return model
             case "Swim":
-                return 1
-            case "MobileNet":
                 return 1
             
 
