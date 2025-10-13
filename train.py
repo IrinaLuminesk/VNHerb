@@ -1,6 +1,7 @@
 import argparse
 import os
 from tqdm import tqdm
+from learning_rate import PiecewiseScheduler
 from model import Model
 from utils.Utilities import YAML_Reader, get_mean_std
 
@@ -62,7 +63,8 @@ def Get_Transform(mean: list, std: list):
             v2.ColorJitter(brightness=0.25, contrast=0.25, saturation=0.25, hue=0.25),
             v2.Lambda(lambda x: x),
             ]),
-            v2.ToTensor(),
+            v2.ToImage(), 
+            v2.ToDtype(torch.float32, scale=True),
             v2.Normalize(
                 mean=mean,
                 std=std
@@ -71,7 +73,8 @@ def Get_Transform(mean: list, std: list):
 
     testing_transform = v2.Compose([
         v2.Resize((256, 256)),
-        v2.ToTensor(),
+        v2.ToImage(), 
+        v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(
             mean=mean,
             std=std
@@ -80,7 +83,7 @@ def Get_Transform(mean: list, std: list):
 
     return training_transform, testing_transform
 
-def train(model, loader, criterion, optimizer, device):
+def train(model, loader, criterion, optimizer, scheduler, device):
     model.train()
     total_loss, correct, total = 0, 0, 0
 
@@ -92,6 +95,7 @@ def train(model, loader, criterion, optimizer, device):
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
+        scheduler.step()
 
         total_loss += loss.item() * inputs.size(0)
         _, predicted = outputs.max(1)
@@ -107,20 +111,24 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    #Data parameters
     root_path = config["DATASET"]["ROOT_FOLDER"]
     train_path = config["DATASET"]["TRAIN_FOLDER"]
     test_path = config["DATASET"]["TEST_FOLDER"]
-    CLASSES = sorted([i for i in os.listdir(root_path)])
+    # CLASSES = sorted([i for i in os.listdir(root_path)])
+    mean = config["TRAIN"]["DATA"]["MEAN"]
+    std = config["TRAIN"]["DATA"]["STD"]
+    batch_size = config["TRAIN"]["DATA"]["BATCH_SIZE"]
     
-    
-    mean = config["TRAIN"]["MEAN"]
-    std = config["TRAIN"]["STD"]
-    batch_size = config["TRAIN"]["BATCH_SIZE"]
-    begin_epoch = config["TRAIN"]["BEGIN_EPOCH"] 
-    end_epoch = config["TRAIN"]["END_EPOCH"]
-    resume = config["TRAIN"]["RESUME"]
+
+    #Training parameters
+    begin_epoch = config["TRAIN"]["TRAIN_PARA"]["BEGIN_EPOCH"] 
+    end_epoch = config["TRAIN"]["TRAIN_PARA"]["END_EPOCH"]
+    resume = config["TRAIN"]["TRAIN_PARA"]["RESUME"]
+    model_type = int(config["TRAIN"]["TRAIN_PARA"]["MODEL_TYPE"])
+
     if resume == True:
-        begin_epoch = config["TRAIN"]["LAST_EPOCH"]
+        begin_epoch = config["TRAIN"]["TRAIN_PARA"]["LAST_EPOCH"]
     
     if mean is None or std is None:
         print("Calculating mean and std")
@@ -133,14 +141,24 @@ def main():
                                                    train_transform=training_transform, 
                                                    test_transform=testing_transform, 
                                                    batch_size=batch_size)
+    CLASSES = training_loader.classes
 
-    model = Model(100, "Resnet50").to(device)
+    model = Model(len(CLASSES), model_type).to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-2)
-    
+    optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-2)
+    lr_schedule = PiecewiseScheduler(
+        start_lr=0.0001,
+        max_lr=0.0005,
+        min_lr=0.0001,
+        rampup_epochs=10,
+        sustain_epochs=5
+    )
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
+
     for epoch in range(begin_epoch, end_epoch):
-        train_loss, train_acc = train(model, training_loader, criterion, optimizer, device=device)
+        train_loss, train_acc = train(model, training_loader, criterion, optimizer, scheduler, device=device)
         # val_loss, val_acc = validate(model, testing_loader, criterion)
+        print()
         print("Epoch [{0}/{1}]: Training loss: {2}\tTraining Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
         # if val_acc > best_acc:
