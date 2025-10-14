@@ -187,10 +187,10 @@ def main():
             format(epoch, end_epoch, val_loss, round(val_acc, 2)))
         if val_acc > best_acc:
             print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                  format(round(best_acc, 2), round(val_acc, 2)), epoch)
+                  format(round(best_acc, 2), round(val_acc, 2),  epoch))
             best_acc = val_acc
             best_epoch = epoch
-            
+
         print()
         # if val_acc > best_acc:
         #     best_acc = val_acc
