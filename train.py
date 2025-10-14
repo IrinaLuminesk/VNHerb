@@ -161,6 +161,7 @@ def main():
         print()
         print("Epoch [{0}/{1}]: Training loss: {2}\tTraining Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
+        print()
         # if val_acc > best_acc:
         #     best_acc = val_acc
         #     best_epoch = epoch

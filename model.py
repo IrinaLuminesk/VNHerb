@@ -1,5 +1,5 @@
 import torch.nn as nn
-from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet201_Weights, vgg19, VGG19_Weights, convnext_large, ConvNeXt_Large_Weights
+from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet201_Weights, vgg19, VGG19_Weights, convnext_base, ConvNeXt_Base_Weights
 
 def build_model(model_type: int, num_classes: int):
         match model_type:
@@ -7,15 +7,29 @@ def build_model(model_type: int, num_classes: int):
                 resnet_weights = ResNet50_Weights.DEFAULT
                 model = resnet50(weights=resnet_weights)
 
-                in_features = model.fc.in_features
-                model.fc = nn.Linear(in_features, num_classes)
+                in_features = model.fc.in_features #2048
+                fc = nn.Sequential(
+                    nn.Linear(in_features, 1024),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, num_classes),
+                )
+                model.fc = fc
                 return model
             case "DenseNet":
                 densenet_Weights = DenseNet201_Weights.DEFAULT
                 model = densenet201(weights=densenet_Weights)
 
-                in_features = model.classifier.in_features
-                model.classifier = nn.Linear(in_features, num_classes)
+                in_features = model.classifier.in_features #1920
+                fc = nn.Sequential(
+                    nn.Linear(in_features, 1024),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, num_classes),
+                )
+                model.classifier = fc
 
                 return model
             case "VGG19":
@@ -23,16 +37,24 @@ def build_model(model_type: int, num_classes: int):
                 model = vgg19(weights=vgg19_weights)
 
                 vgg19_classifier = list(model.classifier.children())[:6]
-                in_features = model.classifier[6].in_features
+                in_features = model.classifier[6].in_features #4096
 
                 model.classifier = nn.Sequential(
                     *vgg19_classifier,
-                    nn.Linear(in_features, num_classes, bias=True)
+                    nn.Linear(in_features, 2048, bias=True),
+                    nn.BatchNorm1d(2048),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(2048, 1024, bias=True),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, num_classes)
                 )
                 return model
             case "convnext":
-                convnext_weight = ConvNeXt_Large_Weights.DEFAULT
-                model = convnext_large(weights= convnext_weight)
+                convnext_weight = ConvNeXt_Base_Weights.DEFAULT
+                model = convnext_base(weights= convnext_weight)
 
                 convnext_classifier = list(model.classifier.children())[:2]
                 in_features = model.classifier[2].in_features
