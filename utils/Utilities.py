@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 import cv2
+import torch
 from tqdm import tqdm
 import yaml
 import numpy as np
@@ -43,3 +44,13 @@ def get_mean_std(path, max_workers=4):
     mean = total_mean / total_count
     std = total_std / total_count
     return mean, std
+
+def Saving_Checkpoint(epoch, model, optimizer, scheduler, path):
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'scheduler_state_dict': scheduler.state_dict()
+    }, path)
+def Saving_Best(model, path):
+    torch.save(model.state_dict(), path)

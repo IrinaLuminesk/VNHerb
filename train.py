@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 from learning_rate import PiecewiseScheduler
 from model import Model
-from utils.Utilities import YAML_Reader, get_mean_std
+from utils.Utilities import Saving_Best, Saving_Checkpoint, YAML_Reader, get_mean_std
 
 import torch
 from torchvision import datasets
@@ -83,11 +83,12 @@ def Get_Transform(mean: list, std: list):
 
     return training_transform, testing_transform
 
-def train(model, loader, criterion, optimizer, scheduler, device):
+def train(epoch, end_epoch, model, loader, criterion, optimizer, scheduler, device):
     model.train()
     total_loss, correct, total = 0, 0, 0
 
-    for inputs, targets in tqdm(loader, total=len(loader)):
+    for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
+                                format(epoch, end_epoch)):
         inputs, targets = inputs.to(device), targets.to(device)
 
         optimizer.zero_grad()
@@ -106,12 +107,13 @@ def train(model, loader, criterion, optimizer, scheduler, device):
     accuracy = 100. * correct / total
     return avg_loss, accuracy
 
-def validate(model, loader, criterion, device):
+def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
     total_loss, correct, total = 0, 0, 0
 
     with torch.no_grad():
-        for inputs, targets in tqdm(loader, total=len(loader)):
+        for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
+                                format(epoch, end_epoch)):
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
             loss = criterion(outputs, targets)
@@ -146,6 +148,11 @@ def main():
     resume = config["TRAIN"]["TRAIN_PARA"]["RESUME"]
     model_type = int(config["TRAIN"]["TRAIN_PARA"]["MODEL_TYPE"])
 
+    #Optional
+    save_checkpoint = config["TRAIN"]["OPTIONAL"]["SAVE_CHECKPOINT"]
+    save_best = config["TRAIN"]["OPTIONAL"]["SAVE_BEST"]
+    save_metrics = config["TRAIN"]["OPTIONAL"]["SAVE_METRICS"]
+
     if resume == True:
         begin_epoch = config["TRAIN"]["TRAIN_PARA"]["LAST_EPOCH"]
     
@@ -177,21 +184,27 @@ def main():
     best_acc = 0
     best_epoch = 0
     for epoch in range(begin_epoch, end_epoch):
-        train_loss, train_acc = train(model, training_loader, criterion, optimizer, scheduler, device=device)
+        train_loss, train_acc = train(epoch, end_epoch, model, training_loader, criterion, optimizer, scheduler, device=device)
         print()
-        val_loss, val_acc = validate(model, testing_loader, criterion, device)
+        val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
         print()
-        print("Epoch [{0}/{1}]: Training loss: {2}\tTraining Acc: {3}%".
+
+        if save_checkpoint == True:
+            Saving_Checkpoint(epoch=epoch, model=model, optimizer=optimizer, scheduler=scheduler, path="/content/Checkpoint.pth")
+
+        print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
-        print("Epoch [{0}/{1}]: Validation loss: {2}\tValidation Acc: {3}%".
+        print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
             format(epoch, end_epoch, val_loss, round(val_acc, 2)))
         if val_acc > best_acc:
             print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
                   format(round(best_acc, 2), round(val_acc, 2),  epoch))
             best_acc = val_acc
             best_epoch = epoch
-
+            if save_best == True:
+                Saving_Best(model, "/content/Best.pth")
         print()
+
         # if val_acc > best_acc:
         #     best_acc = val_acc
         #     best_epoch = epoch
