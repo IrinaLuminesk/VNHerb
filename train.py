@@ -150,7 +150,8 @@ def main():
         max_lr=0.0005,
         min_lr=0.0001,
         rampup_epochs=10,
-        sustain_epochs=5
+        sustain_epochs=5,
+        exp_decay=0.8
     )
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
 
