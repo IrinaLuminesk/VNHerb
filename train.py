@@ -106,6 +106,25 @@ def train(model, loader, criterion, optimizer, scheduler, device):
     accuracy = 100. * correct / total
     return avg_loss, accuracy
 
+def validate(model, loader, criterion, device):
+    model.eval()
+    total_loss, correct, total = 0, 0, 0
+
+    with torch.no_grad():
+        for inputs, targets in tqdm(loader, total=len(loader)):
+            inputs, targets = inputs.to(device), targets.to(device)
+            outputs = model(inputs)
+            loss = criterion(outputs, targets)
+
+            total_loss += loss.item() * inputs.size(0)
+            _, predicted = outputs.max(1)
+            total += targets.size(0)
+            correct += predicted.eq(targets).sum().item()
+
+    avg_loss = total_loss / total
+    accuracy = 100. * correct / total
+    return avg_loss, accuracy
+
 def main():
     config = parse_args()
 
@@ -155,12 +174,23 @@ def main():
     )
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
 
+    best_acc = 0
+    best_epoch = 0
     for epoch in range(begin_epoch, end_epoch):
         train_loss, train_acc = train(model, training_loader, criterion, optimizer, scheduler, device=device)
-        # val_loss, val_acc = validate(model, testing_loader, criterion)
+        print()
+        val_loss, val_acc = validate(model, testing_loader, criterion, device)
         print()
         print("Epoch [{0}/{1}]: Training loss: {2}\tTraining Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
+        print("Epoch [{0}/{1}]: Validation loss: {2}\tValidation Acc: {3}%".
+            format(epoch, end_epoch, val_loss, round(val_acc, 2)))
+        if val_acc > best_acc:
+            print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
+                  format(round(best_acc, 2), round(val_acc, 2)), epoch)
+            best_acc = val_acc
+            best_epoch = epoch
+            
         print()
         # if val_acc > best_acc:
         #     best_acc = val_acc
