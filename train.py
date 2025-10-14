@@ -115,7 +115,7 @@ def main():
     root_path = config["DATASET"]["ROOT_FOLDER"]
     train_path = config["DATASET"]["TRAIN_FOLDER"]
     test_path = config["DATASET"]["TEST_FOLDER"]
-    # CLASSES = sorted([i for i in os.listdir(root_path)])
+    CLASSES = sorted([i for i in os.listdir(root_path)])
     mean = config["TRAIN"]["DATA"]["MEAN"]
     std = config["TRAIN"]["DATA"]["STD"]
     batch_size = config["TRAIN"]["DATA"]["BATCH_SIZE"]
@@ -141,7 +141,6 @@ def main():
                                                    train_transform=training_transform, 
                                                    test_transform=testing_transform, 
                                                    batch_size=batch_size)
-    CLASSES = training_loader.classes
 
     model = Model(len(CLASSES), model_type).to(device)
     criterion = nn.CrossEntropyLoss()

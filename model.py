@@ -3,7 +3,7 @@ from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet
 
 def build_model(model_type: int, num_classes: int):
         match model_type:
-            case "Resnet50":
+            case 1: #Resnet50
                 resnet_weights = ResNet50_Weights.DEFAULT
                 model = resnet50(weights=resnet_weights)
 
@@ -17,7 +17,7 @@ def build_model(model_type: int, num_classes: int):
                 )
                 model.fc = fc
                 return model
-            case "DenseNet":
+            case 2: #DenseNet201
                 densenet_Weights = DenseNet201_Weights.DEFAULT
                 model = densenet201(weights=densenet_Weights)
 
@@ -32,7 +32,7 @@ def build_model(model_type: int, num_classes: int):
                 model.classifier = fc
 
                 return model
-            case "VGG19":
+            case 3: #VGG19
                 vgg19_weights = VGG19_Weights.DEFAULT
                 model = vgg19(weights=vgg19_weights)
 
@@ -52,7 +52,7 @@ def build_model(model_type: int, num_classes: int):
                     nn.Linear(1024, num_classes)
                 )
                 return model
-            case "convnext":
+            case 4: #convnext base
                 convnext_weight = ConvNeXt_Base_Weights.DEFAULT
                 model = convnext_base(weights= convnext_weight)
 
