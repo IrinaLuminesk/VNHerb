@@ -5,6 +5,7 @@ from tqdm import tqdm
 import yaml
 import numpy as np
 import os
+import pandas as pd
 
 def YAML_Reader(path):
     with open(path, "r") as f:
@@ -54,3 +55,25 @@ def Saving_Checkpoint(epoch, model, optimizer, scheduler, path):
     }, path)
 def Saving_Best(model, path):
     torch.save(model.state_dict(), path)
+
+def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
+    if os.path.exists(path):
+        metrics_df = pd.read_csv(path)
+    else:
+        metrics_df = pd.DataFrame({
+            'epoch': pd.Series(dtype='int'),
+            'train_loss': pd.Series(dtype='float'),
+            'train_acc': pd.Series(dtype='float'),
+            'val_loss': pd.Series(dtype='float'),
+            'val_acc': pd.Series(dtype='float'),
+            'lr': pd.Series(dtype='float')
+        })
+    new_row = {
+        'epoch': epoch,
+        'train_loss': train_loss,
+        'train_acc': train_acc,
+        'val_loss': val_loss,
+        'val_acc': val_acc,
+    }
+    metrics_df = pd.concat([metrics_df, pd.DataFrame([new_row])], ignore_index=True)
+    metrics_df.to_csv(path, index=False)

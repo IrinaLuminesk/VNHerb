@@ -28,8 +28,11 @@ TRAIN:
     RESUME: False
   OPTIONAL:
     SAVE_CHECKPOINT: TRUE
+    CHECKPOINT_PATH: "/content/checkpoint.pth"
     SAVE_BEST: TRUE
+    BEST_PATH: "/content/best.pth"
     SAVE_METRICS: TRUE
+    METRICS_PATH: "/content/metrics.csv"
 
 
 TEST:

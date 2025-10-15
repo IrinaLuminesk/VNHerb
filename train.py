@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 from learning_rate import PiecewiseScheduler
 from model import Model
-from utils.Utilities import Saving_Best, Saving_Checkpoint, YAML_Reader, get_mean_std
+from utils.Utilities import Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
 
 import torch
 from torchvision import datasets
@@ -152,6 +152,9 @@ def main():
     save_checkpoint = config["TRAIN"]["OPTIONAL"]["SAVE_CHECKPOINT"]
     save_best = config["TRAIN"]["OPTIONAL"]["SAVE_BEST"]
     save_metrics = config["TRAIN"]["OPTIONAL"]["SAVE_METRICS"]
+    checkpoint_path = config["TRAIN"]["OPTIONAL"]["CHECKPOINT_PATH"]
+    best_path = config["TRAIN"]["OPTIONAL"]["BEST_PATH"]
+    metrics_path = config["TRAIN"]["OPTIONAL"]["METRICS_PATH"]
 
     if resume == True:
         begin_epoch = config["TRAIN"]["TRAIN_PARA"]["LAST_EPOCH"]
@@ -190,34 +193,35 @@ def main():
         print()
 
         if save_checkpoint == True:
-            Saving_Checkpoint(epoch=epoch, model=model, optimizer=optimizer, scheduler=scheduler, path="/content/Checkpoint.pth")
+            Saving_Checkpoint(epoch=epoch, 
+                              model=model, 
+                              optimizer=optimizer, 
+                              scheduler=scheduler, 
+                              path=checkpoint_path)
 
         print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
         print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
             format(epoch, end_epoch, val_loss, round(val_acc, 2)))
         if val_acc > best_acc:
-            print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                  format(round(best_acc, 2), round(val_acc, 2),  epoch))
+            if save_best == True:
+                print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
+                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                Saving_Best(model, best_path)
+            else:
+                print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
+                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
             best_acc = val_acc
             best_epoch = epoch
-            if save_best == True:
-                Saving_Best(model, "/content/Best.pth")
+        if save_metrics == True:
+            Saving_Metric(epoch=epoch, 
+                          train_acc=train_acc, 
+                          train_loss=train_loss, 
+                          val_acc=val_acc, 
+                          val_loss=val_loss, 
+                          path=metrics_path)
         print()
 
-        # if val_acc > best_acc:
-        #     best_acc = val_acc
-        #     best_epoch = epoch
-        #     Save_Best(model, best_acc, best_epoch, path="/content/best.pth")
-        # else:
-        #     print("Model didn't improve from {0}%".format(round(best_acc, 2)))
-        # # current_lr = optimizer.param_groups[0]['lr']
-        # Save_Metrics(epoch, train_loss, train_acc, val_loss, val_acc, 0.0, path="/content/Hybrid_training.csv")
-        # # cosine_scheduler.step()
-        # Save_Checkpoint(epoch, model, optimizer, best_acc, best_epoch)
-        # # print(f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}%, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.2f}%")
-
-        
     
 if __name__ == '__main__':
     main()
