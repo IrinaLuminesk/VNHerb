@@ -114,14 +114,29 @@ def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
-
+        
         total_loss += loss.item() * inputs.size(0)
         _, predicted = outputs.max(1)
         total += targets.size(0)
         correct += predicted.eq(targets).sum().item()
 
-    avg_loss = total_loss / total
-    accuracy = 100. * correct / total
+    if use_ddp:
+        # convert to tensors
+        total_loss_tensor = torch.tensor(total_loss, device=device)
+        correct_tensor = torch.tensor(correct, device=device)
+        total_tensor = torch.tensor(total, device=device)
+
+        # sum across all GPUs
+        torch.distributed.all_reduce(total_loss_tensor)
+        torch.distributed.all_reduce(correct_tensor)
+        torch.distributed.all_reduce(total_tensor)
+
+        # compute global averages
+        avg_loss = total_loss_tensor.item() / total_tensor.item()
+        accuracy = 100. * correct_tensor.item() / total_tensor.item()
+    else:
+        avg_loss = total_loss / total
+        accuracy = 100. * correct / total
     return avg_loss, accuracy
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
@@ -147,7 +162,6 @@ def validate(epoch, end_epoch, model, loader, criterion, device):
 def main():
     config = parse_args()
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     #Data parameters
     root_path = config["DATASET"]["ROOT_FOLDER"]
@@ -181,13 +195,15 @@ def main():
         mean, std = get_mean_std(train_path)
 
     num_gpus = torch.cuda.device_count()
-    use_ddp = None
-    if num_gpus > 1:
-        use_ddp = num_gpus
-        dist.init_process_group(backend='nccl', init_method='env://')
+    use_ddp = num_gpus > 1
+    if use_ddp:
         local_rank = dist.get_rank()
         torch.cuda.set_device(local_rank)
-        device = torch.device(f'cuda:{local_rank}')
+        device = torch.device(f"cuda:{local_rank}")
+        dist.init_process_group(backend="nccl", init_method="env://")
+    else:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        local_rank = 0
     
     training_transform, testing_transform = Get_Transform(mean=mean, std=std)
     
@@ -213,6 +229,7 @@ def main():
 
     best_acc = 0
     best_epoch = 0
+    rank = dist.get_rank() if torch.distributed.is_initialized() else 0
     for epoch in range(begin_epoch, end_epoch):
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
@@ -228,27 +245,29 @@ def main():
         val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
         print()
 
-        if save_checkpoint == True:
-            Saving_Checkpoint(epoch=epoch, 
-                              model=model, 
-                              optimizer=optimizer, 
-                              scheduler=scheduler, 
-                              path=checkpoint_path)
+        rank = local_rank if use_ddp else 0
+        if rank == 0:
+            if save_checkpoint == True:
+                Saving_Checkpoint(epoch=epoch, 
+                                model=model.module.state_dict() if use_ddp else model.state_dict(), 
+                                optimizer=optimizer, 
+                                scheduler=scheduler, 
+                                path=checkpoint_path)
 
-        print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
-            format(epoch, end_epoch, train_loss, round(train_acc, 2)))
-        print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
-            format(epoch, end_epoch, val_loss, round(val_acc, 2)))
-        if val_acc > best_acc:
-            if save_best == True:
-                print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
-                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
-                Saving_Best(model, best_path)
-            else:
-                print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
-            best_acc = val_acc
-            best_epoch = epoch
+            print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
+                format(epoch, end_epoch, train_loss, round(train_acc, 2)))
+            print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
+                format(epoch, end_epoch, val_loss, round(val_acc, 2)))
+            if val_acc > best_acc:
+                if save_best == True:
+                    print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
+                        format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                    Saving_Best(model.module.state_dict() if use_ddp else model.state_dict(), best_path)
+                else:
+                    print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
+                        format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                best_acc = val_acc
+                best_epoch = epoch
         if save_metrics == True:
             Saving_Metric(epoch=epoch, 
                           train_acc=train_acc, 
