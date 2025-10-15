@@ -8,9 +8,11 @@ from utils.Utilities import Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_
 import torch
 from torchvision import datasets
 from torchvision.transforms import v2
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, DistributedSampler
 import torch.nn as nn
 import torch.optim as optim
+from torch.nn.parallel import DistributedDataParallel as DDP
+import torch.distributed as dist
 
 def parse_args():
     parser = argparse.ArgumentParser(description="A simple argparse example")
@@ -26,30 +28,44 @@ def parse_args():
     config = YAML_Reader(args.cfg)
     return config
 
-def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size):
+def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size, use_ddp):
     training_dataset = datasets.ImageFolder(
         root=train_path,
         transform=train_transform
     )
     print("Total train image: {0}".format(len(training_dataset)))
-    training_loader = DataLoader(
-        training_dataset,
-        batch_size=batch_size,
-        shuffle=True
-    )
-
     testing_dataset = datasets.ImageFolder(
         root=test_path,
         transform=test_transform
     )
     print("Total test image: {0}".format(len(testing_dataset)))
-    testing_loader = DataLoader(
-        testing_dataset,
-        batch_size=batch_size,
-        shuffle=False
-    )
-    print()
-    return training_loader, testing_loader
+    training_sampler, testing_sampler = None, None
+    if use_ddp:
+        training_sampler = DistributedSampler(training_dataset)
+        training_loader = DataLoader(training_dataset, 
+                                     batch_size=batch_size, 
+                                     sampler=training_sampler,
+                                     shuffle=True)
+        
+        testing_sampler = DistributedSampler(testing_dataset, shuffle=False)
+        testing_loader = DataLoader(testing_dataset, 
+                                     batch_size=batch_size, 
+                                     sampler=testing_sampler,
+                                     shuffle=False)
+    else:
+        training_loader = DataLoader(
+            training_dataset,
+            batch_size=batch_size,
+            shuffle=True
+        )
+
+        testing_loader = DataLoader(
+            testing_dataset,
+            batch_size=batch_size,
+            shuffle=False
+        )
+        print()
+    return training_loader, training_sampler, testing_loader, testing_sampler
 
 def Get_Transform(mean: list, std: list):
     training_transform = v2.Compose([
@@ -83,8 +99,10 @@ def Get_Transform(mean: list, std: list):
 
     return training_transform, testing_transform
 
-def train(epoch, end_epoch, model, loader, criterion, optimizer, scheduler, device):
+def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp, sampler):
     model.train()
+    if use_ddp:
+        sampler.set_epoch(epoch) 
     total_loss, correct, total = 0, 0, 0
 
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
@@ -96,7 +114,6 @@ def train(epoch, end_epoch, model, loader, criterion, optimizer, scheduler, devi
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
-        scheduler.step()
 
         total_loss += loss.item() * inputs.size(0)
         _, predicted = outputs.max(1)
@@ -162,14 +179,24 @@ def main():
     if mean is None or std is None:
         print("Calculating mean and std")
         mean, std = get_mean_std(train_path)
+
+    num_gpus = torch.cuda.device_count()
+    use_ddp = None
+    if num_gpus > 1:
+        use_ddp = num_gpus
+        dist.init_process_group(backend='nccl', init_method='env://')
+        local_rank = dist.get_rank()
+        torch.cuda.set_device(local_rank)
+        device = torch.device(f'cuda:{local_rank}')
     
     training_transform, testing_transform = Get_Transform(mean=mean, std=std)
     
-    training_loader, testing_loader = Get_Dataset(train_path=train_path,
+    training_loader, training_sampler, testing_loader, testing_sampler = Get_Dataset(train_path=train_path,
                                                    test_path=test_path, 
                                                    train_transform=training_transform, 
                                                    test_transform=testing_transform, 
-                                                   batch_size=batch_size)
+                                                   batch_size=batch_size,
+                                                   use_ddp=use_ddp)
 
     model = Model(len(CLASSES), model_type).to(device)
     criterion = nn.CrossEntropyLoss()
@@ -187,7 +214,16 @@ def main():
     best_acc = 0
     best_epoch = 0
     for epoch in range(begin_epoch, end_epoch):
-        train_loss, train_acc = train(epoch, end_epoch, model, training_loader, criterion, optimizer, scheduler, device=device)
+        train_loss, train_acc = train(epoch, 
+                                      end_epoch, 
+                                      model, 
+                                      training_loader, 
+                                      criterion, 
+                                      optimizer, 
+                                      device=device, 
+                                      use_ddp=use_ddp, 
+                                      sampler=training_sampler)
+        scheduler.step()
         print()
         val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
         print()
