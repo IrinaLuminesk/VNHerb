@@ -249,10 +249,11 @@ def main():
         if rank == 0:
             if save_checkpoint == True:
                 Saving_Checkpoint(epoch=epoch, 
-                                model=model.module.state_dict() if use_ddp else model.state_dict(), 
+                                model=model, 
                                 optimizer=optimizer, 
                                 scheduler=scheduler, 
-                                path=checkpoint_path)
+                                path=checkpoint_path, 
+                                use_ddp=use_ddp)
 
             print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
                 format(epoch, end_epoch, train_loss, round(train_acc, 2)))
@@ -262,7 +263,7 @@ def main():
                 if save_best == True:
                     print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
                         format(round(best_acc, 2), round(val_acc, 2),  epoch))
-                    Saving_Best(model.module.state_dict() if use_ddp else model.state_dict(), best_path)
+                    Saving_Best(model, best_path, use_ddp=use_ddp)
                 else:
                     print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
                         format(round(best_acc, 2), round(val_acc, 2),  epoch))
