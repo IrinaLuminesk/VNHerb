@@ -101,14 +101,17 @@ def Get_Transform(mean: list, std: list):
 
     return training_transform, testing_transform
 
-def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp, sampler):
+def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp, sampler, local_rank=0):
     model.train()
     if use_ddp:
         sampler.set_epoch(epoch) 
     total_loss, correct, total = 0, 0, 0
-
-    for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
-                                format(epoch, end_epoch)):
+    loop = loader
+    if local_rank == 0:
+        loop = tqdm(loader, total=len(loader), desc=f"Training epoch [{epoch}/{end_epoch}]")
+    # for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
+    #                             format(epoch, end_epoch)):
+    for inputs, targets in loop:
         inputs, targets = inputs.to(device), targets.to(device)
 
         optimizer.zero_grad()
@@ -141,13 +144,16 @@ def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp
         accuracy = 100. * correct / total
     return avg_loss, accuracy
 
-def validate(epoch, end_epoch, model, loader, criterion, device):
+def validate(epoch, end_epoch, model, loader, criterion, device, local_rank=0):
     model.eval()
     total_loss, correct, total = 0, 0, 0
-
+    loop = loader
+    if local_rank == 0:
+        loop = tqdm(loader, total=len(loader), desc=f"Validation epoch [{epoch}/{end_epoch}]")
     with torch.no_grad():
-        for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
-                                format(epoch, end_epoch)):
+        # for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
+        #                         format(epoch, end_epoch)):
+        for inputs, targets in loop:
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
             loss = criterion(outputs, targets)
@@ -254,8 +260,8 @@ def main():
 
     # rank = dist.get_rank() if torch.distributed.is_initialized() else 0
     for epoch in range(begin_epoch, end_epoch):
-        if use_ddp:
-            training_sampler.set_epoch(epoch)
+        # if use_ddp:
+        #     training_sampler.set_epoch(epoch)
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
                                       model, 
@@ -264,7 +270,8 @@ def main():
                                       optimizer, 
                                       device=device, 
                                       use_ddp=use_ddp, 
-                                      sampler=training_sampler)
+                                      sampler=training_sampler,
+                                      local_rank=local_rank)
         scheduler.step()
         print()
         val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
@@ -298,7 +305,7 @@ def main():
                         format(round(best_acc, 2), round(val_acc, 2),  epoch))
                 best_acc = val_acc
                 best_epoch = epoch
-        if save_metrics == True:
+        if local_rank == 0 and save_metrics:
             Saving_Metric(epoch=epoch, 
                           train_acc=train_acc, 
                           train_loss=train_loss, 
