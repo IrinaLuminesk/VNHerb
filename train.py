@@ -253,7 +253,7 @@ def main():
                                          optimizer=optimizer,
                                          scheduler=scheduler,
                                          use_ddp=use_ddp,
-                                         map_location=local_rank)
+                                         map_location=device)
         best_acc = Get_Max_Acc(metrics_path)
         if use_ddp:
             dist.barrier()
