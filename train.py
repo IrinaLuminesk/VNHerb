@@ -1,9 +1,11 @@
 import argparse
 import os
 from tqdm import tqdm
+import yaml
 from learning_rate import PiecewiseScheduler
 from model import Model
-from utils.Utilities import Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
+from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Modify, YAML_Reader, get_mean_std
+from ruamel.yaml import YAML
 
 import torch
 from torchvision import datasets
@@ -187,8 +189,7 @@ def main():
     best_path = config["TRAIN"]["OPTIONAL"]["BEST_PATH"]
     metrics_path = config["TRAIN"]["OPTIONAL"]["METRICS_PATH"]
 
-    if resume == True:
-        begin_epoch = config["TRAIN"]["TRAIN_PARA"]["LAST_EPOCH"]
+    yaml_o = YAML()
     
     if mean is None or std is None:
         print("Calculating mean and std")
@@ -197,13 +198,21 @@ def main():
     num_gpus = torch.cuda.device_count()
     use_ddp = num_gpus > 1
     if use_ddp:
-        local_rank = dist.get_rank()
+        # local_rank = dist.get_rank()
+        # torch.cuda.set_device(local_rank)
+        # device = torch.device(f"cuda:{local_rank}")
+        # dist.init_process_group(backend="nccl", init_method="env://")
+        local_rank = int(os.environ.get("LOCAL_RANK", 0))
         torch.cuda.set_device(local_rank)
         device = torch.device(f"cuda:{local_rank}")
         dist.init_process_group(backend="nccl", init_method="env://")
+        print(f"Using DDP with {num_gpus} GPUs. Local rank: {local_rank}")
+        # torchrun --nproc_per_node=NUM_GPUS train.py
     else:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         local_rank = 0
+        print(f"Single GPU or CPU. Using device: {device}")
+        # python train.py
     
     training_transform, testing_transform = Get_Transform(mean=mean, std=std)
     
@@ -215,6 +224,8 @@ def main():
                                                    use_ddp=use_ddp)
 
     model = Model(len(CLASSES), model_type).to(device)
+    if use_ddp:
+        model = DDP(model, device_ids=[local_rank])
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-2)
     lr_schedule = PiecewiseScheduler(
@@ -229,6 +240,18 @@ def main():
 
     best_acc = 0
     best_epoch = 0
+
+    if resume == True:
+        begin_epoch = Loading_Checkpoint(path="/checkpoint.pth",
+                                         model=model,
+                                         optimizer=optimizer,
+                                         scheduler=scheduler,
+                                         use_ddp=use_ddp,
+                                         map_location=local_rank)
+        best_acc = Get_Max_Acc(metrics_path)
+        if use_ddp:
+            dist.barrier()
+
     rank = dist.get_rank() if torch.distributed.is_initialized() else 0
     for epoch in range(begin_epoch, end_epoch):
         train_loss, train_acc = train(epoch, 
@@ -245,8 +268,7 @@ def main():
         val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
         print()
 
-        rank = local_rank if use_ddp else 0
-        if rank == 0:
+        if local_rank == 0:
             if save_checkpoint == True:
                 Saving_Checkpoint(epoch=epoch, 
                                 model=model, 
@@ -254,6 +276,10 @@ def main():
                                 scheduler=scheduler, 
                                 path=checkpoint_path, 
                                 use_ddp=use_ddp)
+                YAML_Modify(yaml_o=yaml_o,
+                            path="config/default_config.yaml",
+                            key=["TRAIN", "TRAIN_PARA", "LAST_EPOCH"],
+                            value=epoch)
 
             print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
                 format(epoch, end_epoch, train_loss, round(train_acc, 2)))

@@ -22,7 +22,7 @@ TRAIN:
   TRAIN_PARA:
     MODEL_TYPE: 1 #{1: Resnet50, 2: DenseNet201, 3: VGG19, 4: ConvNeXt_Large, 5: Swim}
     BEGIN_EPOCH: 0
-    END_EPOCH: 1
+    END_EPOCH: 10
     LAST_EPOCH: 0
     OPTIMIZER: "AdamW"
     RESUME: False

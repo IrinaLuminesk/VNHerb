@@ -3,6 +3,7 @@ import cv2
 import torch
 from tqdm import tqdm
 import yaml
+from ruamel.yaml import YAML
 import numpy as np
 import os
 import pandas as pd
@@ -11,6 +12,25 @@ def YAML_Reader(path):
     with open(path, "r") as f:
         config = yaml.safe_load(f)
     return config
+
+def YAML_Modify(yaml_o: YAML, path: str, key: list, value):
+    """
+    YAML modification function. Used to modify a YAML file without changing the object order or comment in the YAML file
+    Args:
+        yaml_o (YAML): The YAML object used for the modification purpose
+        path (str): The path of the YAML file.
+        key (list): The list containing the key values.
+        value (object): The modify value.
+    """
+    with open(path, "r") as file:
+        data = yaml_o.load(file)
+    d = data
+    for k in key[:-1]:
+        d = d[k]
+    d[key[-1]] = value
+    with open(path, "w") as file:
+        yaml_o.dump(d, file)
+
 
 def read_img(img_path):
     try:
@@ -77,3 +97,28 @@ def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
     }
     metrics_df = pd.concat([metrics_df, pd.DataFrame([new_row])], ignore_index=True)
     metrics_df.to_csv(path, index=False)
+
+def Loading_Checkpoint(path, model, optimizer=None, scheduler=None, use_ddp=False, map_location=None):
+    checkpoint = torch.load(path, map_location=map_location)
+
+    # If using DDP, load into model.module
+    if use_ddp:
+        model.module.load_state_dict(checkpoint['model_state_dict'])
+    else:
+        model.load_state_dict(checkpoint['model_state_dict'])
+
+    if optimizer is not None:
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    if scheduler is not None and 'scheduler_state_dict' in checkpoint:
+        scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+
+    start_epoch = checkpoint.get('epoch', 0) + 1
+    print(f"Resumed from epoch {start_epoch}")
+    return start_epoch
+
+def Get_Max_Acc(path):
+    df = pd.read_csv(path)
+
+    best_acc = df['val_acc'].max()
+
+    return best_acc 
