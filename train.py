@@ -252,8 +252,10 @@ def main():
         if use_ddp:
             dist.barrier()
 
-    rank = dist.get_rank() if torch.distributed.is_initialized() else 0
+    # rank = dist.get_rank() if torch.distributed.is_initialized() else 0
     for epoch in range(begin_epoch, end_epoch):
+        if use_ddp:
+            training_sampler.set_epoch(epoch)
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
                                       model, 
@@ -273,13 +275,14 @@ def main():
                 Saving_Checkpoint(epoch=epoch, 
                                 model=model, 
                                 optimizer=optimizer, 
-                                scheduler=scheduler, 
+                                scheduler=scheduler,
+                                last_epoch=epoch, 
                                 path=checkpoint_path, 
                                 use_ddp=use_ddp)
-                YAML_Modify(yaml_o=yaml_o,
-                            path="config/default_config.yaml",
-                            key=["TRAIN", "TRAIN_PARA", "LAST_EPOCH"],
-                            value=epoch)
+                # YAML_Modify(yaml_o=yaml_o,
+                #             path="config/default_config.yaml",
+                #             key=["TRAIN", "TRAIN_PARA", "LAST_EPOCH"],
+                #             value=epoch)
 
             print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
                 format(epoch, end_epoch, train_loss, round(train_acc, 2)))

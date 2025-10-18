@@ -66,12 +66,13 @@ def get_mean_std(path, max_workers=4):
     std = total_std / total_count
     return mean, std
 
-def Saving_Checkpoint(epoch, model, optimizer, scheduler, path, use_ddp):
+def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path, use_ddp):
     torch.save({
         'epoch': epoch,
         'model_state_dict': model.module.state_dict() if use_ddp else model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
-        'scheduler_state_dict': scheduler.state_dict()
+        'scheduler_state_dict': scheduler.state_dict(),
+        "last_epoch": last_epoch
     }, path)
 def Saving_Best(model, path, use_ddp):
     torch.save(model.module.state_dict() if use_ddp else model.state_dict(), path)
@@ -111,8 +112,9 @@ def Loading_Checkpoint(path, model, optimizer=None, scheduler=None, use_ddp=Fals
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     if scheduler is not None and 'scheduler_state_dict' in checkpoint:
         scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+        print("Resumed LR:", optimizer.param_groups[0]['lr'])
 
-    start_epoch = checkpoint.get('epoch', 0) + 1
+    start_epoch = checkpoint.get('last_epoch', 0) + 1
     print(f"Resumed from epoch {start_epoch}")
     return start_epoch
 
