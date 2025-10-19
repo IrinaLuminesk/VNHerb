@@ -5,7 +5,6 @@ import yaml
 from learning_rate import PiecewiseScheduler
 from model import Model
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
-from ruamel.yaml import YAML
 
 import torch
 from torchvision import datasets
