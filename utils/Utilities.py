@@ -46,10 +46,10 @@ def get_mean_std(path, max_workers=4):
     std = total_std / total_count
     return mean, std
 
-def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path, use_ddp):
+def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path):
     torch.save({
         'epoch': epoch,
-        'model_state_dict': model.module.state_dict() if use_ddp else model.state_dict(),
+        'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
         'scheduler_state_dict': scheduler.state_dict(),
         "last_epoch": last_epoch
