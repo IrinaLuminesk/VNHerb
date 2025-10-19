@@ -47,6 +47,8 @@ def get_mean_std(path, max_workers=4):
     return mean, std
 
 def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path):
+    folder = os.path.dirname(path)
+    os.makedirs(folder, exist_ok=True)
     torch.save({
         'epoch': epoch,
         'model_state_dict': model.state_dict(),
@@ -55,6 +57,8 @@ def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path):
         "last_epoch": last_epoch
     }, path)
 def Saving_Best(model, path):
+    folder = os.path.dirname(path)
+    os.makedirs(folder, exist_ok=True)
     torch.save(model.state_dict(), path)
 
 def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
