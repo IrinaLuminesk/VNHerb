@@ -27,7 +27,7 @@ def parse_args():
     config = YAML_Reader(args.cfg)
     return config
 
-def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size, use_ddp):
+def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size):
     training_dataset = datasets.ImageFolder(
         root=train_path,
         transform=train_transform
