@@ -74,8 +74,8 @@ def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path, use_
         'scheduler_state_dict': scheduler.state_dict(),
         "last_epoch": last_epoch
     }, path)
-def Saving_Best(model, path, use_ddp):
-    torch.save(model.module.state_dict() if use_ddp else model.state_dict(), path)
+def Saving_Best(model, path):
+    torch.save(model.state_dict(), path)
 
 def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
     if os.path.exists(path):
@@ -99,20 +99,15 @@ def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
     metrics_df = pd.concat([metrics_df, pd.DataFrame([new_row])], ignore_index=True)
     metrics_df.to_csv(path, index=False)
 
-def Loading_Checkpoint(path, model, optimizer=None, scheduler=None, use_ddp=False, map_location=None):
-    checkpoint = torch.load(path, map_location=map_location)
+def Loading_Checkpoint(path, model, optimizer, scheduler, device):
+    checkpoint = torch.load(path, map_location=device)
 
-    # If using DDP, load into model.module
-    if use_ddp:
-        model.module.load_state_dict(checkpoint['model_state_dict'])
-    else:
-        model.load_state_dict(checkpoint['model_state_dict'])
+    model.load_state_dict(checkpoint['model_state_dict'])
 
     if optimizer is not None:
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     if scheduler is not None and 'scheduler_state_dict' in checkpoint:
         scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-        print("Resumed LR:", optimizer.param_groups[0]['lr'])
 
     start_epoch = checkpoint.get('last_epoch', 0) + 1
     print(f"Resumed from epoch {start_epoch}")

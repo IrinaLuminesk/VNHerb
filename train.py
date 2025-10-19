@@ -4,17 +4,15 @@ from tqdm import tqdm
 import yaml
 from learning_rate import PiecewiseScheduler
 from model import Model
-from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Modify, YAML_Reader, get_mean_std
+from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
 from ruamel.yaml import YAML
 
 import torch
 from torchvision import datasets
 from torchvision.transforms import v2
-from torch.utils.data import DataLoader, DistributedSampler
+from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
-from torch.nn.parallel import DistributedDataParallel as DDP
-import torch.distributed as dist
 
 def parse_args():
     parser = argparse.ArgumentParser(description="A simple argparse example")
@@ -41,33 +39,19 @@ def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_si
         transform=test_transform
     )
     print("Total test image: {0}".format(len(testing_dataset)))
-    training_sampler, testing_sampler = None, None
-    if use_ddp:
-        training_sampler = DistributedSampler(training_dataset)
-        training_loader = DataLoader(training_dataset, 
-                                     batch_size=batch_size, 
-                                     sampler=training_sampler,
-                                     shuffle=True)
-        
-        testing_sampler = DistributedSampler(testing_dataset, shuffle=False)
-        testing_loader = DataLoader(testing_dataset, 
-                                     batch_size=batch_size, 
-                                     sampler=testing_sampler,
-                                     shuffle=False)
-    else:
-        training_loader = DataLoader(
-            training_dataset,
-            batch_size=batch_size,
-            shuffle=True
-        )
+    training_loader = DataLoader(
+        training_dataset,
+        batch_size=batch_size,
+        shuffle=True
+    )
 
-        testing_loader = DataLoader(
-            testing_dataset,
-            batch_size=batch_size,
-            shuffle=False
-        )
-        print()
-    return training_loader, training_sampler, testing_loader, testing_sampler
+    testing_loader = DataLoader(
+        testing_dataset,
+        batch_size=batch_size,
+        shuffle=False
+    )
+    print()
+    return training_loader, testing_loader
 
 def Get_Transform(mean: list, std: list):
     training_transform = v2.Compose([
@@ -101,17 +85,12 @@ def Get_Transform(mean: list, std: list):
 
     return training_transform, testing_transform
 
-def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp, sampler, local_rank=0):
+def train(epoch, end_epoch, model, loader, criterion, optimizer, device):
     model.train()
-    if use_ddp:
-        sampler.set_epoch(epoch) 
     total_loss, correct, total = 0, 0, 0
     loop = loader
-    if local_rank == 0:
-        loop = tqdm(loader, total=len(loader), desc=f"Training epoch [{epoch}/{end_epoch}]")
-    # for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
-    #                             format(epoch, end_epoch)):
-    for inputs, targets in loop:
+    for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
+                                format(epoch, end_epoch)):
         inputs, targets = inputs.to(device), targets.to(device)
 
         optimizer.zero_grad()
@@ -125,35 +104,17 @@ def train(epoch, end_epoch, model, loader, criterion, optimizer, device, use_ddp
         total += targets.size(0)
         correct += predicted.eq(targets).sum().item()
 
-    if use_ddp:
-        # convert to tensors
-        total_loss_tensor = torch.tensor(total_loss, device=device)
-        correct_tensor = torch.tensor(correct, device=device)
-        total_tensor = torch.tensor(total, device=device)
-
-        # sum across all GPUs
-        torch.distributed.all_reduce(total_loss_tensor)
-        torch.distributed.all_reduce(correct_tensor)
-        torch.distributed.all_reduce(total_tensor)
-
-        # compute global averages
-        avg_loss = total_loss_tensor.item() / total_tensor.item()
-        accuracy = 100. * correct_tensor.item() / total_tensor.item()
-    else:
         avg_loss = total_loss / total
         accuracy = 100. * correct / total
     return avg_loss, accuracy
 
-def validate(epoch, end_epoch, model, loader, criterion, device, local_rank=0):
+def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
     total_loss, correct, total = 0, 0, 0
-    loop = loader
-    if local_rank == 0:
-        loop = tqdm(loader, total=len(loader), desc=f"Validation epoch [{epoch}/{end_epoch}]")
+   
     with torch.no_grad():
-        # for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
-        #                         format(epoch, end_epoch)):
-        for inputs, targets in loop:
+        for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
+                                format(epoch, end_epoch)):
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
             loss = criterion(outputs, targets)
@@ -194,44 +155,23 @@ def main():
     checkpoint_path = config["TRAIN"]["OPTIONAL"]["CHECKPOINT_PATH"]
     best_path = config["TRAIN"]["OPTIONAL"]["BEST_PATH"]
     metrics_path = config["TRAIN"]["OPTIONAL"]["METRICS_PATH"]
-
-    yaml_o = YAML()
     
     if mean is None or std is None:
         print("Calculating mean and std")
         mean, std = get_mean_std(train_path)
 
-    num_gpus = torch.cuda.device_count()
-    use_ddp = num_gpus > 1
-    if use_ddp:
-        # local_rank = dist.get_rank()
-        # torch.cuda.set_device(local_rank)
-        # device = torch.device(f"cuda:{local_rank}")
-        # dist.init_process_group(backend="nccl", init_method="env://")
-        local_rank = int(os.environ.get("LOCAL_RANK", 0))
-        torch.cuda.set_device(local_rank)
-        device = torch.device(f"cuda:{local_rank}")
-        dist.init_process_group(backend="nccl", init_method="env://")
-        print(f"Using DDP with {num_gpus} GPUs. Local rank: {local_rank}")
-        # torchrun --nproc_per_node=NUM_GPUS train.py
-    else:
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        local_rank = 0
-        print(f"Single GPU or CPU. Using device: {device}")
-        # python train.py
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     training_transform, testing_transform = Get_Transform(mean=mean, std=std)
     
-    training_loader, training_sampler, testing_loader, testing_sampler = Get_Dataset(train_path=train_path,
+    training_loader, testing_loader = Get_Dataset(train_path=train_path,
                                                    test_path=test_path, 
                                                    train_transform=training_transform, 
                                                    test_transform=testing_transform, 
-                                                   batch_size=batch_size,
-                                                   use_ddp=use_ddp)
+                                                   batch_size=batch_size)
 
     model = Model(len(CLASSES), model_type).to(device)
-    if use_ddp:
-        model = DDP(model, device_ids=[local_rank])
+
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-2)
     lr_schedule = PiecewiseScheduler(
@@ -251,61 +191,45 @@ def main():
         begin_epoch = Loading_Checkpoint(path="/checkpoint.pth",
                                          model=model,
                                          optimizer=optimizer,
-                                         scheduler=scheduler,
-                                         use_ddp=use_ddp,
-                                         map_location=device)
+                                         scheduler=scheduler)
         best_acc = Get_Max_Acc(metrics_path)
-        if use_ddp:
-            dist.barrier()
 
-    # rank = dist.get_rank() if torch.distributed.is_initialized() else 0
     for epoch in range(begin_epoch, end_epoch):
-        # if use_ddp:
-        #     training_sampler.set_epoch(epoch)
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
                                       model, 
                                       training_loader, 
                                       criterion, 
                                       optimizer, 
-                                      device=device, 
-                                      use_ddp=use_ddp, 
-                                      sampler=training_sampler,
-                                      local_rank=local_rank)
+                                      device=device)
         scheduler.step()
         print()
         val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
         print()
 
-        if local_rank == 0:
-            if save_checkpoint == True:
-                Saving_Checkpoint(epoch=epoch, 
-                                model=model, 
-                                optimizer=optimizer, 
-                                scheduler=scheduler,
-                                last_epoch=epoch, 
-                                path=checkpoint_path, 
-                                use_ddp=use_ddp)
-                # YAML_Modify(yaml_o=yaml_o,
-                #             path="config/default_config.yaml",
-                #             key=["TRAIN", "TRAIN_PARA", "LAST_EPOCH"],
-                #             value=epoch)
+        if save_checkpoint == True:
+            Saving_Checkpoint(epoch=epoch, 
+                            model=model, 
+                            optimizer=optimizer, 
+                            scheduler=scheduler,
+                            last_epoch=epoch, 
+                            path=checkpoint_path)
 
-            print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
-                format(epoch, end_epoch, train_loss, round(train_acc, 2)))
-            print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
-                format(epoch, end_epoch, val_loss, round(val_acc, 2)))
-            if val_acc > best_acc:
-                if save_best == True:
-                    print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
-                        format(round(best_acc, 2), round(val_acc, 2),  epoch))
-                    Saving_Best(model, best_path, use_ddp=use_ddp)
-                else:
-                    print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                        format(round(best_acc, 2), round(val_acc, 2),  epoch))
-                best_acc = val_acc
-                best_epoch = epoch
-        if local_rank == 0 and save_metrics:
+        print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
+            format(epoch, end_epoch, train_loss, round(train_acc, 2)))
+        print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
+            format(epoch, end_epoch, val_loss, round(val_acc, 2)))
+        if val_acc > best_acc:
+            if save_best == True:
+                print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
+                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                Saving_Best(model, best_path)
+            else:
+                print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
+                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+            best_acc = val_acc
+            best_epoch = epoch
+        if save_metrics:
             Saving_Metric(epoch=epoch, 
                           train_acc=train_acc, 
                           train_loss=train_loss, 
