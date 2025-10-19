@@ -27,6 +27,7 @@ TRAIN:
     OPTIMIZER: "AdamW"
     RESUME: False
   OPTIONAL:
+    SAVE_CHECKPOINT: TRUE
     CHECKPOINT_PATH: "./resume_model/checkpoint.pth"
     SAVE_BEST: TRUE
     BEST_PATH: "./best_model/checkpoint.pth"
