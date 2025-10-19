@@ -188,7 +188,7 @@ def main():
     best_epoch = 0
 
     if resume == True:
-        begin_epoch = Loading_Checkpoint(path="/checkpoint.pth",
+        begin_epoch = Loading_Checkpoint(path=checkpoint_path,
                                          model=model,
                                          optimizer=optimizer,
                                          scheduler=scheduler)

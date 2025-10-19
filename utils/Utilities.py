@@ -3,7 +3,6 @@ import cv2
 import torch
 from tqdm import tqdm
 import yaml
-from ruamel.yaml import YAML
 import numpy as np
 import os
 import pandas as pd
@@ -12,25 +11,6 @@ def YAML_Reader(path):
     with open(path, "r") as f:
         config = yaml.safe_load(f)
     return config
-
-def YAML_Modify(yaml_o: YAML, path: str, key: list, value):
-    """
-    YAML modification function. Used to modify a YAML file without changing the object order or comment in the YAML file
-    Args:
-        yaml_o (YAML): The YAML object used for the modification purpose
-        path (str): The path of the YAML file.
-        key (list): The list containing the key values.
-        value (object): The modify value.
-    """
-    with open(path, "r") as file:
-        data = yaml_o.load(file)
-    d = data
-    for k in key[:-1]:
-        d = d[k]
-    d[key[-1]] = value
-    with open(path, "w") as file:
-        yaml_o.dump(d, file)
-
 
 def read_img(img_path):
     try:
