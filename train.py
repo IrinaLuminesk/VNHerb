@@ -190,7 +190,8 @@ def main():
         begin_epoch = Loading_Checkpoint(path=checkpoint_path,
                                          model=model,
                                          optimizer=optimizer,
-                                         scheduler=scheduler)
+                                         scheduler=scheduler,
+                                         device=device)
         best_acc = Get_Max_Acc(metrics_path)
 
     for epoch in range(begin_epoch, end_epoch):
