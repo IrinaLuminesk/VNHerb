@@ -52,9 +52,9 @@ def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_si
     print()
     return training_loader, testing_loader
 
-def Get_Transform(mean: list, std: list):
+def Get_Transform(mean: list, std: list, img_size):
     training_transform = v2.Compose([
-        v2.Resize((256, 256)),
+        v2.Resize(img_size),
         v2.RandomChoice([
             # v2.RandomHorizontalFlip(p=1.0),
             # v2.RandomVerticalFlip(p=1.0),
@@ -65,8 +65,14 @@ def Get_Transform(mean: list, std: list):
             # v2.RandomResizedCrop(size=size),
             v2.RandomHorizontalFlip(p=1),
             v2.RandomVerticalFlip(p=1),
-            v2.Pad((10, 20)),
-            v2.RandomZoomOut(p=1, side_range=(1, 1.5)),
+            v2.Compose([
+                v2.Pad((10, 20)),
+                v2.Resize(img_size)
+            ]),
+            v2.Compose([
+                v2.RandomZoomOut(p=1, side_range=(1, 1.5)),
+                v2.Resize(img_size)
+            ]),
             v2.RandomRotation(degrees=(-180, 180)),
             v2.RandomAffine(degrees=(-180, 180), translate=(0.1, 0.3), scale=(0.5, 1.75)),
             v2.RandomPerspective(p=1),
@@ -88,7 +94,7 @@ def Get_Transform(mean: list, std: list):
     ])
 
     testing_transform = v2.Compose([
-        v2.Resize((256, 256)),
+        v2.Resize(img_size),
         v2.ToImage(), 
         v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(
@@ -157,6 +163,7 @@ def main():
     
 
     #Training parameters
+    img_size = config["TRAIN"]["DATA"]["IMAGE_SIZE"]
     begin_epoch = config["TRAIN"]["TRAIN_PARA"]["BEGIN_EPOCH"] 
     end_epoch = config["TRAIN"]["TRAIN_PARA"]["END_EPOCH"]
     resume = config["TRAIN"]["TRAIN_PARA"]["RESUME"]
@@ -176,7 +183,7 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    training_transform, testing_transform = Get_Transform(mean=mean, std=std)
+    training_transform, testing_transform = Get_Transform(mean=mean, std=std, img_size=img_size)
     
     training_loader, testing_loader = Get_Dataset(train_path=train_path,
                                                    test_path=test_path, 
