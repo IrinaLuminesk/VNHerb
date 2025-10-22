@@ -48,6 +48,7 @@ def get_mean_std(path, max_workers=4):
 
     mean = total_mean / total_count
     std = total_std / total_count
+    print("Mean: {0}, STD: {1}".format(mean, std))
     return mean, std
 
 def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path):
