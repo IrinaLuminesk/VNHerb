@@ -13,6 +13,8 @@ from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 
+from timm.loss import SoftTargetCrossEntropy
+
 def parse_args():
     parser = argparse.ArgumentParser(description="A simple argparse example")
     
@@ -105,13 +107,18 @@ def Get_Transform(mean: list, std: list, img_size):
 
     return training_transform, testing_transform
 
-def train(epoch, end_epoch, model, loader, criterion, optimizer, device):
+def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion, optimizer, device):
     model.train()
     total_loss, correct, total = 0, 0, 0
-    loop = loader
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
+        
+        cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
+        mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
+        cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=0.5)
+
         inputs, targets = inputs.to(device), targets.to(device)
+        inputs, targets = cutmix_or_mixup(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
@@ -193,7 +200,8 @@ def main():
 
     model = Model(len(CLASSES), model_type).to(device)
 
-    criterion = nn.CrossEntropyLoss()
+    eval_criterion = nn.CrossEntropyLoss()
+    train_criterion = SoftTargetCrossEntropy()
     optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-2)
     lr_schedule = PiecewiseScheduler(
         start_lr=0.0001,
@@ -221,12 +229,12 @@ def main():
                                       end_epoch, 
                                       model, 
                                       training_loader, 
-                                      criterion, 
+                                      train_criterion, 
                                       optimizer, 
                                       device=device)
         scheduler.step()
         print()
-        val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, criterion, device)
+        val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
         print()
 
         if save_checkpoint == True:
