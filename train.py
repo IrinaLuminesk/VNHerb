@@ -227,10 +227,11 @@ def main():
     for epoch in range(begin_epoch, end_epoch):
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
-                                      model, 
-                                      training_loader, 
-                                      train_criterion, 
-                                      optimizer, 
+                                      NUM_CLASSES=CLASSES,
+                                      model=model, 
+                                      training_loader=training_loader, 
+                                      train_criterion=train_criterion, 
+                                      optimizer=optimizer, 
                                       device=device)
         scheduler.step()
         print()
