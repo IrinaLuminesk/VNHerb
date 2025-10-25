@@ -2,6 +2,7 @@ import argparse
 import os
 from tqdm import tqdm
 import yaml
+from RingMix import RingMix
 from learning_rate import PiecewiseScheduler
 from model import Model
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
@@ -113,12 +114,14 @@ def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
         
-        cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
-        mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
-        cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=0.5)
+        # cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
+        # mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
+        # cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=0.5)
+        ringmix = RingMix(patch_size=16, num_classes=10, p=0.5)
 
         inputs, targets = inputs.to(device), targets.to(device)
-        inputs, targets = cutmix_or_mixup(inputs, targets)
+        # inputs, targets = cutmix_or_mixup(inputs, targets)
+        inputs, targets = ringmix(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
