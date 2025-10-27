@@ -1,23 +1,7 @@
 import torch.nn as nn
-from torchvision.models import resnet50, ResNet50_Weights, \
-    densenet201, DenseNet201_Weights, \
-        vgg19, VGG19_Weights, \
-        convnext_base, ConvNeXt_Base_Weights, \
-        mobilenet_v2, MobileNet_V2_Weights
+from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet201_Weights, vgg19, VGG19_Weights, convnext_base, ConvNeXt_Base_Weights
 
-            
-
-class Model(nn.Module):
-    def __init__(self, num_classes, model_type, pretrained=True):
-        super().__init__()
-        self.num_classes = num_classes
-        self.model_type = model_type
-
-    def forward(self, x):
-        model = self.build_model(self.model_type, self.num_classes)
-        return model(x)
-    
-    def build_model(model_type: int, num_classes: int):
+def build_model(model_type: int, num_classes: int):
         match model_type:
             case 1: #Resnet50
                 resnet_weights = ResNet50_Weights.DEFAULT
@@ -96,4 +80,15 @@ class Model(nn.Module):
                 return model
             case "Swim":
                 return 1
+            
+
+class Model(nn.Module):
+    def __init__(self, num_classes, model_type, pretrained=True):
+        super().__init__()
+
+        self.model = build_model(model_type, num_classes)
+
+    def forward(self, x):
+        model = self.model(x)
+        return model
     
