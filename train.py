@@ -239,7 +239,7 @@ def main():
                                       end_epoch, 
                                       NUM_CLASSES=CLASSES,
                                       model=model, 
-                                      training_loader=training_loader, 
+                                      loader=training_loader, 
                                       train_criterion=train_criterion, 
                                       optimizer=optimizer, 
                                       device=device)
@@ -258,8 +258,8 @@ def main():
 
         print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
-        print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
-            format(epoch, end_epoch, val_loss, round(top1_val_acc, 2)))
+        print("Epoch [{0}/{1}]: Validation loss: {2}, Top 1 Validation Acc: {3}%, , Top 5 Validation Acc: {4}%".
+            format(epoch, end_epoch, val_loss, round(top1_val_acc, 2), round(top5_val_acc, 2)))
         if top1_val_acc > best_acc:
             if save_best == True:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".

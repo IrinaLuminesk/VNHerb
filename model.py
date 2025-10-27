@@ -1,5 +1,9 @@
 import torch.nn as nn
-from torchvision.models import resnet50, ResNet50_Weights, densenet201, DenseNet201_Weights, vgg19, VGG19_Weights, convnext_base, ConvNeXt_Base_Weights
+from torchvision.models import resnet50, ResNet50_Weights,\
+    densenet201, DenseNet201_Weights,\
+    vgg19, VGG19_Weights, \
+    convnext_base, ConvNeXt_Base_Weights,\
+    mobilenet_v2, MobileNet_V2_Weights
 
 def build_model(model_type: int, num_classes: int):
         match model_type:
