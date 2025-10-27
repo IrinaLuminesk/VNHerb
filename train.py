@@ -114,14 +114,14 @@ def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
         
-        # cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
-        # mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
-        # cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=0.5)
-        ringmix = RingMix(patch_size=16, num_classes=10, p=0.5)
+        cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
+        mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
+        cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=0.5)
+        # ringmix = RingMix(patch_size=16, num_classes=10, p=0.5)
 
         inputs, targets = inputs.to(device), targets.to(device)
-        # inputs, targets = cutmix_or_mixup(inputs, targets)
-        inputs, targets = ringmix(inputs, targets)
+        inputs, targets = cutmix_or_mixup(inputs, targets)
+        # inputs, targets = ringmix(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
@@ -130,17 +130,17 @@ def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion
         optimizer.step()
         
         total_loss += loss.item() * inputs.size(0)
-        _, predicted = outputs.max(1)
+        # _, predicted = outputs.max(1)
         total += targets.size(0)
-        correct += predicted.eq(targets).sum().item()
+        # correct += predicted.eq(targets).sum().item()
 
         avg_loss = total_loss / total
-        accuracy = 100. * correct / total
-    return avg_loss, accuracy
+        # accuracy = 100. * correct / total
+    return avg_loss, 0
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
-    total_loss, correct, total = 0, 0, 0
+    total_loss, correct_top1, correct_top5, total = 0, 0, 0
    
     with torch.no_grad():
         for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
@@ -148,15 +148,23 @@ def validate(epoch, end_epoch, model, loader, criterion, device):
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
             loss = criterion(outputs, targets)
-
-            total_loss += loss.item() * inputs.size(0)
-            _, predicted = outputs.max(1)
+            
             total += targets.size(0)
-            correct += predicted.eq(targets).sum().item()
+
+            # Loss
+            total_loss += loss.item() * inputs.size(0)
+            # Accuracy
+            #Top 1
+            _, predicted = outputs.max(1)
+            correct_top1 += predicted.eq(targets).sum().item()
+            #Top 5
+            _, predicted = outputs.topk(5, 1, True, True)  # top 5 predicted class indices
+            correct_top5 = predicted.eq(targets.view(-1, 1).expand_as(predicted)).sum().item()
 
     avg_loss = total_loss / total
-    accuracy = 100. * correct / total
-    return avg_loss, accuracy
+    accuracy_top1 = 100. * correct_top1 / total
+    accuracy_top5 = 100. * correct_top5 / total
+    return avg_loss, accuracy_top1, accuracy_top5
 
 def main():
     config = parse_args()
@@ -217,7 +225,6 @@ def main():
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
 
     best_acc = 0
-    best_epoch = 0
 
     if resume == True:
         begin_epoch = Loading_Checkpoint(path=checkpoint_path,
@@ -238,7 +245,7 @@ def main():
                                       device=device)
         scheduler.step()
         print()
-        val_loss, val_acc = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
+        val_loss, top1_val_acc, top5_val_acc = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
         print()
 
         if save_checkpoint == True:
@@ -252,22 +259,22 @@ def main():
         print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
         print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
-            format(epoch, end_epoch, val_loss, round(val_acc, 2)))
-        if val_acc > best_acc:
+            format(epoch, end_epoch, val_loss, round(top1_val_acc, 2)))
+        if top1_val_acc > best_acc:
             if save_best == True:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
-                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                    format(round(best_acc, 2), round(top1_val_acc, 2),  epoch))
                 Saving_Best(model, best_path)
             else:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
-            best_acc = val_acc
-            best_epoch = epoch
+                    format(round(best_acc, 2), round(top1_val_acc, 2),  epoch))
+            best_acc = top1_val_acc
         if save_metrics:
             Saving_Metric(epoch=epoch, 
                           train_acc=train_acc, 
                           train_loss=train_loss, 
-                          val_acc=val_acc, 
+                          top1_val_acc=top1_val_acc,
+                          top5_val_acc=top5_val_acc, 
                           val_loss=val_loss, 
                           path=metrics_path)
         print()

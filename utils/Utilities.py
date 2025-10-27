@@ -60,11 +60,12 @@ def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path):
         'scheduler_state_dict': scheduler.state_dict(),
         "last_epoch": last_epoch
     }, path)
+
 def Saving_Best(model, path):
     Create_Folder(path=path)
     torch.save(model.state_dict(), path)
 
-def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
+def Saving_Metric(epoch, train_acc, train_loss, top1_val_acc, top5_val_acc, val_loss, path):
     Create_Folder(path=path)
     if os.path.exists(path):
         metrics_df = pd.read_csv(path)
@@ -74,7 +75,8 @@ def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
             'train_loss': pd.Series(dtype='float'),
             'train_acc': pd.Series(dtype='float'),
             'val_loss': pd.Series(dtype='float'),
-            'val_acc': pd.Series(dtype='float'),
+            'top1_val_acc': pd.Series(dtype='float'),
+            'top5_val_acc': pd.Series(dtype='float'),
             'lr': pd.Series(dtype='float')
         })
     new_row = {
@@ -82,7 +84,8 @@ def Saving_Metric(epoch, train_acc, train_loss, val_acc, val_loss, path):
         'train_loss': train_loss,
         'train_acc': train_acc,
         'val_loss': val_loss,
-        'val_acc': val_acc,
+        'top1_val_acc': top1_val_acc,
+        'top5_val_acc': top5_val_acc,
     }
     metrics_df = pd.concat([metrics_df, pd.DataFrame([new_row])], ignore_index=True)
     metrics_df.to_csv(path, index=False)
@@ -104,6 +107,6 @@ def Loading_Checkpoint(path, model, optimizer, scheduler, device):
 def Get_Max_Acc(path):
     df = pd.read_csv(path)
 
-    best_acc = df['val_acc'].max()
+    best_acc = df['top1_val_acc'].max()
 
     return best_acc 
