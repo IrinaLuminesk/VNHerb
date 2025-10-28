@@ -3,7 +3,8 @@ from torchvision.models import resnet50, ResNet50_Weights,\
     densenet201, DenseNet201_Weights,\
     vgg19, VGG19_Weights, \
     convnext_base, ConvNeXt_Base_Weights,\
-    mobilenet_v2, MobileNet_V2_Weights
+    mobilenet_v2, MobileNet_V2_Weights, \
+    swin_v2_b, Swin_V2_B_Weights
 
 def build_model(model_type: int, num_classes: int):
         match model_type:
@@ -82,8 +83,13 @@ def build_model(model_type: int, num_classes: int):
                     nn.Linear(1024, num_classes)
                 )
                 return model
-            case "Swim":
-                return 1
+            case 6: #Swin transform
+                swinv2Weight = Swin_V2_B_Weights.DEFAULT
+                model = swin_v2_b(weights=swinv2Weight)
+
+                in_features = model.head.in_features #1024
+                model.head = nn.Linear(in_features, num_classes, bias=True),
+                return model
             
 
 class Model(nn.Module):

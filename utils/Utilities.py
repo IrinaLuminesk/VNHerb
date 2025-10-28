@@ -19,6 +19,8 @@ def YAML_Reader(path):
 def read_img(img_path):
     try:
         img = cv2.imread(img_path)
+        if img is None:
+            raise FileNotFoundError("Image not found")
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = img.astype(np.float32) / 255.0
         return img.mean(axis=(0, 1)), img.std(axis=(0, 1)), 1
@@ -49,7 +51,7 @@ def get_mean_std(path, max_workers=4):
     mean = total_mean / total_count
     std = total_std / total_count
     print("Mean: {0}, STD: {1}".format(mean, std))
-    return mean, std
+    return mean.tolist(), std.tolist()
 
 def Saving_Checkpoint(epoch, model, optimizer, scheduler, last_epoch, path):
     Create_Folder(path=path)

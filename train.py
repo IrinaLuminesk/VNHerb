@@ -1,8 +1,8 @@
 import argparse
 import os
+from typing import Sequence
+from sympy import Float
 from tqdm import tqdm
-import yaml
-from RingMix import RingMix
 from learning_rate import PiecewiseScheduler
 from model import Model
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 
-from timm.loss import SoftTargetCrossEntropy
+from timm.loss.cross_entropy import SoftTargetCrossEntropy
 
 def parse_args():
     parser = argparse.ArgumentParser(description="A simple argparse example")
@@ -55,7 +55,7 @@ def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_si
     print()
     return training_loader, testing_loader
 
-def Get_Transform(mean: list, std: list, img_size):
+def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
     training_transform = v2.Compose([
         v2.Resize(img_size),
         v2.RandomChoice([
@@ -116,7 +116,7 @@ def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion
         
         cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
         mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
-        cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=0.5)
+        cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=[0.5, 0.5])
         # ringmix = RingMix(patch_size=16, num_classes=10, p=0.5)
 
         inputs, targets = inputs.to(device), targets.to(device)
@@ -134,13 +134,13 @@ def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion
         total += targets.size(0)
         # correct += predicted.eq(targets).sum().item()
 
-        avg_loss = total_loss / total
+    avg_loss = total_loss / total
         # accuracy = 100. * correct / total
     return avg_loss, 0
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
-    total_loss, correct_top1, correct_top5, total = 0, 0, 0
+    total_loss, correct_top1, correct_top5, total = 0, 0, 0, 0
    
     with torch.no_grad():
         for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
@@ -159,7 +159,7 @@ def validate(epoch, end_epoch, model, loader, criterion, device):
             correct_top1 += predicted.eq(targets).sum().item()
             #Top 5
             _, predicted = outputs.topk(5, 1, True, True)  # top 5 predicted class indices
-            correct_top5 = predicted.eq(targets.view(-1, 1).expand_as(predicted)).sum().item()
+            correct_top5 += predicted.eq(targets.view(-1, 1).expand_as(predicted)).sum().item()
 
     avg_loss = total_loss / total
     accuracy_top1 = 100. * correct_top1 / total
@@ -175,8 +175,8 @@ def main():
     train_path = config["DATASET"]["TRAIN_FOLDER"]
     test_path = config["DATASET"]["TEST_FOLDER"]
     CLASSES = sorted([i for i in os.listdir(root_path)])
-    mean = config["TRAIN"]["DATA"]["MEAN"]
-    std = config["TRAIN"]["DATA"]["STD"]
+    mean: Sequence[float] = config["TRAIN"]["DATA"]["MEAN"]
+    std: Sequence[float] = config["TRAIN"]["DATA"]["STD"]
     batch_size = config["TRAIN"]["DATA"]["BATCH_SIZE"]
     
 
@@ -197,7 +197,7 @@ def main():
     
     if mean is None or std is None:
         print("Calculating mean and std")
-        mean, std = get_mean_std(train_path)
+        mean: Sequence[float]; std: Sequence[float] = get_mean_std(train_path)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
@@ -237,10 +237,10 @@ def main():
     for epoch in range(begin_epoch, end_epoch):
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
-                                      NUM_CLASSES=CLASSES,
+                                      NUM_CLASSES=len(CLASSES),
                                       model=model, 
                                       loader=training_loader, 
-                                      train_criterion=train_criterion, 
+                                      criterion=train_criterion, 
                                       optimizer=optimizer, 
                                       device=device)
         scheduler.step()

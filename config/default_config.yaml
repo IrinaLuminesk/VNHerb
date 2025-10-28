@@ -20,9 +20,9 @@ TRAIN:
     MEAN: [0.48667304, 0.47782094, 0.44596779]
     STD: [0.20571293, 0.20116103, 0.20227837]
   TRAIN_PARA:
-    MODEL_TYPE: 1 #{1: Resnet50, 2: DenseNet201, 3: VGG19, 4: ConvNeXt_Large, 5: Swim}
+    MODEL_TYPE: 1 #{1: Resnet50, 2: DenseNet201, 3: VGG19, 4: ConvNeXt_Large, 5: MobileNet}
     BEGIN_EPOCH: 0
-    END_EPOCH: 10
+    END_EPOCH: 100
     LAST_EPOCH: 0
     OPTIMIZER: "AdamW"
     RESUME: False
