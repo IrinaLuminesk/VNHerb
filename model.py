@@ -88,7 +88,7 @@ def build_model(model_type: int, num_classes: int):
                 model = swin_v2_b(weights=swinv2Weight)
 
                 in_features = model.head.in_features #1024
-                model.head = nn.Linear(in_features, num_classes, bias=True),
+                model.head = nn.Linear(in_features, num_classes, bias=True)
                 return model
             
 

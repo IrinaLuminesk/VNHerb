@@ -30,6 +30,15 @@ def parse_args():
     config = YAML_Reader(args.cfg)
     return config
 
+def set_seed(seed=42):
+    # random.seed(seed)
+    # np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    # torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
 def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size):
     training_dataset = datasets.ImageFolder(
         root=train_path,
@@ -195,6 +204,8 @@ def main():
     best_path = config["TRAIN"]["OPTIONAL"]["BEST_PATH"]
     metrics_path = config["TRAIN"]["OPTIONAL"]["METRICS_PATH"]
     
+    set_seed()
+    
     if mean is None or std is None:
         print("Calculating mean and std")
         mean: Sequence[float]; std: Sequence[float] = get_mean_std(train_path)
@@ -282,3 +293,62 @@ def main():
     
 if __name__ == '__main__':
     main()
+
+# W_augmix, W_mixup, W_cutmix = 0, 0, 0
+
+# p = random.random()
+# if p < 0.33:
+#     aug_type = 'augmix'
+#     x = augmix_transform(x)
+#     W_augmix = 1
+# elif p < 0.66:
+#     aug_type = 'mixup'
+#     x, y = mixup(x, y)
+#     W_mixup = 1
+# else:
+#     aug_type = 'cutmix'
+#     x, y = cutmix(x, y)
+#     W_cutmix = 1
+
+# # --- Forward ---
+# if aug_type == 'augmix':
+#     x_clean, x_aug1, x_aug2 = x
+#     logits_clean = model(x_clean)
+#     logits_aug1 = model(x_aug1)
+#     logits_aug2 = model(x_aug2)
+
+#     loss_ce = F.cross_entropy(logits_clean, y)
+
+#     p_clean = F.softmax(logits_clean, dim=1)
+#     p_aug1  = F.softmax(logits_aug1, dim=1)
+#     p_aug2  = F.softmax(logits_aug2, dim=1)
+#     p_m = (p_clean + p_aug1 + p_aug2) / 3
+#     loss_js = (F.kl_div(p_m.log(), p_clean, reduction='batchmean') +
+#                F.kl_div(p_m.log(), p_aug1, reduction='batchmean') +
+#                F.kl_div(p_m.log(), p_aug2, reduction='batchmean')) / 3
+#     loss_augmix = loss_ce + 12 * loss_js
+
+#     loss_mixup = torch.tensor(0.0, device=x_clean.device)
+#     loss_cutmix = torch.tensor(0.0, device=x_clean.device)
+
+# else:
+#     logits = model(x)
+#     loss_augmix = torch.tensor(0.0, device=x.device)
+
+#     if aug_type == 'mixup':
+#         loss_mixup = soft_target_cross_entropy(logits, y)
+#         loss_cutmix = torch.tensor(0.0, device=x.device)
+#     else:  # cutmix
+#         loss_cutmix = soft_target_cross_entropy(logits, y)
+#         loss_mixup = torch.tensor(0.0, device=x.device)
+
+# # --- Combine everything ---
+# total_loss = (
+#     W_augmix * loss_augmix +
+#     W_mixup  * loss_mixup  +
+#     W_cutmix * loss_cutmix
+# )
+
+# optimizer.zero_grad()
+# total_loss.backward()
+# optimizer.step()
