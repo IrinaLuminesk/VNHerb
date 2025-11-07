@@ -33,7 +33,10 @@ TRAIN:
     BEST_PATH: "./best_model/checkpoint.pth"
     SAVE_METRICS: TRUE
     METRICS_PATH: "./metrics/metrics.csv"
-
+  AUG:
+    CUTMIX: [TRUE, 0.5]
+    MIXUP: [TRUE, 0.5]
+    FMIX: [FALSE, 0.5]
 
 TEST:
   BATCH_SIZE: 32

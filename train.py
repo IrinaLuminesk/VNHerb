@@ -3,6 +3,7 @@ import os
 from typing import Sequence
 from sympy import Float
 from tqdm import tqdm
+from Aug.BatchWiseAug import BatchWiseAug
 from learning_rate import PiecewiseScheduler
 from model import Model
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
@@ -117,20 +118,19 @@ def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
 
     return training_transform, testing_transform
 
-def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion, optimizer, device):
+def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion, optimizer, device, config):
     model.train()
     total_loss, correct, total = 0, 0, 0
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
         
-        cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
-        mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
-        cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=[0.5, 0.5])
-        # ringmix = RingMix(patch_size=16, num_classes=10, p=0.5)
+        # cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
+        # mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
+        # cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=[0.5, 0.5])
+        batchWiseAug = BatchWiseAug(config=config, num_classes=NUM_CLASSES)
 
         inputs, targets = inputs.to(device), targets.to(device)
-        inputs, targets = cutmix_or_mixup(inputs, targets)
-        # inputs, targets = ringmix(inputs, targets)
+        inputs, targets = batchWiseAug(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
@@ -253,7 +253,8 @@ def main():
                                       loader=training_loader, 
                                       criterion=train_criterion, 
                                       optimizer=optimizer, 
-                                      device=device)
+                                      device=device,
+                                      config=config)
         scheduler.step()
         print()
         val_loss, top1_val_acc, top5_val_acc = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
