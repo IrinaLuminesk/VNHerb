@@ -213,7 +213,7 @@ def main():
                                                    test_transform=testing_transform, 
                                                    batch_size=batch_size)
 
-    batchWiseAug = BatchWiseAug(config=config, num_classes=CLASSES)
+    batchWiseAug = BatchWiseAug(config=config, num_classes=len(CLASSES))
 
     model = Model(len(CLASSES), model_type).to(device)
 
