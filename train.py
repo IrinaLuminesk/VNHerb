@@ -69,13 +69,7 @@ def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
     training_transform = v2.Compose([
         v2.Resize(img_size),
         v2.RandomChoice([
-            # v2.RandomHorizontalFlip(p=1.0),
-            # v2.RandomVerticalFlip(p=1.0),
-            # v2.RandomRotation(degrees=15, interpolation=v2.InterpolationMode.BILINEAR),
-            # v2.RandomAffine(degrees=0, translate=(0.5, 0.1)),
-            # v2.RandomResizedCrop((256, 256), scale=(0.5, 1.1), ratio=(1.0, 1.0)),
-            # v2.ColorJitter(brightness=0.25, contrast=0.25, saturation=0.25, hue=0.25),
-            # v2.RandomResizedCrop(size=size),
+            v2.RandomResizedCrop(size=img_size),
             v2.RandomHorizontalFlip(p=1),
             v2.RandomVerticalFlip(p=1),
             v2.Compose([
@@ -118,7 +112,7 @@ def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
 
     return training_transform, testing_transform
 
-def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion, optimizer, device, config):
+def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device):
     model.train()
     total_loss, correct, total = 0, 0, 0
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
@@ -127,25 +121,24 @@ def train(epoch: int, end_epoch: int, NUM_CLASSES: int, model, loader, criterion
         # cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
         # mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
         # cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=[0.5, 0.5])
-        batchWiseAug = BatchWiseAug(config=config, num_classes=NUM_CLASSES)
 
         inputs, targets = inputs.to(device), targets.to(device)
-        inputs, targets = batchWiseAug(inputs, targets)
+        inputs, targets_softmax = batchWiseAug(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
-        loss = criterion(outputs, targets)
+        loss = criterion(outputs, targets_softmax)
         loss.backward()
         optimizer.step()
         
         total_loss += loss.item() * inputs.size(0)
-        # _, predicted = outputs.max(1)
+        _, predicted = torch.max(outputs, dim=1)
         total += targets.size(0)
-        # correct += predicted.eq(targets).sum().item()
+        correct += predicted.eq(targets).sum().item()
 
     avg_loss = total_loss / total
-        # accuracy = 100. * correct / total
-    return avg_loss, 0
+    accuracy = 100. * correct / total
+    return avg_loss, accuracy
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
@@ -220,6 +213,8 @@ def main():
                                                    test_transform=testing_transform, 
                                                    batch_size=batch_size)
 
+    batchWiseAug = BatchWiseAug(config=config, num_classes=CLASSES)
+
     model = Model(len(CLASSES), model_type).to(device)
 
     eval_criterion = nn.CrossEntropyLoss()
@@ -248,13 +243,12 @@ def main():
     for epoch in range(begin_epoch, end_epoch):
         train_loss, train_acc = train(epoch, 
                                       end_epoch, 
-                                      NUM_CLASSES=len(CLASSES),
+                                      batchWiseAug=batchWiseAug,
                                       model=model, 
                                       loader=training_loader, 
                                       criterion=train_criterion, 
                                       optimizer=optimizer, 
-                                      device=device,
-                                      config=config)
+                                      device=device)
         scheduler.step()
         print()
         val_loss, top1_val_acc, top5_val_acc = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)

@@ -20,7 +20,7 @@ class BatchWiseAug:
         for aug_name, aug_fn in aug_map.items():
             enabled, prob = all_augs[aug_name]
             if enabled:
-                Augs.append(aug_fn)       # ← instantiated *only if enabled*
+                Augs.append(aug_fn())       # ← instantiated *only if enabled*
                 Probabilities.append(prob)
         return v2.RandomChoice(Augs, p=Probabilities)
     def __call__(self, images, labels):
