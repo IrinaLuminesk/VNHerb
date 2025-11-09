@@ -117,10 +117,6 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
     total_loss, correct, total = 0, 0, 0
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
-        
-        # cutmix = v2.CutMix(num_classes=NUM_CLASSES, alpha=2.0)
-        # mixup = v2.MixUp(num_classes=NUM_CLASSES, alpha=2.0)
-        # cutmix_or_mixup = v2.RandomChoice([cutmix, mixup], p=[0.5, 0.5])
 
         inputs, targets = inputs.to(device), targets.to(device)
         inputs, targets_softmax = batchWiseAug(inputs, targets)
@@ -132,13 +128,13 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
         optimizer.step()
         
         total_loss += loss.item() * inputs.size(0)
-        _, predicted = torch.max(outputs, dim=1)
+        # _, predicted = torch.max(outputs, dim=1)
         total += targets.size(0)
-        correct += predicted.eq(targets).sum().item()
+        # correct += predicted.eq(targets).sum().item()
 
     avg_loss = total_loss / total
-    accuracy = 100. * correct / total
-    return avg_loss, accuracy
+    # accuracy = 100. * correct / total
+    return avg_loss, 0
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()

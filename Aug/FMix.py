@@ -60,13 +60,11 @@ class FMix(Transform):
         binary_mask = (mask > mask.mean()).float()
         return binary_mask
     def make_params(self, images: torch.Tensor):
-        if isinstance(self.shape, int):
-            self.shape = (self.shape,)
-        B, _, _, _ = images.shape
+        B, C, H, W = images.shape
         masks = []
         lams = []
-        for _ in range(8):
-            mask = self.make_low_freq_image(images.device, self.decay_power, self.shape)
+        for _ in range(B):
+            mask = self.make_low_freq_image(images.device, self.decay_power, (H, W))
             masks.append(mask)
             lam = mask.mean()
             lams.append(lam)
