@@ -97,6 +97,7 @@ class Model(nn.Module):
         super().__init__()
         self.num_classes = num_classes
         self.model_type = model_type
+        self.model = self.build_model() 
     def build_model(self):
         match self.model_type:
             case 1: #Resnet50
@@ -182,6 +183,5 @@ class Model(nn.Module):
                 model.head = nn.Linear(in_features, self.num_classes, bias=True)
                 return model
     def forward(self, x):
-        model = self.build_model()
-        return model(x)
+        return self.model(x)
     
