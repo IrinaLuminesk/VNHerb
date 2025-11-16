@@ -7,7 +7,7 @@ from Aug.BatchWiseAug import BatchWiseAug
 from Metrics.MetricCal import MetricCal
 from learning_rate import PiecewiseScheduler
 from model import Model
-from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
+from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, Saving_Metric2, YAML_Reader, get_mean_std
 
 import torch
 from torchvision import datasets
@@ -116,7 +116,7 @@ def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
 def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device):
     model.train()
     # total_loss, correct, total = 0, 0, 0
-    metrics = MetricCal()
+    metrics = MetricCal(num_classes=10)
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
 
@@ -140,12 +140,12 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
 
     # avg_loss = total_loss / total
     # accuracy = 100. * correct / total
-    return metrics.avg_loss, metrics.avg_accuracy
+    return metrics
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
     # total_loss, correct_top1, correct_top5, total = 0, 0, 0, 0
-    metrics = MetricCal()
+    metrics = MetricCal(num_classes=10)
     with torch.no_grad():
         for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
@@ -168,7 +168,7 @@ def validate(epoch, end_epoch, model, loader, criterion, device):
     # avg_loss = total_loss / total
     # accuracy_top1 = 100. * correct_top1 / total
     # accuracy_top5 = 100. * correct_top5 / total
-    return metrics.avg_loss, metrics.avg_accuracy, metrics.avg_accuracy_top5
+    return metrics
 
 def main():
     config = parse_args()
@@ -243,17 +243,19 @@ def main():
         best_acc = Get_Max_Acc(metrics_path)
 
     for epoch in range(begin_epoch, end_epoch):
-        train_loss, train_acc = train(epoch, 
-                                      end_epoch, 
-                                      batchWiseAug=batchWiseAug,
-                                      model=model, 
-                                      loader=training_loader, 
-                                      criterion=train_criterion, 
-                                      optimizer=optimizer, 
-                                      device=device)
+        train_metrics = train(epoch, 
+                                end_epoch, 
+                                batchWiseAug=batchWiseAug,
+                                model=model, 
+                                loader=training_loader, 
+                                criterion=train_criterion, 
+                                optimizer=optimizer, 
+                                device=device)
+        train_loss, train_acc = train_metrics.avg_loss, train_metrics.avg_accuracy
         scheduler.step()
         print()
-        val_loss, top1_val_acc, top5_val_acc = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
+        val_metrics = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
+        val_loss, val_acc = val_metrics.avg_loss, val_metrics.avg_accuracy
         print()
 
         if save_checkpoint == True:
@@ -266,25 +268,30 @@ def main():
 
         print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc, 2)))
-        print("Epoch [{0}/{1}]: Validation loss: {2}, Top 1 Validation Acc: {3}%, , Top 5 Validation Acc: {4}%".
-            format(epoch, end_epoch, val_loss, round(top1_val_acc, 2), round(top5_val_acc, 2)))
-        if top1_val_acc > best_acc:
+        print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
+            format(epoch, end_epoch, val_loss, round(val_acc, 2)))
+        if val_acc > best_acc:
             if save_best == True:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
-                    format(round(best_acc, 2), round(top1_val_acc, 2),  epoch))
+                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
                 Saving_Best(model, best_path)
             else:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                    format(round(best_acc, 2), round(top1_val_acc, 2),  epoch))
-            best_acc = top1_val_acc
+                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+            best_acc = val_acc
         if save_metrics:
-            Saving_Metric(epoch=epoch, 
-                          train_acc=train_acc, 
-                          train_loss=train_loss, 
-                          top1_val_acc=top1_val_acc,
-                          top5_val_acc=top5_val_acc, 
-                          val_loss=val_loss, 
-                          path=metrics_path)
+            Saving_Metric2(epoch=epoch, 
+                           train_loss=train_loss,
+                           train_acc=train_acc,
+                           train_precision=train_metrics.precision_macro,
+                           train_recall=train_metrics.recall_macro,
+                           train_f1=train_metrics.f1_macro, 
+                           val_loss=val_loss,
+                           val_acc=val_acc,
+                           val_precision=val_metrics.precision_macro,
+                           val_recall=val_metrics.recall_macro,
+                           val_f1=val_metrics.f1_macro, 
+                           path=metrics_path)
         print()
 
     

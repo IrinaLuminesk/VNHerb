@@ -92,6 +92,51 @@ def Saving_Metric(epoch, train_acc, train_loss, top1_val_acc, top5_val_acc, val_
     metrics_df = pd.concat([metrics_df, pd.DataFrame([new_row])], ignore_index=True)
     metrics_df.to_csv(path, index=False)
 
+def Saving_Metric2(epoch, 
+                   train_acc,
+                   train_precision,
+                   train_recall,
+                   train_f1, 
+                   train_loss, 
+                   val_acc,
+                   val_precision,
+                   val_recall,
+                   val_f1, 
+                   val_loss, path):
+    Create_Folder(path=path)
+    if os.path.exists(path):
+        metrics_df = pd.read_csv(path)
+    else:
+        metrics_df = pd.DataFrame({
+            'epoch': pd.Series(dtype='int'),
+            'train_loss': pd.Series(dtype='float'),
+            'train_acc': pd.Series(dtype='float'),
+            'train_precision': pd.Series(dtype='float'),
+            'train_recall': pd.Series(dtype='float'),
+            'train_f1': pd.Series(dtype='float'),
+            'val_loss': pd.Series(dtype='float'),
+            'val_acc': pd.Series(dtype='float'),
+            'val_precision': pd.Series(dtype='float'),
+            'val_recall': pd.Series(dtype='float'),
+            'val_f1': pd.Series(dtype='float'),
+            'lr': pd.Series(dtype='float')
+        })
+    new_row = {
+        'epoch': epoch,
+        'train_loss': train_loss,
+        'train_acc': train_acc,
+        'train_precision': train_precision,
+        'train_recall': train_recall,
+        'train_f1': train_f1,
+        'val_loss': val_loss,
+        'val_acc': val_acc,
+        'val_precision': val_precision,
+        'val_recall': val_recall,
+        'val_f1': val_f1,
+    }
+    metrics_df = pd.concat([metrics_df, pd.DataFrame([new_row])], ignore_index=True)
+    metrics_df.to_csv(path, index=False)
+
 def Loading_Checkpoint(path, model, optimizer, scheduler, device):
     checkpoint = torch.load(path, map_location=device)
 
