@@ -140,35 +140,35 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
 
     # avg_loss = total_loss / total
     # accuracy = 100. * correct / total
-    return metrics.avg_loss, metrics.avg_loss
+    return metrics.avg_loss, metrics.avg_accuracy
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
-    total_loss, correct_top1, correct_top5, total = 0, 0, 0, 0
-   
+    # total_loss, correct_top1, correct_top5, total = 0, 0, 0, 0
+    metrics = MetricCal()
     with torch.no_grad():
         for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
             loss = criterion(outputs, targets)
-            
-            total += targets.size(0)
+            metrics.update(loss=loss, outputs=outputs, targets=targets, type="hard")
+    #         total += targets.size(0)
 
-            # Loss
-            total_loss += loss.item() * inputs.size(0)
-            # Accuracy
-            #Top 1
-            _, predicted = outputs.max(1)
-            correct_top1 += predicted.eq(targets).sum().item()
-            #Top 5
-            _, predicted = outputs.topk(5, 1, True, True)  # top 5 predicted class indices
-            correct_top5 += predicted.eq(targets.view(-1, 1).expand_as(predicted)).sum().item()
+    #         # Loss
+    #         total_loss += loss.item() * inputs.size(0)
+    #         # Accuracy
+    #         #Top 1
+    #         _, predicted = outputs.max(1)
+    #         correct_top1 += predicted.eq(targets).sum().item()
+    #         #Top 5
+    #         _, predicted = outputs.topk(5, 1, True, True)  # top 5 predicted class indices
+    #         correct_top5 += predicted.eq(targets.view(-1, 1).expand_as(predicted)).sum().item()
 
-    avg_loss = total_loss / total
-    accuracy_top1 = 100. * correct_top1 / total
-    accuracy_top5 = 100. * correct_top5 / total
-    return avg_loss, accuracy_top1, accuracy_top5
+    # avg_loss = total_loss / total
+    # accuracy_top1 = 100. * correct_top1 / total
+    # accuracy_top5 = 100. * correct_top5 / total
+    return metrics.avg_loss, metrics.avg_accuracy, metrics.avg_accuracy_top5
 
 def main():
     config = parse_args()
