@@ -4,6 +4,7 @@ from typing import Sequence
 from sympy import Float
 from tqdm import tqdm
 from Aug.BatchWiseAug import BatchWiseAug
+from Metrics.MetricCal import MetricCal
 from learning_rate import PiecewiseScheduler
 from model import Model
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, YAML_Reader, get_mean_std
@@ -114,27 +115,32 @@ def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
 
 def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device):
     model.train()
-    total_loss, correct, total = 0, 0, 0
+    # total_loss, correct, total = 0, 0, 0
+    metrics = MetricCal()
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
 
         inputs, targets = inputs.to(device), targets.to(device)
-        inputs, targets_softmax = batchWiseAug(inputs, targets)
+        inputs, targets = batchWiseAug(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
-        loss = criterion(outputs, targets_softmax)
+        loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
-        
-        total_loss += loss.item() * inputs.size(0)
-        # _, predicted = torch.max(outputs, dim=1)
-        total += targets.size(0)
-        # correct += predicted.eq(targets).sum().item()
 
-    avg_loss = total_loss / total
+        # pred_class = outputs.argmax(dim=1)
+        # true_class = targets.argmax(dim=1)
+
+        # batch_size = inputs.size(0)
+        # total_loss += loss.item() * batch_size
+        # total += batch_size
+        # correct += (pred_class == true_class).sum().item()
+        metrics.update(loss=loss, outputs=outputs, targets=targets, type="soft")
+
+    # avg_loss = total_loss / total
     # accuracy = 100. * correct / total
-    return avg_loss, 0
+    return metrics.avg_loss, metrics.avg_loss
 
 def validate(epoch, end_epoch, model, loader, criterion, device):
     model.eval()
@@ -284,62 +290,3 @@ def main():
     
 if __name__ == '__main__':
     main()
-
-# W_augmix, W_mixup, W_cutmix = 0, 0, 0
-
-# p = random.random()
-# if p < 0.33:
-#     aug_type = 'augmix'
-#     x = augmix_transform(x)
-#     W_augmix = 1
-# elif p < 0.66:
-#     aug_type = 'mixup'
-#     x, y = mixup(x, y)
-#     W_mixup = 1
-# else:
-#     aug_type = 'cutmix'
-#     x, y = cutmix(x, y)
-#     W_cutmix = 1
-
-# # --- Forward ---
-# if aug_type == 'augmix':
-#     x_clean, x_aug1, x_aug2 = x
-#     logits_clean = model(x_clean)
-#     logits_aug1 = model(x_aug1)
-#     logits_aug2 = model(x_aug2)
-
-#     loss_ce = F.cross_entropy(logits_clean, y)
-
-#     p_clean = F.softmax(logits_clean, dim=1)
-#     p_aug1  = F.softmax(logits_aug1, dim=1)
-#     p_aug2  = F.softmax(logits_aug2, dim=1)
-#     p_m = (p_clean + p_aug1 + p_aug2) / 3
-#     loss_js = (F.kl_div(p_m.log(), p_clean, reduction='batchmean') +
-#                F.kl_div(p_m.log(), p_aug1, reduction='batchmean') +
-#                F.kl_div(p_m.log(), p_aug2, reduction='batchmean')) / 3
-#     loss_augmix = loss_ce + 12 * loss_js
-
-#     loss_mixup = torch.tensor(0.0, device=x_clean.device)
-#     loss_cutmix = torch.tensor(0.0, device=x_clean.device)
-
-# else:
-#     logits = model(x)
-#     loss_augmix = torch.tensor(0.0, device=x.device)
-
-#     if aug_type == 'mixup':
-#         loss_mixup = soft_target_cross_entropy(logits, y)
-#         loss_cutmix = torch.tensor(0.0, device=x.device)
-#     else:  # cutmix
-#         loss_cutmix = soft_target_cross_entropy(logits, y)
-#         loss_mixup = torch.tensor(0.0, device=x.device)
-
-# # --- Combine everything ---
-# total_loss = (
-#     W_augmix * loss_augmix +
-#     W_mixup  * loss_mixup  +
-#     W_cutmix * loss_cutmix
-# )
-
-# optimizer.zero_grad()
-# total_loss.backward()
-# optimizer.step()
