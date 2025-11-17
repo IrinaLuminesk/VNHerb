@@ -1,0 +1,43 @@
+GPUS: (0,1,2,3)
+WORKERS: 4
+PRINT_FREQ: 1
+
+DATASET:
+  DATASET_NAME: VNHerb-data
+  ROOT: "../datasets"
+  ROOT_FOLDER: "./datasets/VNHerb"
+  TRAIN_FOLDER: "./datasets/train"
+  TEST_FOLDER: "./datasets/test"
+  ZIP_FOLDER: "./datasets/Cifar10.zip"
+  SELECTION_RATIO: 1
+  SPLIT_RATIO: 0.7
+
+TRAIN:
+  DATA:
+    IMAGE_SIZE: [256, 256]
+    BATCH_SIZE: 128
+    SHUFFLE: True
+    MEAN: None
+    STD: None
+  TRAIN_PARA:
+    MODEL_TYPE: 1 #{1: Resnet50, 2: DenseNet201, 3: VGG19, 4: ConvNeXt_Large, 5: MobileNet}
+    BEGIN_EPOCH: 0
+    END_EPOCH: 100
+    LAST_EPOCH: 0
+    OPTIMIZER: "AdamW"
+    RESUME: False
+  OPTIONAL:
+    SAVE_CHECKPOINT: TRUE
+    CHECKPOINT_PATH: "./resume_model/checkpoint.pth"
+    SAVE_BEST: TRUE
+    BEST_PATH: "./best_model/checkpoint.pth"
+    SAVE_METRICS: TRUE
+    METRICS_PATH: "./metrics/metrics.csv"
+  AUG:
+    CUTMIX: [TRUE, 0.5]
+    MIXUP: [TRUE, 0.5]
+    FMIX: [FALSE, 0.5]
+
+TEST:
+  BATCH_SIZE: 32
+
