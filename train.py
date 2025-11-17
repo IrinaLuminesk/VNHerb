@@ -113,10 +113,9 @@ def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
 
     return training_transform, testing_transform
 
-def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device):
+def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device, num_classes):
     model.train()
-    # total_loss, correct, total = 0, 0, 0
-    metrics = MetricCal(num_classes=10)
+    metrics = MetricCal(num_classes=num_classes)
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
 
@@ -129,23 +128,12 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
         loss.backward()
         optimizer.step()
 
-        # pred_class = outputs.argmax(dim=1)
-        # true_class = targets.argmax(dim=1)
-
-        # batch_size = inputs.size(0)
-        # total_loss += loss.item() * batch_size
-        # total += batch_size
-        # correct += (pred_class == true_class).sum().item()
         metrics.update(loss=loss, outputs=outputs, targets=targets, type="soft")
-
-    # avg_loss = total_loss / total
-    # accuracy = 100. * correct / total
     return metrics
 
-def validate(epoch, end_epoch, model, loader, criterion, device):
+def validate(epoch, end_epoch, model, loader, criterion, device, num_classes):
     model.eval()
-    # total_loss, correct_top1, correct_top5, total = 0, 0, 0, 0
-    metrics = MetricCal(num_classes=10)
+    metrics = MetricCal(num_classes=num_classes)
     with torch.no_grad():
         for inputs, targets in tqdm(loader, total=len(loader), desc="Validating epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
@@ -153,21 +141,6 @@ def validate(epoch, end_epoch, model, loader, criterion, device):
             outputs = model(inputs)
             loss = criterion(outputs, targets)
             metrics.update(loss=loss, outputs=outputs, targets=targets, type="hard")
-    #         total += targets.size(0)
-
-    #         # Loss
-    #         total_loss += loss.item() * inputs.size(0)
-    #         # Accuracy
-    #         #Top 1
-    #         _, predicted = outputs.max(1)
-    #         correct_top1 += predicted.eq(targets).sum().item()
-    #         #Top 5
-    #         _, predicted = outputs.topk(5, 1, True, True)  # top 5 predicted class indices
-    #         correct_top5 += predicted.eq(targets.view(-1, 1).expand_as(predicted)).sum().item()
-
-    # avg_loss = total_loss / total
-    # accuracy_top1 = 100. * correct_top1 / total
-    # accuracy_top5 = 100. * correct_top5 / total
     return metrics
 
 def main():
@@ -267,17 +240,17 @@ def main():
                             path=checkpoint_path)
 
         print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
-            format(epoch, end_epoch, train_loss, round(train_acc, 2)))
+            format(epoch, end_epoch, train_loss, round(train_acc * 100.0, 2)))
         print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
             format(epoch, end_epoch, val_loss, round(val_acc, 2)))
         if val_acc > best_acc:
             if save_best == True:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
-                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                    format(round(best_acc * 100.0, 2), round(val_acc * 100.0, 2),  epoch))
                 Saving_Best(model, best_path)
             else:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
-                    format(round(best_acc, 2), round(val_acc, 2),  epoch))
+                    format(round(best_acc * 100.0, 2), round(val_acc * 100.0, 2),  epoch))
             best_acc = val_acc
         if save_metrics:
             Saving_Metric2(epoch=epoch, 

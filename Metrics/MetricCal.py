@@ -41,7 +41,7 @@ class MetricCal():
     @property
     def avg_accuracy(self):
         """Accuracy (%) over all accumulated batches."""
-        return 100.0 * self.correct / self.total if self.total > 0 else 0.0
+        return self.correct / self.total if self.total > 0 else 0.0
 
     @property
     def precision(self):
