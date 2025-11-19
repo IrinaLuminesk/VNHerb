@@ -223,11 +223,12 @@ def main():
                                 loader=training_loader, 
                                 criterion=train_criterion, 
                                 optimizer=optimizer, 
-                                device=device)
+                                device=device,
+                                num_classes=len(CLASSES))
         train_loss, train_acc = train_metrics.avg_loss, train_metrics.avg_accuracy
         scheduler.step()
         print()
-        val_metrics = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device)
+        val_metrics = validate(epoch, end_epoch, model, testing_loader, eval_criterion, device, num_classes=len(CLASSES))
         val_loss, val_acc = val_metrics.avg_loss, val_metrics.avg_accuracy
         print()
 
