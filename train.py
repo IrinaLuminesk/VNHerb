@@ -7,12 +7,13 @@ from Aug.BatchWiseAug import BatchWiseAug
 from Metrics.MetricCal import MetricCal
 from learning_rate import PiecewiseScheduler
 from model import Model
+from utils.DatasetLoader import DatasetLoader
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, Saving_Metric2, YAML_Reader, get_mean_std
 
 import torch
-from torchvision import datasets
-from torchvision.transforms import v2
-from torch.utils.data import DataLoader
+# from torchvision import datasets
+# from torchvision.transforms import v2
+# from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 
@@ -41,77 +42,77 @@ def set_seed(seed=42):
     # torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size):
-    training_dataset = datasets.ImageFolder(
-        root=train_path,
-        transform=train_transform
-    )
-    print("Total train image: {0}".format(len(training_dataset)))
-    testing_dataset = datasets.ImageFolder(
-        root=test_path,
-        transform=test_transform
-    )
-    print("Total test image: {0}".format(len(testing_dataset)))
-    training_loader = DataLoader(
-        training_dataset,
-        batch_size=batch_size,
-        shuffle=True
-    )
+# def Get_Dataset(train_path, test_path, train_transform, test_transform, batch_size):
+#     training_dataset = datasets.ImageFolder(
+#         root=train_path,
+#         transform=train_transform
+#     )
+#     print("Total train image: {0}".format(len(training_dataset)))
+#     testing_dataset = datasets.ImageFolder(
+#         root=test_path,
+#         transform=test_transform
+#     )
+#     print("Total test image: {0}".format(len(testing_dataset)))
+#     training_loader = DataLoader(
+#         training_dataset,
+#         batch_size=batch_size,
+#         shuffle=True
+#     )
 
-    testing_loader = DataLoader(
-        testing_dataset,
-        batch_size=batch_size,
-        shuffle=False
-    )
-    print()
-    return training_loader, testing_loader
+#     testing_loader = DataLoader(
+#         testing_dataset,
+#         batch_size=batch_size,
+#         shuffle=False
+#     )
+#     print()
+#     return training_loader, testing_loader
 
-def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
-    training_transform = v2.Compose([
-        v2.Resize(img_size),
-        v2.RandomChoice([
-            v2.RandomResizedCrop(size=img_size),
-            v2.RandomHorizontalFlip(p=1),
-            v2.RandomVerticalFlip(p=1),
-            v2.Compose([
-                v2.Pad((10, 20)),
-                v2.Resize(img_size)
-            ]),
-            v2.Compose([
-                v2.RandomZoomOut(p=1, side_range=(1, 1.5)),
-                v2.Resize(img_size)
-            ]),
-            v2.RandomRotation(degrees=(-180, 180)),
-            v2.RandomAffine(degrees=(-180, 180), translate=(0.1, 0.3), scale=(0.5, 1.75)),
-            v2.RandomPerspective(p=1),
-            v2.ElasticTransform(alpha=120),
-            v2.ColorJitter(brightness=(1,2), contrast=(1,2)),
-            v2.RandomPhotometricDistort(brightness=(1,2), contrast=(1,2), p=1),
-            v2.RandomChannelPermutation(),
-            v2.RandomGrayscale(p=1),
-            v2.GaussianBlur(kernel_size=(3, 5), sigma=(0.1, 4.75)),
-            v2.RandomInvert(p=1),
-            v2.Lambda(lambda x: x),
-            ]),
-            v2.ToImage(), 
-            v2.ToDtype(torch.float32, scale=True),
-            v2.Normalize(
-                mean=mean,
-                std=std
-            )
-    ])
+# def Get_Transform(mean: Sequence[float], std: Sequence[float], img_size):
+#     training_transform = v2.Compose([
+#         v2.Resize(img_size),
+#         v2.RandomChoice([
+#             v2.RandomResizedCrop(size=img_size),
+#             v2.RandomHorizontalFlip(p=1),
+#             v2.RandomVerticalFlip(p=1),
+#             v2.Compose([
+#                 v2.Pad((10, 20)),
+#                 v2.Resize(img_size)
+#             ]),
+#             v2.Compose([
+#                 v2.RandomZoomOut(p=1, side_range=(1, 1.5)),
+#                 v2.Resize(img_size)
+#             ]),
+#             v2.RandomRotation(degrees=(-180, 180)),
+#             v2.RandomAffine(degrees=(-180, 180), translate=(0.1, 0.3), scale=(0.5, 1.75)),
+#             v2.RandomPerspective(p=1),
+#             v2.ElasticTransform(alpha=120),
+#             v2.ColorJitter(brightness=(1,2), contrast=(1,2)),
+#             v2.RandomPhotometricDistort(brightness=(1,2), contrast=(1,2), p=1),
+#             v2.RandomChannelPermutation(),
+#             v2.RandomGrayscale(p=1),
+#             v2.GaussianBlur(kernel_size=(3, 5), sigma=(0.1, 4.75)),
+#             v2.RandomInvert(p=1),
+#             v2.Lambda(lambda x: x),
+#             ]),
+#             v2.ToImage(), 
+#             v2.ToDtype(torch.float32, scale=True),
+#             v2.Normalize(
+#                 mean=mean,
+#                 std=std
+#             )
+#     ])
 
-    testing_transform = v2.Compose([
-        v2.Resize(img_size),
-        v2.ToImage(), 
-        v2.ToDtype(torch.float32, scale=True),
-        v2.Normalize(
-            mean=mean,
-            std=std
-        )
-    ])
+#     testing_transform = v2.Compose([
+#         v2.Resize(img_size),
+#         v2.ToImage(), 
+#         v2.ToDtype(torch.float32, scale=True),
+#         v2.Normalize(
+#             mean=mean,
+#             std=std
+#         )
+#     ])
 
-    return training_transform, testing_transform
+#     return training_transform, testing_transform
 
 def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device, num_classes):
     model.train()
@@ -180,13 +181,18 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    training_transform, testing_transform = Get_Transform(mean=mean, std=std, img_size=img_size)
+    train_data = DatasetLoader(path=train_path, batch_size=batch_size, std=std, mean=mean, img_size=img_size)
+    test_data = DatasetLoader(path=test_path, batch_size=batch_size, std=std, mean=mean, img_size=img_size)
+
+    training_loader = train_data.dataset_loader("train")
+    testing_loader = test_data.dataset_loader("test")
+    # training_transform, testing_transform = Get_Transform(mean=mean, std=std, img_size=img_size)
     
-    training_loader, testing_loader = Get_Dataset(train_path=train_path,
-                                                   test_path=test_path, 
-                                                   train_transform=training_transform, 
-                                                   test_transform=testing_transform, 
-                                                   batch_size=batch_size)
+    # training_loader, testing_loader = Get_Dataset(train_path=train_path,
+    #                                                test_path=test_path, 
+    #                                                train_transform=training_transform, 
+    #                                                test_transform=testing_transform, 
+    #                                                batch_size=batch_size)
 
     batchWiseAug = BatchWiseAug(config=config, num_classes=len(CLASSES))
 
@@ -243,7 +249,7 @@ def main():
         print("Epoch [{0}/{1}]: Training loss: {2}, Training Acc: {3}%".
             format(epoch, end_epoch, train_loss, round(train_acc * 100.0, 2)))
         print("Epoch [{0}/{1}]: Validation loss: {2}, Validation Acc: {3}%".
-            format(epoch, end_epoch, val_loss, round(val_acc, 2)))
+            format(epoch, end_epoch, val_loss, round(val_acc * 100.0, 2)))
         if val_acc > best_acc:
             if save_best == True:
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}. Saving best result".
