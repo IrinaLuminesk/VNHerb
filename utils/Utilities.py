@@ -157,3 +157,31 @@ def Get_Max_Acc(path):
     best_acc = df['top1_val_acc'].max()
 
     return best_acc 
+
+def get_num_workers(transform_heavy=True):
+    # 1. Detect CPU cores
+    cpu_cores = os.cpu_count() or 1
+
+    # 2. Detect GPU count
+    gpu_count = torch.cuda.device_count()
+
+    # 3. Select scaling factor
+    # Heavy transforms: ElasticTransform, RandomAffine, Perspective, etc.
+    if transform_heavy:
+        scale = 1.5
+    else:
+        scale = 1.0
+
+    # 4. Handle GPU or CPU-only case
+    if gpu_count > 0:
+        # Workers per GPU
+        workers = int((cpu_cores / gpu_count) * scale)
+    else:
+        # CPU-only system, use more workers since CPU handles everything
+        workers = int(cpu_cores * 0.75)
+
+    # 5. Clamp values
+    workers = max(2, workers)        # never less than 2
+    workers = min(workers, cpu_cores - 1)  # never use ALL CPU cores
+
+    return workers

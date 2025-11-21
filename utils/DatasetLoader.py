@@ -69,7 +69,7 @@ class DatasetLoader():
         else:
             testing_dataset = datasets.ImageFolder(
                 root=self.path,
-                transform=self.test_transform
+                transform=self.test_transform()
             )
             print("Total test image: {0}".format(len(testing_dataset)))
             loader = DataLoader(
