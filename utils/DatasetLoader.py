@@ -1,15 +1,18 @@
 from torchvision.transforms import v2
 from torchvision import datasets
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, DistributedSampler
 import torch
 
+from utils.Utilities import get_num_workers
+
 class DatasetLoader():
-    def __init__(self, path, std, mean, img_size, batch_size) -> None:
+    def __init__(self, path, std, mean, img_size, batch_size, distributed = False) -> None:
         self.path = path
         self.std = std
         self.mean = mean
         self.img_size = img_size
         self.batch_size = batch_size
+        self.distributed = distributed
     def train_transform(self):
         return v2.Compose([
             v2.Resize(self.img_size),
@@ -55,6 +58,11 @@ class DatasetLoader():
                 )
             ])
     def dataset_loader(self, type):
+        if self.distributed == False:
+            return self.non_DDP_Loader(type)
+        else:
+            return self.DDP_Loader(type)
+    def non_DDP_Loader(self, type):
         if type == "train":
             training_dataset = datasets.ImageFolder(
                 root=self.path,
@@ -78,6 +86,53 @@ class DatasetLoader():
                 shuffle=False
             )
         print()
+        return loader
+    def DDP_Loader(self, type):
+        WORLD_SIZE = torch.distributed.get_world_size()
+        LOCAL_RANK = torch.distributed.get_rank()
+        NUM_WORKERS = get_num_workers()
+        if type == "train":
+            training_dataset = datasets.ImageFolder(
+                root=self.path,
+                transform=self.train_transform()
+            )
+            print("Total train image: {0}".format(len(training_dataset)))
+            training_sampler = DistributedSampler(
+                training_dataset,
+                num_replicas=WORLD_SIZE,
+                rank=LOCAL_RANK,
+                shuffle=True
+            )
+            loader = DataLoader(
+                training_dataset,
+                batch_size=self.batch_size,
+                sampler=training_sampler,
+                num_workers=NUM_WORKERS,
+                pin_memory=True,
+                drop_last=True,
+                shuffle=True
+            )
+        else:
+            testing_dataset = datasets.ImageFolder(
+                root=self.path,
+                transform=self.test_transform()
+            )
+            print("Total test image: {0}".format(len(testing_dataset)))
+            testing_sampler = DistributedSampler(
+                testing_dataset,
+                num_replicas=WORLD_SIZE,
+                rank=LOCAL_RANK,
+                shuffle=False
+            )
+            loader = DataLoader(
+                testing_dataset,
+                batch_size=self.batch_size,
+                sampler=testing_sampler,
+                num_workers=NUM_WORKERS,
+                pin_memory=True,
+                drop_last=True,
+                shuffle=False
+            )
         return loader
     def data_transform(self, type):
         if type == "train":

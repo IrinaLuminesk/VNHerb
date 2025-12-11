@@ -45,7 +45,7 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
 
-        inputs, targets = inputs.to(device), targets.to(device)
+        inputs, targets = inputs.to(device, non_blocking=True), targets.to(device, non_blocking=True)
         inputs, targets = batchWiseAug(inputs, targets)
 
         optimizer.zero_grad()
@@ -102,7 +102,7 @@ def main():
     
     if mean is None or std is None:
         print("Calculating mean and std")
-        mean: Sequence[float]; std: Sequence[float] = get_mean_std(train_path)
+        mean, std = get_mean_std(train_path)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
