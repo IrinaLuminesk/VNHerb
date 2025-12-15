@@ -6,92 +6,7 @@ from torchvision.models import resnet50, ResNet50_Weights,\
     mobilenet_v2, MobileNet_V2_Weights, \
     swin_v2_b, Swin_V2_B_Weights, \
     inception_v3, Inception_V3_Weights
-
-# def build_model(model_type: int, num_classes: int):
-#         match model_type:
-#             case 1: #Resnet50
-#                 resnet_weights = ResNet50_Weights.DEFAULT
-#                 model = resnet50(weights=resnet_weights)
-
-#                 in_features = model.fc.in_features #2048
-#                 fc = nn.Sequential(
-#                     nn.Linear(in_features, 1024),
-#                     nn.BatchNorm1d(1024),
-#                     nn.ReLU(),
-#                     nn.Dropout(0.4),
-#                     nn.Linear(1024, num_classes),
-#                 )
-#                 model.fc = fc
-#                 return model
-#             case 2: #DenseNet201
-#                 densenet_Weights = DenseNet201_Weights.DEFAULT
-#                 model = densenet201(weights=densenet_Weights)
-
-#                 in_features = model.classifier.in_features #1920
-#                 fc = nn.Sequential(
-#                     nn.Linear(in_features, 1024),
-#                     nn.BatchNorm1d(1024),
-#                     nn.ReLU(),
-#                     nn.Dropout(0.4),
-#                     nn.Linear(1024, num_classes),
-#                 )
-#                 model.classifier = fc
-
-#                 return model
-#             case 3: #VGG19
-#                 vgg19_weights = VGG19_Weights.DEFAULT
-#                 model = vgg19(weights=vgg19_weights)
-
-#                 vgg19_classifier = list(model.classifier.children())[:6]
-#                 in_features = model.classifier[6].in_features #4096
-
-#                 model.classifier = nn.Sequential(
-#                     *vgg19_classifier,
-#                     nn.Linear(in_features, 2048, bias=True),
-#                     nn.BatchNorm1d(2048),
-#                     nn.ReLU(),
-#                     nn.Dropout(0.4),
-#                     nn.Linear(2048, 1024, bias=True),
-#                     nn.BatchNorm1d(1024),
-#                     nn.ReLU(),
-#                     nn.Dropout(0.4),
-#                     nn.Linear(1024, num_classes)
-#                 )
-#                 return model
-#             case 4: #convnext base
-#                 convnext_weight = ConvNeXt_Base_Weights.DEFAULT
-#                 model = convnext_base(weights= convnext_weight)
-
-#                 convnext_classifier = list(model.classifier.children())[:2]
-#                 in_features = model.classifier[2].in_features
-
-#                 model.classifier = nn.Sequential(
-#                     *convnext_classifier,
-#                     nn.Linear(in_features, num_classes, bias=True)
-#                 )
-#                 return model
-#             case 5: #MobileNet
-#                 mobilenetv2_weights = MobileNet_V2_Weights.DEFAULT
-#                 model = mobilenet_v2(weights=mobilenetv2_weights)
-
-#                 in_features = model.classifier[1].in_features #1280
-
-#                 model.classifier = nn.Sequential(
-#                     nn.Linear(in_features, 1024, bias=True),
-#                     nn.BatchNorm1d(1024),
-#                     nn.ReLU(),
-#                     nn.Dropout(0.4),
-#                     nn.Linear(1024, num_classes)
-#                 )
-#                 return model
-#             case 6: #Swin transform
-#                 swinv2Weight = Swin_V2_B_Weights.DEFAULT
-#                 model = swin_v2_b(weights=swinv2Weight)
-
-#                 in_features = model.head.in_features #1024
-#                 model.head = nn.Linear(in_features, num_classes, bias=True)
-#                 return model
-            
+import timm         
 
 class Model(nn.Module):
     def __init__(self, num_classes, model_type):
@@ -150,6 +65,28 @@ class Model(nn.Module):
                 )
                 model.fc = fc
                 print("Training on InceptionV3 architecture")
+                return model
+            
+            case 4: #Xception
+                model = timm.create_model(
+                    'xception65',
+                    pretrained=True
+                )
+
+                in_features = model.get_classifier().in_features
+                
+                Xception_classifier = model.head
+                Xception_classifier = list(Xception_classifier.children())[:2]
+
+                model.head = nn.Sequential(
+                    *Xception_classifier,
+                    nn.Linear(in_features, 1024, bias=True),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(inplace=True),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, self.num_classes)
+                )
+                print("Training on Xception65 architecture")
                 return model
             # case 2: #DenseNet201
             #     densenet_Weights = DenseNet201_Weights.DEFAULT
