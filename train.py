@@ -92,7 +92,8 @@ def main():
     patience = config["TRAIN"]["TRAIN_PARA"]["PATIENCE"]
     epochs_no_improve = 0
     model_type = int(config["TRAIN"]["TRAIN_PARA"]["MODEL_TYPE"])
-
+    if model_type not in [8,9,10]:
+        img_size = [224, 224]
     #Optional
     save_checkpoint = config["TRAIN"]["OPTIONAL"]["SAVE_CHECKPOINT"]
     save_best = config["TRAIN"]["OPTIONAL"]["SAVE_BEST"]
