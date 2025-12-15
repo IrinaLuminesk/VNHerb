@@ -75,7 +75,7 @@ class Model(nn.Module):
                 return model
             
             case 4: #EfficientNetB4
-                model = efficientnet_b4(weight=EfficientNet_B4_Weights)
+                model = efficientnet_b4(weights=EfficientNet_B4_Weights)
 
                 in_features = model.classifier[1].in_features #1792
 
@@ -88,21 +88,39 @@ class Model(nn.Module):
                 )
                 print("Training on EfficientNetB4 architecture")
                 return model
-            # case 2: #DenseNet201
-            #     densenet_Weights = DenseNet201_Weights.DEFAULT
-            #     model = densenet201(weights=densenet_Weights)
+            
+            case 5: #DenseNet201
+                densenet_Weights = DenseNet201_Weights.DEFAULT
+                model = densenet201(weights=densenet_Weights)
 
-            #     in_features = model.classifier.in_features #1920
-            #     fc = nn.Sequential(
-            #         nn.Linear(in_features, 1024),
-            #         nn.BatchNorm1d(1024),
-            #         nn.ReLU(),
-            #         nn.Dropout(0.4),
-            #         nn.Linear(1024, self.num_classes),
-            #     )
-            #     model.classifier = fc
+                in_features = model.classifier.in_features #1920
+                fc = nn.Sequential(
+                    nn.Linear(in_features, 1024),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, self.num_classes),
+                )
+                model.classifier = fc
+                print("Training on DenseNet201 architecture")
+                return model
+            
+            case 6: #MobileNet
+                mobilenetv2_weights = MobileNet_V2_Weights.DEFAULT
+                model = mobilenet_v2(weights=mobilenetv2_weights)
 
-            #     return model
+                in_features = model.classifier[1].in_features #1280
+
+                model.classifier = nn.Sequential(
+                    nn.Linear(in_features, 1024, bias=True),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, self.num_classes)
+                )
+                print("Training on MobileNetV2 architecture")
+                return model
+
             # case 4: #convnext base
             #     convnext_weight = ConvNeXt_Base_Weights.DEFAULT
             #     model = convnext_base(weights= convnext_weight)
@@ -113,20 +131,6 @@ class Model(nn.Module):
             #     model.classifier = nn.Sequential(
             #         *convnext_classifier,
             #         nn.Linear(in_features, self.num_classes, bias=True)
-            #     )
-            #     return model
-            # case 5: #MobileNet
-            #     mobilenetv2_weights = MobileNet_V2_Weights.DEFAULT
-            #     model = mobilenet_v2(weights=mobilenetv2_weights)
-
-            #     in_features = model.classifier[1].in_features #1280
-
-            #     model.classifier = nn.Sequential(
-            #         nn.Linear(in_features, 1024, bias=True),
-            #         nn.BatchNorm1d(1024),
-            #         nn.ReLU(),
-            #         nn.Dropout(0.4),
-            #         nn.Linear(1024, self.num_classes)
             #     )
             #     return model
             # case 6: #Swin transform
