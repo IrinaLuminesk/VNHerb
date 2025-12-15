@@ -5,7 +5,8 @@ from torchvision.models import resnet50, ResNet50_Weights,\
     convnext_base, ConvNeXt_Base_Weights,\
     mobilenet_v2, MobileNet_V2_Weights, \
     swin_v2_b, Swin_V2_B_Weights, \
-    inception_v3, Inception_V3_Weights
+    inception_v3, Inception_V3_Weights, \
+    efficientnet_b4, EfficientNet_B4_Weights
 import timm         
 
 class Model(nn.Module):
@@ -50,24 +51,8 @@ class Model(nn.Module):
                     nn.Linear(1024, self.num_classes)
                 )
                 return model
-            case 3: #Inception
             
-                inception_v3_weight = Inception_V3_Weights.DEFAULT
-                model = inception_v3(inception_v3_weight)
-
-                in_features = model.fc.in_features #2048
-                fc = nn.Sequential(
-                    nn.Linear(in_features, 1024),
-                    nn.BatchNorm1d(1024),
-                    nn.ReLU(),
-                    nn.Dropout(0.4),
-                    nn.Linear(1024, self.num_classes),
-                )
-                model.fc = fc
-                print("Training on InceptionV3 architecture")
-                return model
-            
-            case 4: #Xception
+            case 3: #Xception
                 model = timm.create_model(
                     'xception65',
                     pretrained=True
@@ -87,6 +72,21 @@ class Model(nn.Module):
                     nn.Linear(1024, self.num_classes)
                 )
                 print("Training on Xception65 architecture")
+                return model
+            
+            case 4: #EfficientNetB4
+                model = efficientnet_b4(weight=EfficientNet_B4_Weights)
+
+                in_features = model.classifier[1].in_features #1792
+
+                model.classifier = nn.Sequential(
+                    nn.Linear(in_features, 1024, bias=True),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(inplace=True),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, self.num_classes)
+                )
+                print("Training on EfficientNetB4 architecture")
                 return model
             # case 2: #DenseNet201
             #     densenet_Weights = DenseNet201_Weights.DEFAULT
