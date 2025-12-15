@@ -88,6 +88,9 @@ def main():
     begin_epoch = config["TRAIN"]["TRAIN_PARA"]["BEGIN_EPOCH"] 
     end_epoch = config["TRAIN"]["TRAIN_PARA"]["END_EPOCH"]
     resume = config["TRAIN"]["TRAIN_PARA"]["RESUME"]
+    early_stopping = int(config["TRAIN"]["TRAIN_PARA"]["EARLY_STOPPING"])
+    patience = config["TRAIN"]["TRAIN_PARA"]["PATIENCE"]
+    epochs_no_improve = 0
     model_type = int(config["TRAIN"]["TRAIN_PARA"]["MODEL_TYPE"])
 
     #Optional
@@ -177,6 +180,9 @@ def main():
                 print("Validation accuracy increase from {0}% to {1}% at epoch {2}".
                     format(round(best_acc * 100.0, 2), round(val_acc * 100.0, 2),  epoch))
             best_acc = val_acc
+            epochs_no_improve = 0  # reset patience
+        else:
+            epochs_no_improve += 1
         if save_metrics:
             Saving_Metric2(epoch=epoch, 
                            train_loss=train_loss,
@@ -190,6 +196,9 @@ def main():
                            val_recall=val_metrics.recall_macro,
                            val_f1=val_metrics.f1_macro, 
                            path=metrics_path)
+        if epochs_no_improve >= patience and early_stopping == True:
+            print("Early stopping triggered at epoch {0}".format(epoch))
+            break
         print()
 
     

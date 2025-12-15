@@ -26,8 +26,11 @@ TRAIN:
     SHUFFLE: True
     # MEAN: [0.66707758, 0.66282453, 0.57892942]
     # STD: [0.20133319, 0.20586158, 0.20954071]
-    MEAN: NULL
-    STD: NULL
+    # 447
+    MEAN: [0.66565923, 0.66174304, 0.57747589] 
+    STD: [0.20152938, 0.20600946, 0.209565]
+    # MEAN: NULL
+    # STD: NULL
   TRAIN_PARA:
     MODEL_TYPE: 1 #{1: Resnet50, 2: DenseNet201, 3: VGG19, 4: ConvNeXt_Large, 5: MobileNet}
     BEGIN_EPOCH: 0
@@ -35,6 +38,9 @@ TRAIN:
     LAST_EPOCH: 0
     OPTIMIZER: "AdamW"
     RESUME: False
+    EARLY_STOPPING: TRUE
+    PATIENCE: 10
+
   OPTIONAL:
     SAVE_CHECKPOINT: TRUE
     CHECKPOINT_PATH: "./resume_model/checkpoint.pth"
