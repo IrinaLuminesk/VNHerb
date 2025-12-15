@@ -45,7 +45,7 @@ TRAIN:
     SAVE_CHECKPOINT: TRUE
     CHECKPOINT_PATH: "./resume_model/checkpoint.pth"
     SAVE_BEST: TRUE
-    BEST_PATH: "./best_model/checkpoint.pth"
+    BEST_PATH: "./best_model/best_checkpoint.pth"
     SAVE_METRICS: TRUE
     METRICS_PATH: "./metrics/metrics.csv"
   AUG:
