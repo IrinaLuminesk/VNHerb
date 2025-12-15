@@ -1,0 +1,547 @@
+STT,Trang,Tên cây,Tên khoa học,Tên tiếng Anh,Mã Taxon,Số lượng data sau khi lọc,Số lượng data gốc,Số lượng data bẩn,Số lượng data cuối,Số lượng data tự nhiên,Số lượng data kiểm soát,Ngành,Lớp,Bộ,Họ,Chi
+1,33,Hương phụ,Cyperus rotundus L.,Java-grass,2714818,1042,12138,0,1042,159,883,Tracheophyta,Liliopsida,Poales,Cyperaceae,Cyperus
+2,36,Ngải cứu,Artemisia vulgaris L.,Artemisia,3120946,1040,34503,0,1040,920,120,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Artemisia
+3,40,Cây diếp cá,Houttuynia cordata Thunb.,Chameleon,5384931,1047,2018,0,1047,628,419,Tracheophyta,Magnoliopsida,Piperales,Saururaceae,Houttuynia
+4,41,Cây hồng hoa,Carthamus tinctorius L.,Dyer's-saffron,3138327,770,2018,0,770,196,574,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Carthamus
+5,42,Cây gai,Boehmeria nivea (L.) Gaudich.,China-grass,2984359,1094,1861,1,1093,359,734,Tracheophyta,Magnoliopsida,Rosales,Urticaceae,Boehmeria
+6,43,Cây hoa cứt lợn,Ageratum conyzoides L.,"Ageratum, Billy goat weed, Blue ageratum, Blue flowered groundsel, Blue top, Goat weed, Mother brinkly, Tropic ateratum, Tropical whiteweed, White weed, Winter weed",5401673,1020,10726,0,1020,207,813,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Ageratum
+7,47,Cây bông,Gossypium arboreum L.,Tree Cotton,3152663,483,928,0,483,5,478,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Gossypium
+8,48,Cây ngưu tất,Achyranthes bidentata Blume,Ruderal chaff flower,3085175,1141,2086,0,1141,469,672,Tracheophyta,Magnoliopsida,Caryophyllales,Amaranthaceae,Achyranthes
+9,50,Cây tô mộc,Biancaea sappan (L.) Tod.,Sappanwood,2958871,407,679,0,407,17,390,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Biancaea
+10,52,Cây rau ngót,Breynia androgyna (L.) Chakrab. & N.P.Balakr.,Katuk,9197670,659,995,0,659,119,540,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Breynia
+11,53,Đài hái,Hodgsonia macrocarpa (Blume) Cogn.,Chinese lardfruit,7317816,170,232,0,170,0,170,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Hodgsonia
+12,54,Cò đuời lượn,Philydrum lanuginosum Banks & Sol. ex Gaertn.,Woolly frog's mouth,2765625,556,984,1,555,273,282,Tracheophyta,Liliopsida,Commelinales,Philydraceae,Philydrum
+13,55,Đương quy,Angelica sinensis (Oliv.) Diels,Chinese angelica,6027415,13,50,0,13,0,13,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Angelica
+14,59,Huyết giác,Dracaena cochinchinensis (Lour.) S.C.Chen,,5304529,37,105,0,37,8,29,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Dracaena
+15,60,Mướp,Luffa aegyptiaca Mill.,"Loofah, Plant sponge",2874599,1119,2448,0,1119,193,926,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Luffa
+16,61,Nhội,Bischofia javanica Blume,Bishopwood,5383085,1021,2892,0,1021,342,679,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Bischofia
+17,63,Ô rò,Cirsium japonicum Fisch. ex DC.,"East Asian thistle, Japanese thistle",3112887,299,558,0,299,137,162,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Cirsium
+18,64,Thiên lý,Telosma cordata (Burm.fil.) Merr.,Chinese-violet,3570803,120,240,0,120,1,119,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Telosma
+19,65,Bạch thược,Paeonia lactiflora Pall.,Chinese Peony,3083486,483,932,0,483,250,233,Tracheophyta,Magnoliopsida,Saxifragales,Paeoniaceae,Paeonia
+20,66,Xích thược,Paeonia obovata Maxim.,Chinese peony,7316524,375,703,0,375,52,323,Tracheophyta,Magnoliopsida,Saxifragales,Paeoniaceae,Paeonia
+21,67,Bọ mẩy,Clerodendrum cyrtophyllum Turcz.,,7308161,333,709,0,333,157,176,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Clerodendrum
+22,68,Mít,Artocarpus integer (Thunb.) Merr.,Chempedak,2984566,271,409,0,271,15,256,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Artocarpus
+23,69,Cửu lý hương,Ruta graveolens L.,Common Rue,3190382,1026,2346,0,1026,379,647,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Ruta
+24,70,Duyên hồ sách,Corydalis ambigua Cham. & Schltdl.,Small corydalis,7315083,126,190,0,126,28,98,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Corydalis
+25,72,Bồ công anh Việt Nam,Lactuca indica L.,Indian lettuce,3140510,827,1396,0,827,313,514,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Lactuca
+26,73,Bồ công anh Trung Quốc,Taraxacum officinale Weber ex F.H.Wigg.,Blowball,5394163,1007,30155,0,1007,816,191,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Taraxacum
+27,75,Kim ngân,Lonicera japonica Thunb.,Chinese Honeysuckle,5334240,1100,18286,0,1100,879,221,Tracheophyta,Magnoliopsida,Dipsacales,Caprifoliaceae,Lonicera
+28,78,Cây ké đầu ngựa,Xanthium strumarium L.,"Burweed, Cocklebur, Clotbur",3089154,1096,14262,0,1096,732,364,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Xanthium
+29,79,Hạ khô thảo,Prunella vulgaris L.,Alpine Self-heal,5341297,1019,51933,0,1019,825,194,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Prunella
+30,82,Cây xà sàng,Cnidium monnieri (L.) Cusson,Monnier's snowparsley,3034720,149,320,0,149,25,124,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Cnidium
+31,84,Cây mã tiên thảo,Verbena officinalis L.,Common verbena,2925529,1168,11175,0,1168,689,479,Tracheophyta,Magnoliopsida,Lamiales,Verbenaceae,Verbena
+32,88,Bạch hạc,Rhinacanthus nasutus (L.) Kuntze,,7263230,366,682,0,366,117,249,Tracheophyta,Magnoliopsida,Lamiales,Acanthaceae,Rhinacanthus
+33,89,Bạch hoa xà,Plumbago zeylanica L.,Ceylon leadwort,3082282,1018,5412,0,1018,297,721,Tracheophyta,Magnoliopsida,Caryophyllales,Plumbaginaceae,Plumbago
+34,90,Bảy lá một hoa,Paris polyphylla Sm.,Love Apple,5295929,439,871,0,439,148,291,Tracheophyta,Liliopsida,Liliales,Melanthiaceae,Paris
+35,92,Bèo cái,Pistia stratiotes L.,Lettuce water,2870583,1164,5040,0,1164,501,663,Tracheophyta,Liliopsida,Alismatales,Araceae,Pistia
+36,93,Bồ cu vẽ,Breynia fruticosa (L.) Müll.Arg.,,5383016,353,724,0,353,50,303,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Breynia
+37,94,Bùng bục,Mallotus barbatus Müll.Arg.,,5378750,318,651,0,318,15,303,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Mallotus
+38,95,Cà dại hoa vàng,Argemone mexicana L.,Bermuda Thistle,2888485,1003,4275,0,1003,428,575,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Argemone
+39,97,Chó đẻ răng cưa,Phyllanthus urinaria L.,Chamber bitter,5382780,1036,4296,0,1036,408,628,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Phyllanthus
+40,98,Cúc liên chi dại,Parthenium hysterophorus L.,Santa Maria,3086784,1025,7143,0,1025,658,367,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Parthenium
+41,99,Dâm bụt,Hibiscus rosa-sinensis L.,China-rose,3152559,1002,3576,0,1002,243,759,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Hibiscus
+42,99,Ké hoa đào,Urena lobata L.,Caesar Weed,3152253,999,10808,0,999,309,690,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Urena
+43,100,Ké hoa vàng,Sida rhombifolia L.,Arrowleaf sida,5406735,1075,12599,0,1075,341,734,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Sida
+44,102,Khế,Averrhoa carambola L.,Carambola,2891641,884,1801,0,884,234,650,Tracheophyta,Magnoliopsida,Oxalidales,Oxalidaceae,Averrhoa
+45,102,Liên kiều,Forsythia suspensa (Thunb.) Vahl,Forsythia,5415056,459,892,0,459,79,380,Tracheophyta,Magnoliopsida,Lamiales,Oleaceae,Forsythia
+46,104,Máu chó,Knema globularia (Lam.) Warb.,,3743505,343,681,0,343,14,329,Tracheophyta,Magnoliopsida,Magnoliales,Myristicaceae,Knema
+47,105,Lá móng tay,Lawsonia inermis L.,Egyptian-privet,5420912,925,1862,0,925,54,871,Tracheophyta,Magnoliopsida,Myrtales,Lythraceae,Lawsonia
+48,106,Mù u,Calophyllum inophyllum L.,Alexandrian Laurel,9531830,1030,4095,0,1030,202,828,Tracheophyta,Magnoliopsida,Malpighiales,Calophyllaceae,Calophyllum
+49,107,Niệt gió,Wikstroemia indica (L.) C.A.Mey.,tiebush,5524676,1018,1893,0,1018,359,659,Tracheophyta,Magnoliopsida,Malvales,Thymelaeaceae,Wikstroemia
+50,108,Phù dung,Hibiscus mutabilis L.,Confederate rose,3152555,468,879,0,468,141,327,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Hibiscus
+51,109,Dầu rái trắng,Dipterocarpus alatus Roxb.,,4096596,93,190,0,93,1,92,Tracheophyta,Magnoliopsida,Malvales,Dipterocarpaceae,Dipterocarpus
+52,111,Cây rau má lá rau muống,Emilia sonchifolia (L.) DC. ex Wight,,7376217,995,4744,1,994,295,699,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Emilia
+53,111,Rau má ngọ,Persicaria perfoliata (L.) H.Gross,Asian Tearthumb,4033648,1484,2382,0,1484,1139,345,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Persicaria
+54,112,Tần cửu (Thanh táo),Justicia gendarussa Burm.fil.,Warer willow,7447231,570,1116,0,570,42,528,Tracheophyta,Magnoliopsida,Lamiales,Acanthaceae,Justicia
+55,116,Thuốc bồng,Kalanchoe pinnata (Lam.) Pers.,Air plant,2985930,1006,3316,0,1006,479,527,Tracheophyta,Magnoliopsida,Saxifragales,Crassulaceae,Kalanchoe
+56,117,Thuốc giấu,Euphorbia tithymaloides L.,Japanese-poinsettia,3069168,858,1472,0,858,153,705,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Euphorbia
+57,118,Trầu không,Piper betle L.,Betel Pepper,4187904,709,1296,0,709,84,625,Tracheophyta,Magnoliopsida,Piperales,Piperaceae,Piper
+58,119,Thồm lồm,Persicaria chinensis (L.) H.Gross,Chinese knotweed,4036385,1009,4015,0,1009,272,737,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Persicaria
+59,120,Đơn buốt,Bidens pilosa L.,Black-jack,5391845,1178,13154,0,1178,446,732,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Bidens
+60,121,Chè vằng,Jasminum nervosum Lour.,,3683063,526,822,0,526,180,346,Tracheophyta,Magnoliopsida,Lamiales,Oleaceae,Jasminum
+61,122,Cây ráy,Alocasia odora (Lindl.) K.Koch,,5329889,34,152,0,34,1,33,Tracheophyta,Liliopsida,Alismatales,Araceae,Alocasia
+62,123,Ba chạc,Melicope pteleifolia (Champ. ex Benth.) T.G.Hartley,,3831820,400,566,0,400,67,333,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Melicope
+63,123,Bạc thau,Argyreia obtusifolia Lour.,,2928691,52,195,0,52,3,49,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Argyreia
+64,124,Bèo tây,Pontederia crassipes Mart.,Water-hyacinth,2765942,1014,5891,0,1014,759,255,Tracheophyta,Liliopsida,Commelinales,Pontederiaceae,Pontederia
+65,125,Bứa,Garcinia oblongifolia Champ. ex Benth.,,3713469,159,235,0,159,27,132,Tracheophyta,Magnoliopsida,Malpighiales,Clusiaceae,Garcinia
+66,126,Dây đòn gánh,Gouania leptostachya DC.,,7273872,206,510,0,206,0,206,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Gouania
+67,126,Đại phong tử,Hydnocarpus castaneus Hook.fil. & Thomson,,3878251,248,414,0,248,0,248,Tracheophyta,Magnoliopsida,Malpighiales,Achariaceae,Hydnocarpus
+68,129,Đơn răng cưa,Maesa latifolia (Blume) DC.,,3718906,110,130,0,110,0,110,Tracheophyta,Magnoliopsida,Ericales,Primulaceae,Maesa
+69,130,Đơn tướng quân,Syzygium formosum (Wall.) Masam.,,3182746,59,131,0,59,0,59,Tracheophyta,Magnoliopsida,Myrtales,Myrtaceae,Syzygium
+70,131,Găng tu hú,Catunaregam spinosa (Thunb.) Tirveng.,emetic-nut,2910886,633,1180,3,630,124,506,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Catunaregam
+71,132,Huyết kiệt,Calamus draco Willd.,,5293618,78,91,2,76,1,75,Tracheophyta,Liliopsida,Arecales,Arecaceae,Calamus
+72,133,Hương điệp,Pelargonium radens H.E.Moore,mutifid-leaf pelargonium,3828894,212,335,0,212,82,130,Tracheophyta,Magnoliopsida,Geraniales,Geraniaceae,Pelargonium
+73,135,Keo nước hoa,Vachellia farnesiana (L.) Wight & Arn.,Ellington-curse,2979265,1120,7387,0,1120,497,623,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Vachellia
+74,136,Khoai nưa,Amorphophallus rivieri Durieu,Umbrella Arum,8688557,4,6,0,4,0,4,Tracheophyta,Liliopsida,Alismatales,Araceae,Amorphophallus
+75,137,Cây la,Solanum donianum Walp.,Mullein nightshade,2929566,430,807,0,430,100,330,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+76,138,Cà tàu,Solanum virginianum L.,Surattense nightshade,2929920,322,699,0,322,93,229,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+77,138,Lân tơ uyn,Rhaphidophora decursiva (Roxb.) Schott,,5329707,187,404,0,187,4,183,Tracheophyta,Liliopsida,Alismatales,Araceae,Rhaphidophora
+78,140,Lu lu đực,Solanum nigrum L.,Black Nightshade,9150405,1027,23527,0,1027,712,315,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+79,141,Mặt quỷ,Gynochthodes umbellata (L.) Razafim. & B.Bremer,,7533157,678,1270,0,678,57,621,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Gynochthodes
+80,141,Muồng truổng,Zanthoxylum avicennae (Lam.) DC.,,3832937,561,1163,0,561,67,494,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Zanthoxylum
+81,144,Thóc lép,Pleurolobus gangeticus (L.) J.St.-Hil. ex H.Ohashi & K.Ohashi,,10781752,1190,2408,0,1190,36,1154,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Pleurolobus
+82,145,Tỏi đỏ,Eleutherine bulbosa (Mill.) Urb.,Lagrimas De La Virgen,2749556,154,392,0,154,4,150,Tracheophyta,Liliopsida,Asparagales,Iridaceae,Eleutherine
+83,148,Vạn niên thanh,Aglaonema simplex (Blume) Blume,Malayan-sword,2866378,476,756,1,475,18,457,Tracheophyta,Liliopsida,Alismatales,Araceae,Aglaonema
+84,149,Táo rừng,"Rhamnus crenatulus Knowlton & Cockerell, 1919",,11668641,0,4,0,0,0,0,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Rhamnus
+85,150,Sảng,Sterculia lanceolata Cav.,,6029583,410,825,0,410,95,315,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Sterculia
+86,151,Hàn the,Grona heterophylla (Willd.) H.Ohashi & K.Ohashi,,10734509,443,758,0,443,68,375,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Grona
+87,151,Cà chua,Lycopersicum esculentum Mill,,3801770,8,22,0,8,0,8,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+88,153,Cây dầu giun,Dysphania ambrosioides (L.) Mosyakin & Clemants,American Wormseed,5568446,1174,10370,0,1174,193,981,Tracheophyta,Magnoliopsida,Caryophyllales,Amaranthaceae,Dysphania
+89,156,Sử quân tử,Combretum indicum (L.) De Filipps,,12203608,1056,2053,0,1056,295,761,Tracheophyta,Magnoliopsida,Myrtales,Combretaceae,Combretum
+90,158,Cây keo giậu,Acaciella glauca (L.) L.Rico,Redwood,3794870,364,887,0,364,0,364,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Acaciella
+91,160,Cây bách bộ,Stemona tuberosa Lour.,stemona,2863358,303,452,0,303,73,230,Tracheophyta,Liliopsida,Pandanales,Stemonaceae,Stemona
+92,161,Xoan,Melia azedarach L.,Cape-lilac,5914287,1032,14432,0,1032,709,323,Tracheophyta,Magnoliopsida,Sapindales,Meliaceae,Melia
+93,169,Cây chân bầu,Combretum quadrangulare Kurz,,3698705,130,301,0,130,0,130,Tracheophyta,Magnoliopsida,Myrtales,Combretaceae,Combretum
+94,170,Cây thạch lựu,Punica granatum L.,Pomegranate,5420901,1195,5355,0,1195,847,348,Tracheophyta,Magnoliopsida,Myrtales,Lythraceae,Punica
+95,172,Cây cau,Areca catechu L.,"Indian nut, Betelnut palm, Betelnut, Betel palm, Areca nut, Areca Nut Palm, Areca Palm",2736531,244,504,0,244,64,180,Tracheophyta,Liliopsida,Arecales,Arecaceae,Areca
+96,174,Cây rùm nao,Mallotus philippensis (Lam.) Müll.Arg.,Kamala tree,5378605,1043,5168,0,1043,251,792,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Mallotus
+97,177,Mắc nưa,Diospyros mollis Griff.,,4070936,61,147,0,61,0,61,Tracheophyta,Magnoliopsida,Ericales,Ebenaceae,Diospyros
+98,179,Cây sầu đâu rừng,Brucea javanica (L.) Merr.,Java brucea,5555210,1018,1588,0,1018,30,988,Tracheophyta,Magnoliopsida,Sapindales,Simaroubaceae,Brucea
+99,181,Tỏi,Allium sativum L.,Cultivated Garlic,2856681,440,1732,0,440,229,211,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Allium
+100,182,Mộc hoa trắng,Holarrhena pubescens (Buch.-Ham.) Wall. ex G.Don,Tellicherry-bark,3169748,1018,2799,0,1018,35,983,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Holarrhena
+101,184,Rau sam,Portulaca oleracea L.,Akulikuli-kula,3084719,1147,16667,0,1147,895,252,Tracheophyta,Magnoliopsida,Caryophyllales,Portulacaceae,Portulaca
+102,186,Mơ tam thể,Paederia foetida L.,Skunk vine,2909527,1004,4053,0,1004,509,495,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Paederia
+103,187,Cây chè,Camellia sinensis (L.) Kuntze,Japanese tea,3189635,1030,3108,2,1028,91,937,Tracheophyta,Magnoliopsida,Ericales,Theaceae,Camellia
+104,191,Hoàng liên gai,Berberis wallichiana DC.,,3981546,66,134,0,66,0,66,Tracheophyta,Magnoliopsida,Ranunculales,Berberidaceae,Berberis
+105,192,Hoàng liên ô rô,Mahonia bealei (Fortune) Carrière,Beale's Barberry,3033888,1043,1456,0,1043,984,59,Tracheophyta,Magnoliopsida,Ranunculales,Berberidaceae,Mahonia
+106,193,Hoàng đằng,Fibraurea tinctoria Lour.,,5371724,244,362,0,244,12,232,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Fibraurea
+107,194,Hoàng đẳng chân vịt,Cyclea peltata (Lam.) Hook.fil. & Thomson,,8187840,120,261,0,120,14,106,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Cyclea
+108,195,Vàng đằng,Coscinium fenestratum (Gaertn.) Colebr.,false calumba,5592750,165,282,0,165,4,161,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Coscinium
+109,195,Thổ hoàng liên,Thalictrum foliolosum DC.,Asian meadow-rue,8317447,163,376,0,163,18,145,Tracheophyta,Magnoliopsida,Ranunculales,Ranunculaceae,Thalictrum
+110,197,Hoàng dùng loong trơn,Cyclea bicristata (Griff.) Diels,,3830070,15,42,0,15,0,15,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Cyclea
+111,197,Hoàng bá,Phellodendron amurense Rupr.,Amur Corktree,3190154,937,1414,0,937,460,477,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Phellodendron
+112,200,Ba chẽ,Dendrolobium triangulare (Retz.) Schindl.,,2946831,526,925,0,526,21,505,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Dendrolobium
+113,201,Bàng,Terminalia catappa L.,India Almond,3189394,1080,5500,1,1079,529,550,Tracheophyta,Magnoliopsida,Myrtales,Combretaceae,Terminalia
+114,202,Cẩm xà lặc,Canthium parvifolium Roxb.,,2917463,27,88,0,27,0,27,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Canthium
+115,203,Điều nhuộm,Bixa orellana L.,Lipsticktree,2874863,1022,4405,1,1021,192,829,Tracheophyta,Magnoliopsida,Malvales,Bixaceae,Bixa
+116,204,Đơn đỏ,Ixora coccinea L.,Scarlet Jungleflame,2905493,712,1546,0,712,168,544,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Ixora
+117,205,Đơn trắng (Hé mọ),Psychotria asiatica L.,,2920037,634,1269,0,634,380,254,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Psychotria
+118,206,Mộc nhĩ,"Auricularia nigricans (Sw.) Birkebak, Looney & Sánchez-García",Black-eared fungus,7351381,551,635,0,551,236,315,Basidiomycota,Agaricomycetes,Auriculariales,Auriculariaceae,Auricularia
+119,206,Phượng nhỡn thảo,Ailanthus altissima (Mill.) Swingle,China-sumac,3190653,1047,21465,0,1047,968,79,Tracheophyta,Magnoliopsida,Sapindales,Simaroubaceae,Ailanthus
+120,208,Seo gà,Pteris multifida Poir.,Chinese brake,5275415,902,2273,1,901,283,618,Tracheophyta,Polypodiopsida,Polypodiales,Pteridaceae,Pteris
+121,209,Vọng cách,Premna serratifolia L.,bastard guelder,6411486,1000,5391,0,1000,135,865,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Premna
+122,210,Đậu rựa,Canavalia gladiata (Jacq.) DC.,Sword Jackbean,2962057,396,768,0,396,10,386,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Canavalia
+123,211,Gừng dại,Zingiber purpureum Roscoe,Cassumunar ginger,2757204,29,71,0,29,0,29,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Zingiber
+124,212,Săng lẻ,Lagerstroemia calyculata Kurz,,3989199,129,362,0,129,4,125,Tracheophyta,Magnoliopsida,Myrtales,Lythraceae,Lagerstroemia
+125,215,Mã đề,Plantago asiatica L.,Asian plantain,9118978,544,981,0,544,214,330,Tracheophyta,Magnoliopsida,Lamiales,Plantaginaceae,Plantago
+126,217,Cây trạch tả,Alisma plantago-aquatica L.,American Waterplantain,2865100,1026,11483,0,1026,588,438,Tracheophyta,Liliopsida,Alismatales,Alismataceae,Alisma
+127,218,Cỏ chỉ,Cynodon dactylon (L.) Pers.,Bermuda Grass,6109637,1021,20697,0,1021,338,683,Tracheophyta,Liliopsida,Poales,Poaceae,Cynodon
+128,219,Cỏ tranh,Imperata cylindrica (L.) Raeusch.,"Alang-alang, Blady grass, Cogon grass, Japgrass, Satintail, Speargrass",8424006,1024,7904,0,1024,253,771,Tracheophyta,Liliopsida,Poales,Poaceae,Imperata
+129,219,Cây râu mèo,Orthosiphon aristatus var. aristatus,,7308027,99,167,0,99,0,99,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Orthosiphon
+130,221,Cây áctiso (Artichoke),Cynara scolymus L.,Globe Artichoke,3112361,52,214,0,52,5,47,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Cynara
+131,223,Bấc đèn,Juncus effusus L.,Common Rush,2701311,1002,22625,0,1002,499,503,Tracheophyta,Liliopsida,Poales,Juncaceae,Juncus
+132,224,Cây thông thảo,Tetrapanax papyrifer (Hook.) K.Koch,Chinese rice-paper plant,3035275,472,777,0,472,381,91,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Tetrapanax
+133,225,Dành dành,Gardenia jasminoides J.Ellis,Cape Jasmine,5335125,767,2132,0,767,277,490,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Gardenia
+134,227,Nghệ,Curcuma longa L.,Common Turmeric,2757624,548,1112,8,540,72,468,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Curcuma
+135,232,Bòn bọt,Glochidion eriocarpum Champ. ex Benth.,,3080301,253,427,0,253,45,208,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Glochidion
+136,233,Chỉ thiên,Elephantopus scaber L.,,5395925,983,2061,0,983,71,912,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Elephantopus
+137,235,Dưa chuột,Cucumis sativus L.,,4939951,30,30,0,30,1,29,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Cucumis
+138,236,Chua me đất hoa vàng,Oxalis corniculata L.,'ihi,8427624,1032,20841,0,1032,617,415,Tracheophyta,Magnoliopsida,Oxalidales,Oxalidaceae,Oxalis
+139,237,Cây chua me lá me,Biophytum sensitivum (L.) DC.,lifeplant,3628231,580,1057,0,580,171,409,Tracheophyta,Magnoliopsida,Oxalidales,Oxalidaceae,Biophytum
+140,238,Cỏ bợ,Marsilea quadrifolia L.,European Waterclover,5274875,687,2132,0,687,67,620,Tracheophyta,Polypodiopsida,Salviniales,Marsileaceae,Marsilea
+141,238,Cỏ may,Chrysopogon aciculatus (Retz.) Trin.,Golden False Beardgrass,5290133,1032,2175,0,1032,109,923,Tracheophyta,Liliopsida,Poales,Poaceae,Chrysopogon
+142,239,Đậu đen,Vigna unguiculata subsp. unguiculata,southern pea,7225149,563,1145,0,563,0,563,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Vigna
+143,240,Hoa hiên,Hemerocallis fulva (L.) L.,Fulvous Day-lily,2781074,1024,5135,0,1024,760,264,Tracheophyta,Liliopsida,Asparagales,Asphodelaceae,Hemerocallis
+144,241,Lõi tiền,Stephania longa Lour.,,5592802,69,192,0,69,47,22,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Stephania
+145,242,Mộc tác,Equisetum arvense L,Common Horsetail,7924597,1002,46618,0,1002,562,440,Tracheophyta,Polypodiopsida,Equisetales,Equisetaceae,Equisetum
+146,246,Sòi,Triadica sebifera (L.) Small,Chinese tallow,3054399,1342,6113,0,1342,950,392,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Triadica
+147,248,Tai chuột,Dischidia acuminata Costantin,,3571169,9,45,0,9,0,9,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Dischidia
+148,249,Thạch vĩ,Pyrrosia lingua (Thunb.) Farw.,Tongue fern,7290072,682,1587,0,682,240,442,Tracheophyta,Polypodiopsida,Polypodiales,Polypodiaceae,Pyrrosia
+149,250,Lưỡi rắn,Oldenlandia corymbosa L.,Flat-Top Mille Graines,2911970,1014,5502,0,1014,304,710,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Oldenlandia
+150,251,Dày chặc chìu,Tetracera scandens (L.) Merr.,,7370317,349,489,0,349,0,349,Tracheophyta,Magnoliopsida,Dilleniales,Dilleniaceae,Tetracera
+151,252,Thòng bong,Lygodium flexuosum (L.) Sw.,maidenhair creeper,3744838,1020,3030,0,1020,32,988,Tracheophyta,Polypodiopsida,Schizaeales,Lygodiaceae,Lygodium
+152,252,Mần tưới,Eupatorium fortunei Turcz.,Chinese eupatorium,5403095,19,60,0,19,0,19,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Eupatorium
+153,254,Cà dái dê tím,Solanum melongena L.,Aubergine,2930617,776,1572,0,776,71,705,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+154,255,Chanh trường,Solanum spirale Roxb.,,2930705,172,351,0,172,0,172,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+155,255,Cói,Cyperus malaccensis Lam.,shichito matgrass,2715148,308,450,0,308,48,260,Tracheophyta,Liliopsida,Poales,Cyperaceae,Cyperus
+156,257,Cây cơm cháy,Sambucus javanica Reinw. ex Blume,Chinese elder,3856236,1044,2237,0,1044,249,795,Tracheophyta,Magnoliopsida,Dipsacales,Viburnaceae,Sambucus
+157,258,Rau dừa nước,Ludwigia adscendens subsp. adscendens,,7322192,32,161,0,32,0,32,Tracheophyta,Magnoliopsida,Myrtales,Onagraceae,Ludwigia
+158,259,Dứa,Ananas comosus (L.) Merr.,Pineapple,5288819,826,2576,2,824,188,636,Tracheophyta,Liliopsida,Poales,Bromeliaceae,Ananas
+159,261,Dứa dại,Pandanus odorifer (Forssk.) Kuntze,,5327293,766,1168,0,766,497,269,Tracheophyta,Liliopsida,Pandanales,Pandanaceae,Pandanus
+160,261,Cây đa,Ficus elastica Roxb.,,7835333,636,982,0,636,341,295,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Ficus
+161,262,Đậu chiều,Cajanus cajan (L.) Huth,Congo-pea,7587087,1008,4256,0,1008,120,888,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Cajanus
+162,263,Đậu đỏ nhỏ,Vigna angularis (Willd.) Ohwi & H.Ohashi,Adzuki Bean,2982508,105,281,0,105,16,89,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Vigna
+163,264,Găng,Catunaregam tomentosa (Blume ex DC.) Tirveng.,,2910934,133,291,0,133,5,128,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Catunaregam
+164,265,Cây xương sáo,Platostoma palustre (Blume) A.J.Paton,black cincau,3881888,226,315,0,226,18,208,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Platostoma
+165,265,Thốt nốt,Borassus flabellifer L,Toddy Palm,2733934,159,258,0,159,109,50,Tracheophyta,Liliopsida,Arecales,Arecaceae,Borassus
+166,266,Mía,Saccharum officinarum L.,Sugarcane,2703912,564,1186,0,564,55,509,Tracheophyta,Liliopsida,Poales,Poaceae,Saccharum
+167,267,Kim tiền thảo,Grona styracifolia (Osbeck) H.Ohashi & K.Ohashi,,10722283,253,530,0,253,0,253,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Grona
+168,268,Rau om,Limnophila aromatica (Lam.) Merr.,Limnophila,5415005,327,527,0,327,40,287,Tracheophyta,Magnoliopsida,Lamiales,Plantaginaceae,Limnophila
+169,269,Móng lưng rồng,Selaginella tamariscina (P.Beauv.) Spring,Little club-moss,4940390,277,662,0,277,81,196,Tracheophyta,Lycopodiopsida,Selaginellales,Selaginellaceae,Selaginella
+170,270,Nàng nàng,Callicarpa candicans var. candicans,,7226081,24,177,0,24,0,24,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Callicarpa
+171,271,Rau đắng,Polygonum aviculare L.,Doorweed,7821030,1027,24596,2,1025,380,645,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Polygonum
+172,272,Cây lá tiết dê,Cissampelos pareira L.,Velvetleaf,3033937,998,5128,0,998,54,944,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Cissampelos
+173,273,Khế rừng,Rourea microphylla (Hook. & Arn.) Planch.,,3686955,159,274,0,159,25,134,Tracheophyta,Magnoliopsida,Oxalidales,Connaraceae,Rourea
+174,274,Mã thầy,Eleocharis interstincta (Vahl) Roem. & Schult.,Knotted Spikerush,2716972,710,1410,0,710,79,631,Tracheophyta,Liliopsida,Poales,Cyperaceae,Eleocharis
+175,275,Mùi tây,Petroselinum crispum subsp. crispum,Parsley,7224069,446,850,0,446,249,197,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Petroselinum
+176,276,Thương lục,Phytolacca acinosa var. esculenta (Van Houtte) Maxim.,,8359411,102,534,1,101,0,101,Tracheophyta,Magnoliopsida,Caryophyllales,Phytolaccaceae,Phytolacca
+177,277,Cỏ thiên thảo,Anisomeles indica (L.) Kuntze,catmint,3884461,818,1621,0,818,108,710,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Anisomeles
+178,280,Lục lạc ba lá tròn,Crotalaria pallida var. obovata (G.Don) Polhill,Smooth Rattlebox,2942716,822,1707,0,822,129,693,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Crotalaria
+179,281,Rau muống,Merremia hirta (L.) Merr.,,7324214,201,409,0,201,7,194,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Merremia
+180,282,Cỏ nhọ nồi,Eclipta alba (L.) Hassk.,,5384955,1017,3733,0,1017,0,1017,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Eclipta
+181,283,Cây nghể,Persicaria hydropiper (L.) Spach,Marshpepper Knotweed,8323622,1030,9998,0,1030,408,622,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Persicaria
+182,284,Cây cỏ nến,Typha orientalis C.Presl,Oriental cattail,5289521,1015,1569,0,1015,862,153,Tracheophyta,Liliopsida,Poales,Typhaceae,Typha
+183,285,Long nha thảo,Agrimonia pilosa var. nepalensis (D.Don) Nakai,,7703020,47,166,0,47,0,47,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Agrimonia
+184,287,Cây huyết dụ,Cordyline fruticosa (L.) A.Chev.,Tiplant,2766278,1006,2493,0,1006,251,755,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Cordyline
+185,287,Cây trắc bách diệp,Platycladus orientalis (L.) Franco,Chinese Thuja,2684855,1007,2254,0,1007,164,843,Tracheophyta,Pinopsida,Pinales,Cupressaceae,Platycladus
+186,289,Cây tam thất,Panax pseudoginseng Wall.,Himalayan ginseng,5372282,67,215,0,67,7,60,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Panax
+187,291,Cây mào gà trắng,Celosia argentea L.,Cockscomb,3085191,1033,4861,0,1033,361,672,Tracheophyta,Magnoliopsida,Caryophyllales,Amaranthaceae,Celosia
+188,292,Cây mào gà đỏ,Celosia argentea f. cristata (L.) Schinz,,6429520,320,633,0,320,0,320,Tracheophyta,Magnoliopsida,Caryophyllales,Amaranthaceae,Celosia
+189,293,Rau ngổ,Enydra fluctuans Lour.,Buffalo-spinach,5402447,365,637,0,365,71,294,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Enydra
+190,294,Thiến thảo,Rubia cordifolia L.,Heart-leaf Indian madder,2892192,916,1826,0,916,92,824,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Rubia
+191,295,Vạn tuế,Cycas revoluta Thunb.,Sago Palm,2683217,277,664,0,277,67,210,Tracheophyta,Cycadopsida,Cycadales,Cycadaceae,Cycas
+192,297,Địa du,Sanguisorba officinalis L.,Burnet Bloodwort,3029627,1021,10269,0,1021,640,381,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Sanguisorba
+193,298,Cây hoa hòe,Styphnolobium japonicum (L.) Schott,Chinese Scholar Tree,2963569,831,1343,0,831,162,669,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Styphnolobium
+194,300,Mạch ba góc,Fagopyrum esculentum Moench,Brank,2889373,1002,5867,0,1002,597,405,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Fagopyrum
+195,301,Cây ba gạc,Rauvolfia verticillata (Lour.) Baill.,,3616228,689,1556,0,689,49,640,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Rauvolfia
+196,302,Cây ba gạc Ấn Độ,Rauvolfia serpentina (L.) Benth. ex Kurz,Java devil-pepper,3169787,330,620,0,330,46,284,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Rauvolfia
+197,303,Cây ba kích,Gynochthodes officinalis (F.C.How) Razafim. & B.Bremer,,7356096,2,3,0,2,0,2,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Gynochthodes
+198,305,Cây câu đằng,Uncaria rhynchophylla (Miq.) Miq.,,8104601,48,105,0,48,6,42,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Uncaria
+199,306,Cây nhàu,Morinda citrifolia L.,Indian Mulberry,5339879,1042,4453,0,1042,432,610,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Morinda
+200,307,Cây dừa cạn,Catharanthus roseus (L.) G.Don,Cape periwinkle,3169830,1014,6218,0,1014,469,545,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Catharanthus
+201,309,Đỗ trọng,Eucommia ulmoides Oliv.,Gutta percha,3723584,171,357,1,170,6,164,Tracheophyta,Magnoliopsida,Garryales,Eucommiaceae,Eucommia
+202,311,Hoàng cầm,Scutellaria baicalensis Georgi,Baikal skullcap,7309014,311,592,0,311,27,284,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Scutellaria
+203,314,Hồi đầu thảo,Tacca plantaginea (Hance) Drenth,,2755849,47,88,0,47,0,47,Tracheophyta,Liliopsida,Dioscoreales,Dioscoreaceae,Tacca
+204,316,Cây chẹo,Engelhardtia roxburghiana Lindl.,,7914294,6,186,0,6,0,6,Tracheophyta,Magnoliopsida,Fagales,Juglandaceae,Engelhardtia
+205,316,Cây củ đậu,Pachyrhizus erosus (L.) Urb.,Mexican-potato,2974683,714,1506,0,714,35,679,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Pachyrhizus
+206,318,Cây hột mát,Antheroporum pierrei Gagnep.,,2947702,30,80,0,30,0,30,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Antheroporum
+207,318,Cây lá ngón,Gelsemium elegans (Gardner & Champion) Benth.,,4020282,122,266,0,122,5,117,Tracheophyta,Magnoliopsida,Gentianales,Gelsemiaceae,Gelsemium
+208,321,Cây sui,Antiaris toxicaria (Pers.) Lesch.,sackingtree,7262663,752,1439,1,751,35,716,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Antiaris
+209,322,Thàn mát,Millettia ichthyochtona Drake,,5355812,16,52,0,16,0,16,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Millettia
+210,323,Hồi núi,Illicium griffithii Hook.fil. & Thomson,,3592309,37,147,0,37,0,37,Tracheophyta,Magnoliopsida,Austrobaileyales,Schisandraceae,Illicium
+211,324,Hương bài,Dianella ensifolia (L.) Redouté,Cerulean Flaxlily,8365251,1007,2832,0,1007,247,760,Tracheophyta,Liliopsida,Asparagales,Asphodelaceae,Dianella
+212,325,Hương lâu,Chrysopogon zizanioides (L.) Roberty,False beardgrass,5677150,600,1185,0,600,15,585,Tracheophyta,Liliopsida,Poales,Poaceae,Chrysopogon
+213,327,Cúc trừ sâu,Chrysanthemum cinerariaefolium Vis.,,11213051,54,56,0,54,0,54,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Chrysanthemum
+214,331,Tỏi độc,Colchicum autumnale L.,Autumn Crocus,2739622,1079,7731,0,1079,839,240,Tracheophyta,Liliopsida,Liliales,Colchicaceae,Colchicum
+215,334,Cây ngọt nghẹo,Gloriosa superba L.,Flame Lily,2740024,1138,4372,3,1135,321,814,Tracheophyta,Liliopsida,Liliales,Colchicaceae,Gloriosa
+216,338,Sở,Camellia sasanqua Thunb.,Sasanqua Camellia,3189637,166,422,0,166,11,155,Tracheophyta,Magnoliopsida,Ericales,Theaceae,Camellia
+217,341,Cây lim,Erythrophleum fordii Oliv.,,2971186,28,94,0,28,3,25,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Erythrophleum
+218,343,Mắc kẹn,Aesculus chinensis Bunge,Chinese horse-chestnut,7323139,118,211,0,118,4,114,Tracheophyta,Magnoliopsida,Sapindales,Sapindaceae,Aesculus
+219,344,Thuốc lá,Nicotiana tabacum L.,Cultivated tobacco,2928774,999,3243,3,996,243,753,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Nicotiana
+220,346,Gai dầu,Cannabis sativa L.,Grass,5361880,998,6380,0,998,409,589,Tracheophyta,Magnoliopsida,Rosales,Cannabaceae,Cannabis
+221,350,Cây sơn,Toxicodendron succedaneum (L.) Kuntze,Japanese waxtree,3190624,885,1359,0,885,315,570,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Toxicodendron
+222,351,Dây thuốc cá,Derris elliptica (Wall.) Benth.,oiltree,5350305,428,649,0,428,10,418,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Derris
+223,357,Mạch nha,Hordeum vulgare L.,Barley,2706056,1363,6490,1,1362,666,696,Tracheophyta,Liliopsida,Poales,Poaceae,Hordeum
+224,360,Đu đủ,Carica papaya L.,Papaya,2874484,1035,3565,2,1033,601,432,Tracheophyta,Magnoliopsida,Brassicales,Caricaceae,Carica
+225,365,Địa liền,Kaempferia galanga L.,aromatic ginger,5301451,86,190,0,86,3,83,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Kaempferia
+226,366,Gừng,Zingiber officinale Roscoe,Garden Ginger,2757280,301,629,1,300,23,277,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Zingiber
+227,368,Gừng gió,Zingiber zerumbet (L.) Roscoe ex Sm.,Bitter ginger,2757108,761,1380,0,761,155,606,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Zingiber
+228,369,Hạt sẻn,Zanthoxylum nitidum (Roxb.) DC.,shiny-leaf prickly-ash,7269365,383,650,0,383,241,142,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Zanthoxylum
+229,370,Hạt tiêu,Piper nigrum L.,Black Pepper,3086357,415,987,1,414,76,338,Tracheophyta,Magnoliopsida,Piperales,Piperaceae,Piper
+230,374,Hoắc hương,Pogostemon cablin (Blanco) Benth.,Patchouli,2926672,138,219,1,137,1,136,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Pogostemon
+231,375,Long đởm thảo,Gentiana scabra Bunge,,4934496,80,152,0,80,28,52,Tracheophyta,Magnoliopsida,Gentianales,Gentianaceae,Gentiana
+232,377,Nga truật,Curcuma aromatica Salisb.,curcuma,2757544,115,174,0,115,12,103,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Curcuma
+233,378,Ngô thù du,Tetradium ruticarpum (A.Juss.) T.G.Hartley,evodia,5594365,219,324,0,219,44,175,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Tetradium
+234,382,Ớt,Capsicum annuum L.,American bird pepper,3799221,664,1333,0,664,159,505,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Capsicum
+235,389,Bạch biển đậu,Lablab purpureus subsp. purpureus,bonavist-bean,7224611,404,751,0,404,0,404,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Lablab
+236,391,Bạch truật,Atractylodes macrocephala Koidz.,,3122454,3,6,0,3,0,3,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Atractylodes
+237,392,Thương truật,Atractylodes lancea (Thunb.) DC.,southern tsangshu,3122433,240,509,0,240,56,184,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Atractylodes
+238,394,Đơn lá đỏ,Excoecaria cochinchinensis Lour.,,3071716,319,547,0,319,5,314,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Excoecaria
+239,395,Đùm đũm,Rubus cochinchinensis Tratt.,,2999072,111,233,0,111,0,111,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Rubus
+240,395,Mâm xôi,Rubus alceifolius Poir.,"Giant bramble, Asian bramble",2997267,375,628,0,375,147,228,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Rubus
+241,398,Rau đay,Corchorus olitorius L.,Jew's-mallow,3152084,992,2145,0,992,27,965,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Corchorus
+242,400,Dương xuân sa,Wurfbainia villosa (Lour.) Škorničk. & A.D.Poulsen,,11082522,77,252,0,77,0,77,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Wurfbainia
+243,401,Sa nhân,Amomum xanthioides Wall.,,8093158,0,1,0,0,0,0,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Amomum
+244,402,Đậu khấu,Elettaria cardamomum (L.) Maton,Cardamom,2759871,155,285,1,154,29,125,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Elettaria
+245,404,Thảo dâu khẩu,"Alpinia katsumadai Hayata, 1915",,5635657,5,10,0,5,0,5,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Alpinia
+246,404,Hồng đậu khấu,Alpinia galanga (L.) Willd.,Greater Galangal,5302225,309,560,0,309,20,289,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Alpinia
+247,405,Ích trí nhân,Alpinia oxyphylla Miq.,sharp-leaf galangal,5302068,38,73,0,38,0,38,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Alpinia
+248,406,Nhục đậu khấu,Myristica fragrans Houtt.,Nutmeg,5406817,407,838,2,405,18,387,Tracheophyta,Magnoliopsida,Magnoliales,Myristicaceae,Myristica
+249,408,Thành ngạnh,Cratoxylum formosum subsp. pruniflorum (Wall. ex Kurz) Gogelein,,3712038,106,136,0,106,0,106,Tracheophyta,Magnoliopsida,Malpighiales,Hypericaceae,Cratoxylum
+250,409,Thảo quả,Lanxangia tsao-ko (Crevost & Lemarié) M.F.Newman & Škorničk.,Tsao-ko Cardamom,10966714,7,17,0,7,3,4,Tracheophyta,Liliopsida,Zingiberales,Zingiberaceae,Lanxangia
+251,410,Thị,Diospyros decandra Lour.,,4070543,35,98,0,35,10,25,Tracheophyta,Magnoliopsida,Ericales,Ebenaceae,Diospyros
+252,412,Bách bệnh,Eurycoma longifolia Jack,,3709190,813,1078,0,813,17,796,Tracheophyta,Magnoliopsida,Sapindales,Simaroubaceae,Eurycoma
+253,413,Hublông,Humulus lupulus L.,Bine,2984535,1004,15470,0,1004,801,203,Tracheophyta,Magnoliopsida,Rosales,Cannabaceae,Humulus
+254,415,Cây dung,Symplocos racemosa Roxb.,lodhtree,7902154,407,764,0,407,0,407,Tracheophyta,Magnoliopsida,Ericales,Symplocaceae,Symplocos
+255,416,Hoa tiên,Asarum maximum Hemsl.,,3589522,9,26,0,9,0,9,Tracheophyta,Magnoliopsida,Piperales,Aristolochiaceae,Asarum
+256,416,Màng tang,Litsea cubeba (Lour.) Pers.,litsea,3033977,1031,2149,0,1031,162,869,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Litsea
+257,417,Rau mùi,Coriandrum sativum L.,Chinese Parsley,3034871,1045,4103,0,1045,258,787,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Coriandrum
+258,420,Thiên đầu thống,Cordia dichotoma G.Forst.,Fragrant manjack,5341270,993,2283,0,993,242,751,Tracheophyta,Magnoliopsida,Boraginales,Cordiaceae,Cordia
+259,421,Tai chua,Garcinia pedunculata Roxb.,,3713251,17,33,0,17,0,17,Tracheophyta,Magnoliopsida,Malpighiales,Clusiaceae,Garcinia
+260,422,Thìa là,Anethum graveolens L.,Dill,3034646,1023,2840,3,1020,278,742,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Anethum
+261,423,Vối,Syzygium nervosum DC.,Daly River satin-ash,3184115,438,706,0,438,13,425,Tracheophyta,Magnoliopsida,Myrtales,Myrtaceae,Syzygium
+262,423,Cây lá men,Mosla dianthera (Buch.-Ham. ex Roxb.) Maxim.,Miniature beefsteakplant,2926630,451,878,0,451,47,404,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Mosla
+263,424,Sổ,Dillenia indica L.,Chulta,5383898,322,510,0,322,83,239,Tracheophyta,Magnoliopsida,Dilleniales,Dilleniaceae,Dillenia
+264,425,Thanh ngâm,Picria felterrae Lour.,,3727321,127,183,0,127,0,127,Tracheophyta,Magnoliopsida,Lamiales,Linderniaceae,Picria
+265,427,Kha tử,Terminalia chebula Retz.,black myrobalan,3189388,489,959,0,489,33,456,Tracheophyta,Magnoliopsida,Myrtales,Combretaceae,Terminalia
+266,428,Măng cụt,Garcinia mangostana L.,Mangosteen,3189571,276,587,0,276,38,238,Tracheophyta,Magnoliopsida,Malpighiales,Clusiaceae,Garcinia
+267,443,Khoai riềng,Canna indica L.,African arrowroot,8034409,1098,5509,0,1098,513,585,Tracheophyta,Liliopsida,Zingiberales,Cannaceae,Canna
+268,444,Khiên ngưu,Ipomoea hederacea Jacq.,Entireleaf Morningglory,2928538,1003,3100,0,1003,488,515,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Ipomoea
+269,446,Khoai lang,Ipomoea batatas (L.) Lam.,Sweet Potato,2928551,1015,3208,0,1015,366,649,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Ipomoea
+270,447,Cây đại,Plumeria rubra L.,Frangipani,3169674,1008,2850,0,1008,272,736,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Plumeria
+271,449,Ba đậu,Croton tiglium L.,Purging Croton,3057656,642,1021,0,642,17,625,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Croton
+272,451,Thầu dầu,Ricinus communis L.,Castor,5380041,1076,14767,1,1075,757,318,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Ricinus
+273,453,Chút chít,Rumex microcarpus Campd.,,4038319,13,32,0,13,0,13,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Rumex
+274,460,Muồng trâu,Senna alata (L.) Roxb.,Christmas-candle,2956947,1030,3659,0,1030,321,709,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Senna
+275,461,Phan tà điệp,Senna alexandrina var. alexandrina,,7302622,45,240,0,45,0,45,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Senna
+276,463,Thảo quyết minh,Senna tora (L.) Roxb.,Foetid Cassia,2957728,800,1570,0,800,36,764,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Senna
+277,464,Vọng giang nam,Senna occidentalis (L.) Link,Arsenic bean,2957966,1126,8480,0,1126,193,933,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Senna
+278,466,Rau mồng tơi,Basella alba L.,Ceylon Spinach,3083504,757,1516,0,757,195,562,Tracheophyta,Magnoliopsida,Caryophyllales,Basellaceae,Basella
+279,469,Cây hoa phấn,Mirabilis jalapa L.,Beauty-of-the-night,3086240,1027,6713,0,1027,769,258,Tracheophyta,Magnoliopsida,Caryophyllales,Nyctaginaceae,Mirabilis
+280,470,Ba đậu tây,Hura crepitans L.,Sandbox tree,5380015,925,1858,0,925,143,782,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Hura
+281,471,Đằng hoàng,Garcinia hanburyi Hook.fil.,Hanbury's garcinia,3189558,52,168,0,52,0,52,Tracheophyta,Magnoliopsida,Malpighiales,Clusiaceae,Garcinia
+282,472,Đậu cọc rào,Jatropha curcas L.,Barbados Nut,3072953,1032,2857,0,1032,163,869,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Jatropha
+283,473,Cây lai,Aleurites moluccanus (L.) Willd.,Candlenut tree,4930679,1000,3061,0,1000,162,838,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Aleurites
+284,474,Lộc mại,Claoxylon hainanense Pax & K.Hoffm.,,3060599,43,73,0,43,0,43,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Claoxylon
+285,475,Me,Tamarindus indica L.,Indian tamarind,2975768,1283,4390,2,1281,212,1069,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Tamarindus
+286,476,Lạc,Arachis hypogaea L.,Peanut,5353770,877,2007,0,877,113,764,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Arachis
+287,478,Tục tùy tử,Euphorbia lathyris L.,Caper Spurge,3066965,1460,5387,0,1460,1168,292,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Euphorbia
+288,479,Thanh long,Selenicereus undatus (Haw.) D.R.Hunt,Nightblooming Cactus,10334868,454,804,1,453,379,74,Tracheophyta,Magnoliopsida,Caryophyllales,Cactaceae,Selenicereus
+289,481,Cây khôi,Ardisia silvestris Pit.,,7330958,12,36,0,12,0,12,Tracheophyta,Magnoliopsida,Ericales,Primulaceae,Ardisia
+290,482,Cây dạ cẩm,Dimetia capitellata (Wall. ex G.Don) Neupane & N.Wikstr.,,9284073,341,566,0,341,0,341,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Dimetia
+291,487,Cải bắp,Brassica oleracea L.,Cabbage,3042845,1006,4650,1,1005,634,371,Tracheophyta,Magnoliopsida,Brassicales,Brassicaceae,Brassica
+292,491,Cốt toái bổ,Drynaria roosii Nakaike,,4024368,219,490,1,218,167,51,Tracheophyta,Polypodiopsida,Polypodiales,Polypodiaceae,Drynaria
+293,492,Dây đau xương,Tinospora sinensis (Lour.) Merr.,Chinese tinospora,3830295,41,90,0,41,0,41,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Tinospora
+294,493,Cây hàm ếch,Saururus chinensis (Lour.) Baill.,Asian lizard’s tail,7979280,213,478,0,213,57,156,Tracheophyta,Magnoliopsida,Piperales,Saururaceae,Saururus
+295,494,Hy thiêm,Sigesbeckia orientalis L.,Common St. Paul's Wort,3125901,1093,3943,0,1093,354,739,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Sigesbeckia
+296,496,Thiên niên kiện,Homalomena aromatica (Spreng.) Schott,,2868616,36,64,0,36,0,36,Tracheophyta,Liliopsida,Alismatales,Araceae,Homalomena
+297,499,Cây xá xị,Cinnamomum parthenoxylon (Jack) Meisn.,Selasian Wood,4181342,512,851,0,512,6,506,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Cinnamomum
+298,500,Tỷ giải,Dioscorea tokoro Makino,,7434550,17,46,0,17,0,17,Tracheophyta,Liliopsida,Dioscoreales,Dioscoreaceae,Dioscorea
+299,505,Chìa vôi,Cissus modeccoides Planch.,,4054910,30,30,0,30,28,2,Tracheophyta,Magnoliopsida,Vitales,Vitaceae,Cissus
+300,506,Củ cối khí,Reynoutria japonica Houtt.,Asian Knotweed,2889173,1288,46290,0,1288,1144,144,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Reynoutria
+301,509,Náng hoa trắng,Crinum asiaticum L.,Asiatic poisonbulb,2853796,848,1348,0,848,320,528,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Crinum
+302,511,Trinh nữ hoàng cung,Crinum latifolium L.,,2853901,87,128,0,87,9,78,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Crinum
+303,512,Phấn phòng kỷ,Stephania tetrandra S.Moore,stephania-root,5592737,72,128,0,72,43,29,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Stephania
+304,514,Quảng phòng kỷ,Isotrema westlandii (Hemsl.) H.Huber,,3589367,8,18,0,8,0,8,Tracheophyta,Magnoliopsida,Piperales,Aristolochiaceae,Isotrema
+305,515,Mộc phòng kỷ,Cocculus orbiculatus (L.) DC.,Queen Coralbead,3033943,1009,1971,0,1009,365,644,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Cocculus
+306,515,Háng Trung Phòng Kỷ,Isotrema kaempferi (Willd.) H.Huber,,3589461,89,234,0,89,13,76,Tracheophyta,Magnoliopsida,Piperales,Aristolochiaceae,Isotrema
+307,515,Tầm duột,Phyllanthus acidus (L.) Skeels,Indian-gooseberry,5381567,421,846,0,421,62,359,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Phyllanthus
+308,516,Lá lốt,Piper sarmentosum Roxb.,,4191172,331,793,0,331,82,249,Tracheophyta,Magnoliopsida,Piperales,Piperaceae,Piper
+309,517,Lấu,Eumachia montana (Blume) I.M.Turner,,10762800,247,353,0,247,0,247,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Eumachia
+310,519,Châu thụ,Gaultheria fragrantissima Wall.,,7328504,353,615,0,353,7,346,Tracheophyta,Magnoliopsida,Ericales,Ericaceae,Gaultheria
+311,520,Dây toàn,Solanum dulcamara L.,Bitter Nightshade,2932737,1047,31770,0,1047,864,183,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+312,521,Cây dền,Xylopia vielana Pierre,,3157037,39,132,0,39,0,39,Tracheophyta,Magnoliopsida,Magnoliales,Annonaceae,Xylopia
+313,522,Gối hạc,Leea rubra Blume ex Spreng.,,8338112,154,263,0,154,0,154,Tracheophyta,Magnoliopsida,Vitales,Vitaceae,Leea
+314,522,Hoàng nàn,Strychnos wallichiana Steud. ex A.DC.,,5645841,135,233,0,135,0,135,Tracheophyta,Magnoliopsida,Gentianales,Loganiaceae,Strychnos
+315,524,Hồi,Illicium verum Hook.fil.,Chinese star-anise,2889756,44,133,0,44,1,43,Tracheophyta,Magnoliopsida,Austrobaileyales,Schisandraceae,Illicium
+316,525,Khoai tây,Solanum tuberosum L.,Irish Potato,2930262,1151,4458,0,1151,225,926,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+317,526,Kim sương,Micromelum falcatum (Lour.) Yu.Tanaka,,3837660,111,223,0,111,0,111,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Micromelum
+318,527,Long não,Cinnamomum camphora (L.) J.Presl,Camphortree,3033991,1029,3319,2,1027,618,409,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Cinnamomum
+319,529,Mã tiền,Strychnos nux-vomica L.,nux-vomica,5414399,225,429,0,225,44,181,Tracheophyta,Magnoliopsida,Gentianales,Loganiaceae,Strychnos
+320,531,Mộc qua,Chaenomeles speciosa (Sweet) Nakai,Chinese Quince,3000679,370,668,0,370,170,200,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Chaenomeles
+321,533,Bướm bạc,Mussaenda pubescens W.T.Aiton,,8251682,75,322,0,75,0,75,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Mussaenda
+322,533,Chay,Artocarpus tonkinensis A.Chev.,,3764001,43,84,0,43,0,43,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Artocarpus
+323,534,Rung rúc,Berchemia lineata (L.) DC.,,7799649,172,331,0,172,76,96,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Berchemia
+324,535,Giổi,Magnolia hypolampra (Dandy) Figlar,,3153387,11,33,0,11,0,11,Tracheophyta,Magnoliopsida,Magnoliales,Magnoliaceae,Magnolia
+325,536,Chìa vôi,Operculina turpethum (L.) Silva Manso,Indian jalap,5341747,725,30,0,725,357,368,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Operculina
+326,538,Cây ban,Hypericum japonicum Thunb.,Tiny St. Johnswort,7948012,1015,2166,0,1015,158,857,Tracheophyta,Magnoliopsida,Malpighiales,Hypericaceae,Hypericum
+327,539,Bời lời nhớt,Litsea glutinosa (Lour.) C.B.Rob.,"Indian laurel, Soft bollygum, Bolly beech, Brown bollygum, Brown Bollywood, Brown beech, Bollywood, Bollygum",7304140,1013,3372,0,1013,166,847,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Litsea
+328,540,Bông báo,Thunbergia grandiflora (Roxb. ex Rottler) Roxb.,"Bengal clock vine, Bengal trumpet, Blue sky vine, Blue trumpet vine, Clockvine, Bengal trumpet vine, Blue skyflower, Blue thunbergia, Skyflower, Skyvine, Heavenly blue, Giant thunbergia, Green trumpet vine, Large flowered thunbergia",5415456,786,1444,0,786,347,439,Tracheophyta,Magnoliopsida,Lamiales,Acanthaceae,Thunbergia
+329,542,Cà dại hoa trắng,Solanum torvum Sw.,Turkey berry,2932389,1002,7402,0,1002,315,687,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+330,542,Bông ổi,Lantana camara L.,Lantana,2925303,1004,15641,0,1004,631,373,Tracheophyta,Magnoliopsida,Lamiales,Verbenaceae,Lantana
+331,543,Tơ mành,Hiptage benghalensis (L.) Kurz,Hiptage,3191302,967,1754,0,967,246,721,Tracheophyta,Magnoliopsida,Malpighiales,Malpighiaceae,Hiptage
+332,544,Bát giác liên,Dysosma difformis (Hemsl. & E.H.Wilson) T.H.Wang,,7875312,2,9,0,2,0,2,Tracheophyta,Magnoliopsida,Ranunculales,Berberidaceae,Dysosma
+333,545,Bông gạo,Bombax ceiba L.,Indian kapok,3152226,520,1049,6,514,220,294,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Bombax
+334,546,Cà gai leo,Solanum procumbens Lour.,,2931076,59,150,0,59,8,51,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+335,547,Rau răm,Persicaria odorata subsp. odorata,,8075816,25,57,0,25,0,25,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Persicaria
+336,548,Vông vang,Abelmoschus moschatus subsp. moschatus,musk okra,10045372,278,469,0,278,0,278,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Abelmoschus
+337,549,Lá dong,Stachyphrynium placentarium (Lour.) Clausager & Borchs.,,2762365,123,239,0,123,0,123,Tracheophyta,Liliopsida,Zingiberales,Marantaceae,Stachyphrynium
+338,549,Sơn từ cô,Pleione bulbocodioides (Franch.) Rolfe,,5321422,66,233,0,66,0,66,Tracheophyta,Liliopsida,Asparagales,Orchidaceae,Pleione
+339,550,Phèn đen,Phyllanthus reticulatus Poir.,Potato bush,5382478,1005,3380,0,1005,145,860,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Phyllanthus
+340,552,Cỏ bạc đầu,Rhynchospora colorata (L.) H.Pfeiff.,Starrush Whitetop,2721618,1031,4483,0,1031,285,746,Tracheophyta,Liliopsida,Poales,Cyperaceae,Rhynchospora
+341,553,Đào lộn hột,Anacardium occidentale L.,Cashew,5421368,1063,4547,0,1063,199,864,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Anacardium
+342,554,Xoan nhừ,Choerospondias axillaris (Roxb.) B.L.Burtt & A.W.Hill,,3661517,246,412,0,246,27,219,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Choerospondias
+343,556,Bóng nước,Impatiens balsamina L.,Balsam,2891773,823,1640,0,823,331,492,Tracheophyta,Magnoliopsida,Ericales,Balsaminaceae,Impatiens
+344,558,Rau tàu bay,Crassocephalum crepidioides (Benth.) S.Moore,Ebolo,3115443,1049,4053,0,1049,442,607,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Crassocephalum
+345,559,Cây kim vàng,Barleria lupulina Lindl.,Hophead Philippine Violet,3173126,190,413,1,189,44,145,Tracheophyta,Magnoliopsida,Lamiales,Acanthaceae,Barleria
+346,560,Cốc tinh thảo,Eriocaulon sexangulare L.,,2690608,445,849,0,445,56,389,Tracheophyta,Liliopsida,Poales,Eriocaulaceae,Eriocaulon
+347,562,Cúc áo,Blainvillea acmella (L.) Philipson,,5385687,414,1105,0,414,5,409,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Blainvillea
+348,564,Xương khô,Euphorbia tirucalli L.,African milkbush,3069353,684,1213,0,684,289,395,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Euphorbia
+349,565,Xương rồng,Euphorbia antiquorum L.,Malayan spurge tree,3069535,143,246,0,143,30,113,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Euphorbia
+350,566,Tế tân,Asarum sieboldii Miq.,Wildginger,7313629,155,299,0,155,37,118,Tracheophyta,Magnoliopsida,Piperales,Aristolochiaceae,Asarum
+351,568,Đơn chân chấu,Aralia armata (Wall. ex G.Don) Seem.,,3036888,96,223,0,96,24,72,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Aralia
+352,568,Mía dò,Hellenia speciosa (J.Koenig) S.R.Dutta,,7584507,1132,2819,0,1132,366,766,Tracheophyta,Liliopsida,Zingiberales,Costaceae,Hellenia
+353,569,Xoài,Mangifera indica L.,Indian mango,3190638,1244,4271,0,1244,512,732,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Mangifera
+354,571,Nhãn hương,Melilotus suaveolens Ledeb.,Daghestan sweet-clover,2971041,244,443,0,244,33,211,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Melilotus
+355,573,Tật lê,Tribulus terrestris L.,Mexican sandbur,5421116,1337,13451,0,1337,720,617,Tracheophyta,Magnoliopsida,Zygophyllales,Zygophyllaceae,Tribulus
+356,574,Ruối,Streblus asper Lour.,,10242935,720,1164,0,720,28,692,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Streblus
+357,575,Củ gió,Paratinospora sagittata (Oliv.) Wei Wang,,11546126,25,89,0,25,0,25,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Paratinospora
+358,576,Sao đen,Hopea odorata Roxb.,,5669231,312,665,0,312,8,304,Tracheophyta,Magnoliopsida,Malvales,Dipterocarpaceae,Hopea
+359,577,Tất bạt,Piper longum L.,Indian long pepper,3086338,132,338,0,132,4,128,Tracheophyta,Magnoliopsida,Piperales,Piperaceae,Piper
+360,579,Cây mướp sát,Cerbera odollam Gaertn.,Suicide Tree,7155753,604,879,0,604,184,420,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Cerbera
+361,583,Cây thông thiên,Cascabela thevetia (L.) Lippold,,3169652,1179,3289,0,1179,382,797,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Cascabela
+362,586,Cây trúc đào,Nerium oleander L.,Oleander,3169756,1004,7929,0,1004,702,302,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Nerium
+363,598,Bạch chỉ,Angelica dahurica (Hoffm.) Benth. & Hook.fil. ex Franch. & Sav.,Dahurian angelica,5537813,157,225,0,157,63,94,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Angelica
+364,601,Cây cối xay,Abutilon hirtum (Lam.) Sweet,Florida Keys Indian Mallow,3152619,538,1158,0,538,67,471,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Abutilon
+365,602,Cây cúc bách nhật,Gomphrena globosa L.,Common globe amaranth,3084908,627,1291,0,627,116,511,Tracheophyta,Magnoliopsida,Caryophyllales,Amaranthaceae,Gomphrena
+366,613,Dây ký nình,Tinospora crispa (L.) Miers ex Hook.fil. & Thomson,,8298918,110,194,0,110,63,47,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Tinospora
+367,614,Ma hoàng,Ephedra sinica Stapf,Chinese ephedra,2653377,120,175,0,120,10,110,Tracheophyta,Gnetopsida,Ephedrales,Ephedraceae,Ephedra
+368,618,Màn kinh tử,Vitex trifolia L.,Indian three-leaf vitex,2925561,1021,2569,0,1021,139,882,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Vitex
+369,619,Cỏ mần trầu,Eleusine indica (L.) Gaertn.,Crabgrass,2705953,1039,17559,0,1039,259,780,Tracheophyta,Liliopsida,Poales,Poaceae,Eleusine
+370,622,Muống biển,Ipomoea pes-caprae subsp. pes-caprae,bayhops,7096505,110,247,0,110,0,110,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Ipomoea
+371,622,Na,Annona squamosa L.,"Sugar apple, Sweetsop",5407099,687,1439,0,687,213,474,Tracheophyta,Magnoliopsida,Magnoliales,Annonaceae,Annona
+372,624,Ngưu bàng,Arctium lappa L.,Beggar's-buttons,7353729,1028,10772,0,1028,843,185,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Arctium
+373,631,Cây rau má,Centella asiatica (L.) Urb.,Asian pennywort,3034128,1041,6322,0,1041,246,795,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Centella
+374,635,Sắn dây,Pueraria montana var. thomsonii (Benth.) M.R.Almeida,,8233429,186,301,0,186,27,159,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Pueraria
+375,636,Tề thái,Capsella bursa-pastoris (L.) Medik.,,5375388,1003,37559,0,1003,737,266,Tracheophyta,Magnoliopsida,Brassicales,Brassicaceae,Capsella
+376,640,Thanh cao hoa vàng,Artemisia annua L.,Annual Mugwort,8373355,1021,3567,0,1021,560,461,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Artemisia
+377,642,Thanh cao,Artemisia caruifolia Buch.-Ham. ex Roxb.,"Celery sand wormwood, Celery wormwood",4230571,43,86,0,43,0,43,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Artemisia
+378,643,Cây chổi xuể,Baeckea frutescens L.,,3187799,699,1286,0,699,59,640,Tracheophyta,Magnoliopsida,Myrtales,Myrtaceae,Baeckea
+379,648,Tía tô,Perilla frutescens (L.) Britton,Beefsteak Mint,5341394,1011,4926,0,1011,648,363,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Perilla
+380,653,Xạ can,Iris domestica (L.) Goldblatt & Mabb.,Belamcanda,5298546,833,1707,0,833,314,519,Tracheophyta,Liliopsida,Asparagales,Iridaceae,Iris
+381,654,Xuyên khung,Oreocome striata (Wall. ex DC.) Pimenov & Kljuykov,,3639584,51,123,0,51,0,51,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Oreocome
+382,657,Bầu đất,Gynura procumbens (Lour.) Merr.,,3139818,630,924,1,629,5,624,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Gynura
+383,658,Dướng,Broussonetia papyrifera (L.) L'Hér. ex Vent.,Paper mulberry,5361944,1162,6910,0,1162,817,345,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Broussonetia
+384,659,Húng quế,Ocimum basilicum L.,Basil,2927096,997,3216,0,997,95,902,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Ocimum
+385,661,Trà tiên,Ocimum ×africanum Lour.,hoary basil,3898584,248,494,0,248,12,236,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Ocimum
+386,662,Cây gắm,Gnetum montanum Markgr.,,2653221,130,290,0,130,0,130,Tracheophyta,Gnetopsida,Gnetales,Gnetaceae,Gnetum
+387,664,Khương hoạt,Hansenia weberbaueriana (Fedde ex H.Wolff) Pimenov & Kljuykov,notopterygium,5537964,21,63,0,21,0,21,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Hansenia
+388,665,Niễng,Zizania latifolia (Griseb.) Stapf,Manchurian Wildrice,2703231,170,302,0,170,0,170,Tracheophyta,Liliopsida,Poales,Poaceae,Zizania
+389,668,Dây quai bị,Tetrastigma pachyphyllum (Hemsl.) Chun,,5658284,18,101,0,18,0,18,Tracheophyta,Magnoliopsida,Vitales,Vitaceae,Tetrastigma
+390,670,Canh châu,Sageretia thea (Osbeck) M.C.Johnst.,Mock buckthorn,3039516,534,1071,0,534,149,385,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Sageretia
+391,674,Đinh hương,Syzygium aromaticum (L.) Merr. & L.M.Perry,Clove,3183002,277,638,4,273,2,271,Tracheophyta,Magnoliopsida,Myrtales,Myrtaceae,Syzygium
+392,675,Ngâu,Aglaia odorata Lour.,,5597349,325,723,0,325,3,322,Tracheophyta,Magnoliopsida,Sapindales,Meliaceae,Aglaia
+393,676,Bàm bàm,Entada phaseoloides (L.) Merr.,St. Thomas Bean,2976244,627,1012,0,627,78,549,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Entada
+394,677,Bụng báng,Arenga pinnata (Wurmb) Merr.,Black-fiber palm,2733997,180,323,0,180,16,164,Tracheophyta,Liliopsida,Arecales,Arecaceae,Arenga
+395,685,Cúc mốc,Crossostephium chinense (L.) Makino,,7970844,175,210,1,174,130,44,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Crossostephium
+396,685,Cúc tần,Pluchea indica (L.) Less.,Indian camphorweed,3132728,924,1361,0,924,408,516,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Pluchea
+397,686,Đậu sị,Phaseolus vulgaris L.,Bean,5350452,1023,16210,0,1023,33,990,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Phaseolus
+398,687,Rau mùi tàu,Eryngium foetidum L.,Spiritweed,3034425,1010,1802,0,1010,210,800,Tracheophyta,Magnoliopsida,Apiales,Apiaceae,Eryngium
+399,688,Sả,Cymbopogon nardus (L.) Rendle,Ceylon citronella,2705267,858,1453,1,857,14,843,Tracheophyta,Liliopsida,Poales,Poaceae,Cymbopogon
+400,689,Xương sông,Blumea lanceolaria (Roxb.) Druce,,5395835,296,452,0,296,79,217,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Blumea
+401,690,Bỏng nổ,Flueggea virosa (Roxb. ex Willd.) Royle,Common Bushweed,5382823,1041,5870,0,1041,128,913,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Flueggea
+402,691,Bưởi,Citrus maxima (Burm.) Merr.,Shaddock,3190160,342,626,1,341,53,288,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Citrus
+403,692,So đũa,Sesbania grandiflora (L.) Pers.,Vegetable hummingbird,2970672,209,387,0,209,7,202,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Sesbania
+404,693,Cây gáo,Nauclea orientalis (L.) L.,Cape York leichardt,5339133,815,1231,0,815,65,750,Tracheophyta,Magnoliopsida,Gentianales,Rubiaceae,Nauclea
+405,695,Cây me rừng,Phyllanthus emblica L.,Emblic,5381660,815,1555,0,815,123,692,Tracheophyta,Magnoliopsida,Malpighiales,Phyllanthaceae,Phyllanthus
+406,696,Móc mèo núi,Guilandina bonduc L.,,8400302,1036,3998,0,1036,287,749,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Guilandina
+407,697,Cây cổ bình,Tadehagi triquetrum (L.) H.Ohashi,,2950828,708,1296,0,708,18,690,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Tadehagi
+408,698,Tía tô dại,Mesosphaerum suaveolens (L.) Kuntze,Pignut,3889017,1050,4323,0,1050,226,824,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Mesosphaerum
+409,699,Cây thuốc phiện,Papaver somniferum L.,Oilseed Poppy,2888439,1017,9903,0,1017,777,240,Tracheophyta,Magnoliopsida,Ranunculales,Papaveraceae,Papaver
+410,700,Cây cà độc dược,Datura metel L.,Hindu datura,2928747,814,2022,0,814,115,699,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Datura
+411,702,Thiên tiên tử,Hyoscyamus niger L.,Black Henbane,2928978,1014,7409,0,1014,516,498,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Hyoscyamus
+412,703,Μơ,Prunus armeniaca L.,Apricot,7818643,1045,1559,0,1045,809,236,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Prunus
+413,706,Đào,Prunus persica (L.) Stokes,Peach,8149923,1135,4082,0,1135,728,407,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Prunus
+414,707,Cỏ trói gà,Drosera burmannii Vahl,,3191153,147,537,0,147,3,144,Tracheophyta,Magnoliopsida,Caryophyllales,Droseraceae,Drosera
+415,708,Húng chanh,Coleus amboinicus Lour.,"Indian borage, Mexican mint, Cuban oregano, Country, French thyme, Indian mint, Soup mint, Spanish thyme, Thick leaf thyme, Broad leaf thyme",5341313,417,649,0,417,150,267,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Coleus
+416,709,Ráng trắc,Adiantum capillus-veneris L.,Maidenhair Fern,2651816,1019,14352,0,1019,428,591,Tracheophyta,Polypodiopsida,Polypodiales,Pteridaceae,Adiantum
+417,710,Cải canh,Brassica juncea (L.) Czern.,Brown Mustard,3042751,1095,4228,0,1095,197,898,Tracheophyta,Magnoliopsida,Brassicales,Brassicaceae,Brassica
+418,712,Củ cải,Raphanus sativus L.,Cultivated Radish,7678610,1134,6556,0,1134,669,465,Tracheophyta,Magnoliopsida,Brassicales,Brassicaceae,Raphanus
+419,713,Thiên môn đông,Asparagus cochinchinensis (Lour.) Merr.,Chinese Asparagus,2768772,481,768,0,481,221,260,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Asparagus
+420,716,Cát cánh,Platycodon grandiflorus (Jacq.) A.DC.,Balloon Flower,3164340,500,894,0,500,135,365,Tracheophyta,Magnoliopsida,Asterales,Campanulaceae,Platycodon
+421,717,Cây nhót tây,Rhaphiolepis bibas (Lour.) Galasso & Banfi,,10786206,1001,3810,0,1001,829,172,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Rhaphiolepis
+422,718,Cây bồng bồng,Calotropis gigantea (L.) W.T.Aiton,Crown flower,3579089,1032,2291,0,1032,669,363,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Calotropis
+423,720,Cây dâu,Morus alba L.,Mulberry,5361889,1004,9075,0,1004,673,331,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Morus
+424,723,Cây bọ mắm,Pouzolzia zeylanica (L.) Benn. & R.Br.,Graceful pouzolzsbush,2984383,1004,2019,0,1004,175,829,Tracheophyta,Magnoliopsida,Rosales,Urticaceae,Pouzolzia
+425,724,Hẹ,Allium ramosum L.,fragrant garlic,2857449,669,1423,0,669,194,475,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Allium
+426,726,Núc nác,Oroxylum indicum (L.) Kurz,Indian Trumpet Tree,7414934,376,721,0,376,38,338,Tracheophyta,Magnoliopsida,Lamiales,Bignoniaceae,Oroxylum
+427,728,Tô hạp hương,Liquidambar orientalis Mill.,Oriental sweet-gum,3152825,102,225,0,102,27,75,Tracheophyta,Magnoliopsida,Saxifragales,Altingiaceae,Liquidambar
+428,729,Cánh kiến trắng,Styrax tonkinensis (Pierre) Craib ex Hartwich,Lao benzointree,5371676,47,169,0,47,0,47,Tracheophyta,Magnoliopsida,Ericales,Styracaceae,Styrax
+429,730,Viễn chí,Polygala tenuifolia Willd.,Chinese senega-root,7593997,182,290,0,182,31,151,Tracheophyta,Magnoliopsida,Fabales,Polygalaceae,Polygala
+430,732,Bồ kết,Gleditsia australis Hemsl.,,2959479,51,109,0,51,0,51,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Gleditsia
+431,734,Mướp đắng,Momordica charantia L.,,7317998,426,479,0,426,419,7,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Momordica
+432,735,Trám,Canarium album (Lour.) Raeusch.,Chinese white olive,8269930,51,140,0,51,9,42,Tracheophyta,Magnoliopsida,Sapindales,Burseraceae,Canarium
+433,737,Thị đế,Diospyros kaki L.f.,Japanese persimmon,3032984,314,708,0,314,135,179,Tracheophyta,Magnoliopsida,Ericales,Ebenaceae,Diospyros
+434,738,Tử uyển,Aster tataricus L.fil.,Tartarian Aster,7751501,432,707,0,432,149,283,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Aster
+435,740,Tràm và tinh dầu tràm,Melaleuca leucadendra (L.) L.,Cajeput,5415976,699,1643,9,690,146,544,Tracheophyta,Magnoliopsida,Myrtales,Myrtaceae,Melaleuca
+436,742,Bạch đàn và tinh dầu bạch đàn,Eucalyptus globulus Labill.,Southern Blue-gum,3176787,1006,4509,2,1004,789,215,Tracheophyta,Magnoliopsida,Myrtales,Myrtaceae,Eucalyptus
+437,744,Cây một lá,Nervilia fordii (Hance) Schltr.,,2836625,2,5,0,2,0,2,Tracheophyta,Liliopsida,Asparagales,Orchidaceae,Nervilia
+438,746,Hồng bì,Clausena lansium (Lour.) Skeels,Chinese clausena,3190413,194,355,0,194,23,171,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Clausena
+439,746,Cóc mẳn,Centipeda minima (L.) A.Br. & Asch.,Spreading Sneezeweed,5391292,555,1173,0,555,137,418,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Centipeda
+440,748,Phật thủ,Citrus medica L.,Citron,3190157,283,688,0,283,11,272,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Citrus
+441,749,Gai tầm xoọng,Atalantia buxifolia (Poir.) Oliv.,,5593924,316,513,0,316,164,152,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Atalantia
+442,749,Bạch cập,Bletilla striata (Thunb.) Rchb.f.,Chinese ground orchid,2808791,137,512,0,137,25,112,Tracheophyta,Liliopsida,Asparagales,Orchidaceae,Bletilla
+443,751,Biến hóa,Asarum caudigerum Hance,,7313620,116,211,0,116,64,52,Tracheophyta,Magnoliopsida,Piperales,Aristolochiaceae,Asarum
+444,751,Bồ hòn,Sapindus mukorossi Gaertn.,Chinese soapberry,5421133,428,665,1,427,220,207,Tracheophyta,Magnoliopsida,Sapindales,Sapindaceae,Sapindus
+445,755,Cà dại hoa tím,Solanum violaceum Ortega,,2929848,651,1331,0,651,140,511,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Solanum
+446,755,Cải cúc,Glebionis coronaria (L.) Tzvelev,Crown Daisy,7627205,1014,6312,0,1014,714,300,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Glebionis
+447,756,Chùa dù,Elsholtzia blanda (Benth.) Benth.,,8002762,175,353,0,175,2,173,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Elsholtzia
+448,757,Chóc gai,Lasia spinosa (L.) Thwaites,,5330870,349,611,0,349,14,335,Tracheophyta,Liliopsida,Alismatales,Araceae,Lasia
+449,758,Hổ vĩ,Dracaena trifasciata (Prain) Mabb.,"Snake plant, Mother-in-law's tongue, Viper's bowstring hemp, Snake Sansevieria, Bowstring hemp, Good luck plant, Mother-in-law's nose",11041822,301,493,0,301,119,182,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Dracaena
+450,759,Rau khúc,Helichrysum indicum (L.) Grierson,,3131847,350,730,0,350,43,307,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Helichrysum
+451,759,Mướp tây,Abelmoschus esculentus (L.) Moench,Okra,3152707,944,1595,0,944,86,858,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Abelmoschus
+452,760,Cây nhót,Elaeagnus latifolia L.,oleaster,4048232,332,500,0,332,2,330,Tracheophyta,Magnoliopsida,Rosales,Elaeagnaceae,Elaeagnus
+453,761,Ruột gà,Bacopa monnieri (L.) Pennell,Indian-pennywort,3171169,1018,6167,0,1018,502,516,Tracheophyta,Magnoliopsida,Lamiales,Plantaginaceae,Bacopa
+454,762,Sấu,Dracontomelon duperreanum Pierre,,3660297,38,90,0,38,0,38,Tracheophyta,Magnoliopsida,Sapindales,Anacardiaceae,Dracontomelon
+455,762,Cây si,Ficus benjamina L.,Java fig,5361932,1035,2257,0,1035,203,832,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Ficus
+456,763,Lười ươi,Scaphium affine (Mast.) Pierre,,7737109,75,118,0,75,8,67,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Scaphium
+457,765,Cây bã thuốc,Lobelia pyramidalis Wall.,,5408559,67,119,0,67,0,67,Tracheophyta,Magnoliopsida,Asterales,Campanulaceae,Lobelia
+458,766,Chanh,Citrus ×limon (L.) Osbeck,lemon,7647136,293,757,3,290,47,243,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Citrus
+459,767,Dâu gia xoan,Clausena excavata Burm.fil.,,5834596,884,1433,0,884,87,797,Tracheophyta,Magnoliopsida,Sapindales,Rutaceae,Clausena
+460,768,Tri mẫu,Anemarrhena asphodeloides Bunge,,2771077,45,90,0,45,5,40,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Anemarrhena
+461,769,Mù mắt,Hippobroma longiflora (L.) G.Don,Madamfate,3168943,1035,2643,0,1035,502,533,Tracheophyta,Magnoliopsida,Asterales,Campanulaceae,Hippobroma
+462,771,Thủy tiên,Narcissus tazetta L.,Bunch-flowered Daffodil,2858963,1039,2974,0,1039,550,489,Tracheophyta,Liliopsida,Asparagales,Amaryllidaceae,Narcissus
+463,772,Sen cạn,Tropaeolum majus L.,Garden Nasturtium,2889934,1003,5625,0,1003,908,95,Tracheophyta,Magnoliopsida,Brassicales,Tropaeolaceae,Tropaeolum
+464,773,La hán,Siraitia grosvenorii (Swingle) C.Jeffrey ex A.M.Lu & Zhi Y.Zhang,Buddhafruit,3623059,9,24,0,9,0,9,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Siraitia
+465,774,Bạch quả,Ginkgo biloba L.,Common Ginkgo,2687885,796,1893,0,796,123,673,Tracheophyta,Ginkgoopsida,Ginkgoales,Ginkgoaceae,Ginkgo
+466,776,Cây nắp ấm,Nepenthes mirabilis (Lour.) Druce,tropical pitcherplant,3190712,786,1250,1,785,216,569,Tracheophyta,Magnoliopsida,Caryophyllales,Nepenthaceae,Nepenthes
+467,777,Khoản đông hoa,Tussilago farfara L.,Colt's-foot,3149879,1005,34529,0,1005,905,100,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Tussilago
+468,779,Bình vôi,Stephania rotunda Lour.,,5592764,163,378,0,163,0,163,Tracheophyta,Magnoliopsida,Ranunculales,Menispermaceae,Stephania
+469,782,Lạc tiên,Passiflora foetida L.,Fetid passionflower,2874211,1010,8500,0,1010,262,748,Tracheophyta,Magnoliopsida,Malpighiales,Passifloraceae,Passiflora
+470,783,Sen,Nelumbo nucifera Gaertn.,East Indian lotus,2882449,1003,1792,4,999,662,337,Tracheophyta,Magnoliopsida,Proteales,Nelumbonaceae,Nelumbo
+471,787,Cây vông nem,Erythrina variegata L.,Indian coraltree,5349581,943,1500,0,943,76,867,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Erythrina
+472,788,Táo ta,Ziziphus mauritiana Lam.,Chinese-apple,3039424,1035,2885,0,1035,239,796,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Ziziphus
+473,790,Long nhãn,Dimocarpus longan Lour.,Longan,3190008,1006,1856,0,1006,343,663,Tracheophyta,Magnoliopsida,Sapindales,Sapindaceae,Dimocarpus
+474,791,Cây hoa nhài,Jasminum sambac (L.) Aiton,Arabian Jasmine,7587215,470,813,0,470,86,384,Tracheophyta,Magnoliopsida,Lamiales,Oleaceae,Jasminum
+475,794,Cây xấu hổ,Mimosa pudica L.,Common Sensitive-plant,2969284,1004,7581,0,1004,593,411,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Mimosa
+476,801,Chỉ cụ,Hovenia dulcis Thunb.,Chinese raisintree,3039410,379,948,0,379,47,332,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Hovenia
+477,808,Nhân sâm Việt Nam,Panax vietnamensis Ha & Grushv.,Vietnamese ginseng,5372258,2,6,0,2,0,2,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Panax
+478,813,Sâm bố chính,Abelmoschus sagittifolius (Kurz) Merr.,,3940600,182,442,0,182,34,148,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Abelmoschus
+479,815,Thổ cao ly sâm,Talinum fruticosum (L.) Juss.,Ceylon-spinach,3084670,977,1780,0,977,398,579,Tracheophyta,Magnoliopsida,Caryophyllales,Talinaceae,Talinum
+480,818,Đan sâm,Salvia miltiorrhiza Bunge,Chinese salvia,7308369,111,233,0,111,2,109,Tracheophyta,Magnoliopsida,Lamiales,Lamiaceae,Salvia
+481,820,Huyền sâm,Scrophularia buergeriana Miq.,Buerger’s figwort,3738793,32,74,0,32,0,32,Tracheophyta,Magnoliopsida,Lamiales,Scrophulariaceae,Scrophularia
+482,821,Tục đoạn,Dipsacus japonicus Miq.,East Asian teasel,4102897,53,182,0,53,0,53,Tracheophyta,Magnoliopsida,Dipsacales,Caprifoliaceae,Dipsacus
+483,823,Nam sâm,Heptapleurum heptaphyllum (L.) Y.F.Deng,,11047823,714,1253,0,714,470,244,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Heptapleurum
+484,824,Sâm rừng,Boerhavia repens L.,Anena,3086288,469,1671,0,469,52,417,Tracheophyta,Magnoliopsida,Caryophyllales,Nyctaginaceae,Boerhavia
+485,826,Cây khổ sâm cho lá,Croton kongensis Gagnep.,,3060155,73,137,0,73,0,73,Tracheophyta,Magnoliopsida,Malpighiales,Euphorbiaceae,Croton
+486,826,Cây khổ sâm cho rễ,Sophora flavescens Aiton,Shrubby sophora,2959073,285,566,0,285,31,254,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Sophora
+487,828,Đinh lăng,Polyscias fruticosa (L.) Harms,Ming Aralia,3035652,319,511,0,319,12,307,Tracheophyta,Magnoliopsida,Apiales,Araliaceae,Polyscias
+488,830,Bàn long sâm,Spiranthes sinensis (Pers.) Ames,Ladies’ tresse,2805433,714,1864,0,714,186,528,Tracheophyta,Liliopsida,Asparagales,Orchidaceae,Spiranthes
+489,831,Nấm linh chỉ,Ganoderma lucidum (Curtis) P.Karst.,Lacquered Bracket,2549730,816,2142,0,816,491,325,Basidiomycota,Agaricomycetes,Polyporales,Polyporaceae,Ganoderma
+490,833,Hà thủ ô đỏ,Reynoutria multiflora (Thunb.) Moldenke,Chinese fleece flower,4038333,303,569,0,303,168,135,Tracheophyta,Magnoliopsida,Caryophyllales,Polygonaceae,Reynoutria
+491,836,Hà thủ ô trắng,Streptocaulon juventas (Lour.) Merr.,,3572291,188,400,0,188,0,188,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Streptocaulon
+492,837,Sinh địa,Rehmannia glutinosa (Gaertn.) Libosch. ex Fisch. & C.A.Mey.,,7516558,72,188,0,72,16,56,Tracheophyta,Magnoliopsida,Lamiales,Rehmanniaceae,Rehmannia
+493,841,Hoàng tinh,Polygonatum kingianum Collett & Hemsl.,,2770124,101,239,0,101,0,101,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Polygonatum
+494,843,Ngọc trúc,Polygonatum odoratum var. odoratum,,7228168,284,955,0,284,3,281,Tracheophyta,Liliopsida,Asparagales,Asparagaceae,Polygonatum
+495,844,Ý dĩ,Coix lacryma-jobi L.,Adlay,2706301,1178,5081,0,1178,164,1014,Tracheophyta,Liliopsida,Poales,Poaceae,Coix
+496,850,Kỷ tử,Lycium chinense Mill.,Chinese Teaplant,2928809,463,1316,0,463,128,335,Tracheophyta,Magnoliopsida,Solanales,Solanaceae,Lycium
+497,853,Cây sữa,Alstonia scholaris (L.) R.Br.,Dogbane,5414410,1189,2082,0,1189,216,973,Tracheophyta,Magnoliopsida,Gentianales,Apocynaceae,Alstonia
+498,854,Cây xộp,Ficus pumila L.,Climbing fig,5361930,1031,1772,1,1030,689,341,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Ficus
+499,856,Phá cố chỉ,Cullen corylifolium (L.) Medik.,Malaysian scurfpea,2948930,163,352,0,163,8,155,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Cullen
+500,857,Bạng hoa,Tradescantia spathacea Sw.,Boatlily,2765230,584,923,1,583,327,256,Tracheophyta,Liliopsida,Commelinales,Commelinaceae,Tradescantia
+501,858,Quế Thanh Hóa,Cinnamomum loureiroi Nees,Saigon cinnamon,4182513,41,82,0,41,0,41,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Cinnamomum
+502,861,Quế quan,Cinnamomum verum J.Presl,Cinnamon,3033987,970,2163,2,968,34,934,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Cinnamomum
+503,862,Quế Trung Quốc,Cinnamomum cassia Nees ex Blume,,8338622,9,16,0,9,0,9,Tracheophyta,Magnoliopsida,Laurales,Lauraceae,Cinnamomum
+504,868,Cam thảo dây (Dây cam thảo),Abrus precatorius L.,Crab's Eye,5348711,1058,4819,0,1058,301,757,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Abrus
+505,870,Cam thảo nam,Scoparia dulcis L.,Licorice Weed,3171787,1017,8365,0,1017,208,809,Tracheophyta,Magnoliopsida,Lamiales,Plantaginaceae,Scoparia
+506,871,Cây sóng rắn,Albizia myriophylla Benth.,,2973009,129,277,0,129,0,129,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Albizia
+507,875,Cải xoong,Nasturtium officinale R.Br.,Watercress,7701037,1021,13299,0,1021,521,500,Tracheophyta,Magnoliopsida,Brassicales,Brassicaceae,Nasturtium
+508,877,Âu ô đầu,Aconitum napellus L.,Aconite,3033665,1131,6184,1,1130,573,557,Tracheophyta,Magnoliopsida,Ranunculales,Ranunculaceae,Aconitum
+509,878,Ô đầu và phụ tử (Ô dầu phụ tử Trung Quốc),Aconitum fischeri Rchb.,Fischer monkshood,3033674,167,281,0,167,9,158,Tracheophyta,Magnoliopsida,Ranunculales,Ranunculaceae,Aconitum
+510,881,Ô đầu Việt Nam,Aconitum carmichaelii var. truppelianum (Ulbr.) W.T.Wang & P.K.Hsiao,Spreading-hair monk’shood,3926588,7,29,0,7,0,7,Tracheophyta,Magnoliopsida,Ranunculales,Ranunculaceae,Aconitum
+511,882,Đông trùng hạ thảo,"Ophiocordyceps sinensis (Berk.) G.H.Sung, J.M.Sung, Hywel-Jones & Spatafora",Chinese Caterpillar Fungus,2560562,12,28,0,12,3,9,Ascomycota,Sordariomycetes,Hypocreales,Ophiocordycipitaceae,Ophiocordyceps
+512,885,Hạt gấc,Momordica cochinchinensis (Lour.) Spreng.,Balsampear,2874580,683,1125,0,683,65,618,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Momordica
+513,887,Hoàng kỳ,Astragalus mongholicus Bunge,membranous milk-vetch,5345341,278,381,0,278,50,228,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Astragalus
+514,890,Hồng đằng,Sargentodoxa cuneata (Oliv.) Rehder & E.H.Wilson,,3782041,48,122,0,48,1,47,Tracheophyta,Magnoliopsida,Ranunculales,Lardizabalaceae,Sargentodoxa
+515,892,Kim anh,Rosa laevigata Michx.,Cherokee rose,3002751,504,1475,0,504,187,317,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Rosa
+516,894,Tâm xuân,Rosa multiflora Thunb.,Baby Rose,3003244,1132,14854,0,1132,1016,116,Tracheophyta,Magnoliopsida,Rosales,Rosaceae,Rosa
+517,895,Hồ đào,Juglans regia L.,Carpathian Walnut,3054368,1035,8085,0,1035,914,121,Tracheophyta,Magnoliopsida,Fagales,Juglandaceae,Juglans
+518,897,Đào tiên,Crescentia cujete L.,Common Calabash Tree,5415081,888,1501,4,884,365,519,Tracheophyta,Magnoliopsida,Lamiales,Bignoniaceae,Crescentia
+519,898,Vừng,Sesamum indicum subsp. indicum,,7601097,56,153,0,56,0,56,Tracheophyta,Magnoliopsida,Lamiales,Pedaliaceae,Sesamum
+520,900,Bổ béo (Sâm béo trắng),Gomphandra mollis Merr.,,3596656,10,17,0,10,0,10,Tracheophyta,Magnoliopsida,Cardiopteridales,Stemonuraceae,Gomphandra
+521,901,Cát sâm,Nanhaia speciosa (Champ. ex Benth.) J.Compton & Schrire,,10507579,81,131,0,81,10,71,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Nanhaia
+522,902,Công cộng (nguyển cộng),Andrographis paniculata (Burm.fil.) Nees,creat,3173178,471,747,0,471,191,280,Tracheophyta,Magnoliopsida,Lamiales,Acanthaceae,Andrographis
+523,903,Cây cơm nếp,Strobilanthes affinis (Griff.) Terao ex J.R.I.Wood & J.R.Benn.,,7486344,69,149,0,69,0,69,Tracheophyta,Magnoliopsida,Lamiales,Acanthaceae,Strobilanthes
+524,904,Cây lá dứa,Pandanus amaryllifolius Roxb. ex Lindl.,Fragrant Pandan,9296315,2,12,0,2,1,1,Tracheophyta,Liliopsida,Pandanales,Pandanaceae,Pandanus
+525,906,Dâu rượu,Morella rubra Lour.,Chinese-arbutus,3745136,377,599,0,377,125,252,Tracheophyta,Magnoliopsida,Fagales,Myricaceae,Morella
+526,908,Đại táo,Ziziphus jujuba Mill.,Chinese jujube,3039423,1028,2601,0,1028,393,635,Tracheophyta,Magnoliopsida,Rosales,Rhamnaceae,Ziziphus
+527,909,Ô môi,Cassia grandis L.f.,Pink Shower,5357158,593,1112,0,593,31,562,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Cassia
+528,910,Sâm cau,Curculigo orchioides Gaertn.,golden eye-grass,2853024,579,985,0,579,118,461,Tracheophyta,Liliopsida,Asparagales,Hypoxidaceae,Curculigo
+529,911,Sơn thù du,Cornus officinalis Siebold & Zucc.,Asiatic dogwood,7161076,108,196,0,108,15,93,Tracheophyta,Magnoliopsida,Cornales,Cornaceae,Cornus
+530,912,Thanh thất,Ailanthus triphysa (Dennst.) Alston,,3708775,258,403,0,258,95,163,Tracheophyta,Magnoliopsida,Sapindales,Simaroubaceae,Ailanthus
+531,913,Thổ tam thất,Gynura pseudochina (L.) DC.,,7715188,206,478,0,206,0,206,Tracheophyta,Magnoliopsida,Asterales,Asteraceae,Gynura
+532,914,Tòa dương,Balanophora J.R.Forst. & G.Forst.,,4195050,74,102,0,74,64,10,Tracheophyta,Magnoliopsida,Santalales,Balanophoraceae,Balanophora
+533,915,Cây vú bò,Ficus heterophylla L.fil.,,8418037,184,413,0,184,0,184,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Ficus
+534,915,Ca cao,Theobroma cacao L.,Cacao,3152205,994,2358,2,992,401,591,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Theobroma
+535,918,Dừa,Cocos nucifera L.,Coconut,2735117,1040,3070,3,1037,916,121,Tracheophyta,Liliopsida,Arecales,Arecaceae,Cocos
+536,919,Cọ dầu,Elaeis guineensis Jacq.,African Oil Palm,2731882,242,564,0,242,82,160,Tracheophyta,Liliopsida,Arecales,Arecaceae,Elaeis
+537,921,Côca,Erythroxylum coca Lam.,Coca,2873939,153,414,0,153,4,149,Tracheophyta,Magnoliopsida,Malpighiales,Erythroxylaceae,Erythroxylum
+538,924,Côla,Cola nitida (Vent.) Schott & Endl.,Gbanja kola,5406687,234,530,0,234,3,231,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Cola
+539,926,Vú sữa,Chrysophyllum cainito L.,Star Apple,2885828,641,1368,0,641,49,592,Tracheophyta,Magnoliopsida,Ericales,Sapotaceae,Chrysophyllum
+540,928,Sầu riêng,Durio zibethinus Murray,durian,3152230,173,247,0,173,24,149,Tracheophyta,Magnoliopsida,Malvales,Malvaceae,Durio
+541,928,Dưa hấu,Citrullus lanatus (Thunb.) Matsum. & Nakai,Afghan-melon,2874621,1040,3678,0,1040,242,798,Tracheophyta,Magnoliopsida,Cucurbitales,Cucurbitaceae,Citrullus
+542,930,Đậu nành,Glycine max subsp. soja (Siebold & Zucc.) H.Ohashi,Wild soybean,5359662,298,477,0,298,93,205,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Glycine
+543,932,Đậu xanh,Vigna radiata var. radiata,golden gram,6592576,124,234,0,124,0,124,Tracheophyta,Magnoliopsida,Fabales,Fabaceae,Vigna
+544,933,Nhục thung dung,Cistanche salsa (C.A.Mey.) Beck,broomrape,7332223,44,98,0,44,12,32,Tracheophyta,Magnoliopsida,Lamiales,Orobanchaceae,Cistanche
+545,935,Tầm sét,Ipomoea digitata L.,finger-leaf morning-glory,8249252,110,243,0,110,0,110,Tracheophyta,Magnoliopsida,Solanales,Convolvulaceae,Ipomoea
+546,936,Cây sake (Xa kê),Artocarpus altilis (Parkinson) Fosberg,Breadfruit,2984573,1015,2153,0,1015,259,756,Tracheophyta,Magnoliopsida,Rosales,Moraceae,Artocarpus
