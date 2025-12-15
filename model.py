@@ -121,18 +121,28 @@ class Model(nn.Module):
                 print("Training on MobileNetV2 architecture")
                 return model
 
-            # case 4: #convnext base
-            #     convnext_weight = ConvNeXt_Base_Weights.DEFAULT
-            #     model = convnext_base(weights= convnext_weight)
+            case 7: #convnext base
+                convnext_weight = ConvNeXt_Base_Weights.DEFAULT
+                model = convnext_base(weights= convnext_weight)
 
-            #     convnext_classifier = list(model.classifier.children())[:2]
-            #     in_features = model.classifier[2].in_features
+                convnext_classifier = list(model.classifier.children())[:2]
+                in_features = model.classifier[2].in_features #1024
 
-            #     model.classifier = nn.Sequential(
-            #         *convnext_classifier,
-            #         nn.Linear(in_features, self.num_classes, bias=True)
-            #     )
-            #     return model
+                model.classifier = nn.Sequential(
+                    *convnext_classifier,
+                    nn.Linear(in_features, self.num_classes)
+                )
+                print("Training on convnextBase architecture")
+                return model
+            
+            case 8: #Beit
+                model = timm.create_model('beit_base_patch16_224', pretrained=True)
+                in_features = model.head.in_features #768
+
+                model.head = nn.Linear(in_features, self.num_classes)
+                print("Training on Beit architecture")
+                return model
+
             # case 6: #Swin transform
             #     swinv2Weight = Swin_V2_B_Weights.DEFAULT
             #     model = swin_v2_b(weights=swinv2Weight)
