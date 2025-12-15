@@ -143,13 +143,13 @@ class Model(nn.Module):
                 print("Training on Beit architecture")
                 return model
 
-            # case 6: #Swin transform
-            #     swinv2Weight = Swin_V2_B_Weights.DEFAULT
-            #     model = swin_v2_b(weights=swinv2Weight)
+            case 10: #Swin transform
+                swinv2Weight = Swin_V2_B_Weights.DEFAULT
+                model = swin_v2_b(weights=swinv2Weight)
 
-            #     in_features = model.head.in_features #1024
-            #     model.head = nn.Linear(in_features, self.num_classes, bias=True)
-            #     return model
+                in_features = model.head.in_features #1024
+                model.head = nn.Linear(in_features, self.num_classes, bias=True)
+                return model
     def forward(self, x):
         return self.model(x)
     
