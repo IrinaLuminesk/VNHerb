@@ -136,6 +136,7 @@ class Model(nn.Module):
                 )
                 return model
             case 3: #Inception
+            
                 inception_v3_weight = Inception_V3_Weights.DEFAULT
                 model = inception_v3(inception_v3_weight)
 
@@ -148,6 +149,7 @@ class Model(nn.Module):
                     nn.Linear(1024, self.num_classes),
                 )
                 model.fc = fc
+                print("Training on InceptionV3 architecture")
                 return model
             # case 2: #DenseNet201
             #     densenet_Weights = DenseNet201_Weights.DEFAULT

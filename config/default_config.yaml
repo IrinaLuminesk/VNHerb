@@ -35,6 +35,8 @@ TRAIN:
     LAST_EPOCH: 0
     OPTIMIZER: "AdamW"
     RESUME: False
+    EARLY_STOPPING: TRUE
+    PATIENCE: 10
   OPTIONAL:
     SAVE_CHECKPOINT: TRUE
     CHECKPOINT_PATH: "./resume_model/checkpoint.pth"
