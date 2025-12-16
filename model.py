@@ -5,8 +5,8 @@ from torchvision.models import resnet50, ResNet50_Weights,\
     convnext_base, ConvNeXt_Base_Weights,\
     mobilenet_v2, MobileNet_V2_Weights, \
     swin_v2_b, Swin_V2_B_Weights, \
-    inception_v3, Inception_V3_Weights, \
-    efficientnet_b4, EfficientNet_B4_Weights
+    efficientnet_b4, EfficientNet_B4_Weights, \
+    vit_b_16, ViT_B_16_Weights
 import timm         
 
 class Model(nn.Module):
@@ -130,20 +130,23 @@ class Model(nn.Module):
 
                 model.classifier = nn.Sequential(
                     *convnext_classifier,
+                    nn.Dropout(0.4),
                     nn.Linear(in_features, self.num_classes)
                 )
                 print("Training on convnextBase architecture")
                 return model
             
-            case 8: #Beit
-                model = timm.create_model('beit_base_patch16_224', pretrained=True)
+            case 8: #ViT
+                ViTWeight = ViT_B_16_Weights.DEFAULT
+                model = vit_b_16(weights=ViTWeight)
+                
                 in_features = model.head.in_features #768
 
                 model.head = nn.Linear(in_features, self.num_classes)
-                print("Training on Beit architecture")
+                print("Training on ViT architecture")
                 return model
 
-            case 10: #Swin transform
+            case 9: #Swin transform
                 swinv2Weight = Swin_V2_B_Weights.DEFAULT
                 model = swin_v2_b(weights=swinv2Weight)
 
