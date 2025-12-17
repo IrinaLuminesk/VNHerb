@@ -36,7 +36,7 @@ class Model(nn.Module):
                 model = vgg16(weights=vgg16_weights)
 
                 # vgg16_classifier = list(model.classifier.children())[:6]
-                in_features = model.classifier[6].in_features #4096
+                in_features = model.classifier[0].in_features #25088
 
                 model.classifier = nn.Sequential(
                     # *vgg16_classifier,
