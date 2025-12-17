@@ -140,9 +140,9 @@ class Model(nn.Module):
                 ViTWeight = ViT_B_16_Weights.DEFAULT
                 model = vit_b_16(weights=ViTWeight)
                 
-                in_features = model.head.in_features #768
+                in_features = model.heads[0].in_features #768
 
-                model.head = nn.Linear(in_features, self.num_classes)
+                model.heads = nn.Linear(in_features, self.num_classes)
                 print("Training on ViT architecture")
                 return model
 

@@ -72,7 +72,11 @@ class DatasetLoader():
             loader = DataLoader(
                 training_dataset,
                 batch_size=self.batch_size,
-                shuffle=True
+                shuffle=True,
+                num_workers=16,          # START HERE
+                pin_memory=True,
+                persistent_workers=True,
+                prefetch_factor=4
             )
         else:
             testing_dataset = datasets.ImageFolder(
@@ -83,7 +87,10 @@ class DatasetLoader():
             loader = DataLoader(
                 testing_dataset,
                 batch_size=self.batch_size,
-                shuffle=False
+                shuffle=False,
+                num_workers=8,
+                pin_memory=True,
+                persistent_workers=True
             )
         print()
         return loader

@@ -23,7 +23,7 @@ def parse_args():
     parser.add_argument(
     "--cfg",
     type=str,
-    default="config/default_config.yaml",
+    default="config/DTLHerb_config.yaml",
     help="Config file used to train the model (default: config/default_config.yaml)"
     )
     args = parser.parse_args()
@@ -92,8 +92,8 @@ def main():
     patience = config["TRAIN"]["TRAIN_PARA"]["PATIENCE"]
     epochs_no_improve = 0
     model_type = int(config["TRAIN"]["TRAIN_PARA"]["MODEL_TYPE"])
-    # if model_type in [8,9]:
-    #     img_size = [224, 224]
+    if model_type == 8:
+        img_size = [224, 224]
     #Optional
     save_checkpoint = config["TRAIN"]["OPTIONAL"]["SAVE_CHECKPOINT"]
     save_best = config["TRAIN"]["OPTIONAL"]["SAVE_BEST"]
