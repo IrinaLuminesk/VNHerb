@@ -35,16 +35,16 @@ class Model(nn.Module):
                 vgg16_weights = VGG16_Weights.DEFAULT
                 model = vgg16(weights=vgg16_weights)
 
-                vgg16_classifier = list(model.classifier.children())[:6]
+                # vgg16_classifier = list(model.classifier.children())[:6]
                 in_features = model.classifier[6].in_features #4096
 
                 model.classifier = nn.Sequential(
-                    *vgg16_classifier,
-                    nn.Linear(in_features, 2048, bias=True),
-                    nn.BatchNorm1d(2048),
-                    nn.ReLU(),
-                    nn.Dropout(0.4),
-                    nn.Linear(2048, 1024, bias=True),
+                    # *vgg16_classifier,
+                    # nn.Linear(in_features, 2048, bias=True),
+                    # nn.BatchNorm1d(2048),
+                    # nn.ReLU(),
+                    # nn.Dropout(0.4),
+                    nn.Linear(in_features, 1024, bias=True),
                     nn.BatchNorm1d(1024),
                     nn.ReLU(),
                     nn.Dropout(0.4),
