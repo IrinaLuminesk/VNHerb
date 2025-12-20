@@ -1,3 +1,7 @@
+import math
+from typing import Any
+
+
 class PiecewiseScheduler:
     """
     Custom learning rate schedule that used a three phrases strategy. Linear warm-up phrase, sustain phrase, and exponential decay.
@@ -32,3 +36,17 @@ class PiecewiseScheduler:
         else:
             lr = (self.max_lr - self.min_lr) * self.exp_decay**(epoch - self.rampup_epochs - self.sustain_epochs) + self.min_lr
         return lr / self.max_lr  
+    
+class WarmupCosineScheduler:
+    def __init__(self, total_epochs, warmup_epochs, min_lr, max_lr):
+        self.total_epochs = total_epochs
+        self.warmup_epochs = warmup_epochs
+        self.min_lr = min_lr
+        self.max_lr = max_lr
+    def __call__(self, epoch):
+        if epoch < self.warmup_epochs:
+            return self.min_lr + (self.max_lr - self.min_lr) * (epoch / self.warmup_epochs)
+        else:
+            progress = (epoch - self.warmup_epochs) / (self.total_epochs - self.warmup_epochs)
+            cosine = 0.5 * (1 + math.cos(math.pi * progress))
+            return self.min_lr + (self.max_lr - self.min_lr) * cosine

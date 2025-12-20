@@ -5,7 +5,7 @@ from sympy import Float
 from tqdm import tqdm
 from Aug.BatchWiseAug import BatchWiseAug
 from Metrics.MetricCal import MetricCal
-from learning_rate import PiecewiseScheduler
+from learning_rate import PiecewiseScheduler, WarmupCosineScheduler
 from model import Model
 from utils.DatasetLoader import DatasetLoader
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, Saving_Metric2, YAML_Reader, get_mean_std
@@ -123,14 +123,23 @@ def main():
     eval_criterion = nn.CrossEntropyLoss()
     train_criterion = SoftTargetCrossEntropy()
     optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-2)
-    lr_schedule = PiecewiseScheduler(
-        start_lr=0.0001,
-        max_lr=0.0005,
-        min_lr=0.0001,
-        rampup_epochs=10,
-        sustain_epochs=5,
-        exp_decay=0.8
-    )
+
+    if model_type not in [8, 9]:
+        lr_schedule = PiecewiseScheduler(
+            start_lr=0.0001,
+            max_lr=0.0005,
+            min_lr=0.0001,
+            rampup_epochs=10,
+            sustain_epochs=5,
+            exp_decay=0.8
+        )
+    else:
+        lr_schedule = WarmupCosineScheduler(
+            warmup_epochs=10,
+            total_epochs=end_epoch,
+            min_lr=0.0001,
+            max_lr=0.0005
+        )
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
 
     best_acc = 0

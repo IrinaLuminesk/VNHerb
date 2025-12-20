@@ -142,7 +142,14 @@ class Model(nn.Module):
                 
                 in_features = model.heads[0].in_features #768
 
-                model.heads = nn.Linear(in_features, self.num_classes)
+                # model.heads = nn.Linear(in_features, self.num_classes)
+                model.heads = nn.Sequential(
+                    nn.LayerNorm(in_features),
+                    nn.Linear(in_features, 1024),
+                    nn.GELU(),
+                    nn.Dropout(0.1),
+                    nn.Linear(1024, self.num_classes)
+                )
                 print("Training on ViT architecture")
                 return model
 
@@ -151,7 +158,14 @@ class Model(nn.Module):
                 model = swin_v2_b(weights=swinv2Weight)
 
                 in_features = model.head.in_features #1024
-                model.head = nn.Linear(in_features, self.num_classes, bias=True)
+                # model.head = nn.Linear(in_features, self.num_classes, bias=True)
+                model.head = nn.Sequential(
+                    nn.LayerNorm(in_features),
+                    nn.Linear(in_features, 1024),
+                    nn.GELU(),
+                    nn.Dropout(0.1),
+                    nn.Linear(1024, self.num_classes)
+                )
                 return model
     def forward(self, x):
         return self.model(x)
