@@ -13,6 +13,7 @@ from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.optim.lr_scheduler import CosineAnnealingLR
 
 from timm.loss.cross_entropy import SoftTargetCrossEntropy
 
@@ -133,14 +134,15 @@ def main():
             sustain_epochs=5,
             exp_decay=0.8
         )
+        scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
     else:
-        lr_schedule = WarmupCosineScheduler(
-            warmup_epochs=10,
-            total_epochs=end_epoch,
-            min_lr=0.0001,
-            max_lr=0.0005
-        )
-    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
+        # lr_schedule = WarmupCosineScheduler(
+        #     warmup_epochs=10,
+        #     total_epochs=end_epoch,
+        #     min_lr=0.0001,
+        #     max_lr=0.0005
+        # )
+        scheduler = CosineAnnealingLR(optimizer, T_max=end_epoch)
 
     best_acc = 0
 

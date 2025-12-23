@@ -37,16 +37,70 @@ class PiecewiseScheduler:
             lr = (self.max_lr - self.min_lr) * self.exp_decay**(epoch - self.rampup_epochs - self.sustain_epochs) + self.min_lr
         return lr / self.max_lr  
     
+# class WarmupCosineScheduler:
+#     def __init__(self, total_epochs, warmup_epochs, min_lr, max_lr):
+#         self.total_epochs = total_epochs
+#         self.warmup_epochs = warmup_epochs
+#         self.min_lr = min_lr
+#         self.max_lr = max_lr
+#     def __call__(self, epoch):
+#         if epoch < self.warmup_epochs:
+#             return self.min_lr + (self.max_lr - self.min_lr) * (epoch / self.warmup_epochs)
+#         else:
+#             progress = (epoch - self.warmup_epochs) / (self.total_epochs - self.warmup_epochs)
+#             cosine = 0.5 * (1 + math.cos(math.pi * progress))
+#             return self.min_lr + (self.max_lr - self.min_lr) * cosine
+
+# class WarmupCosineScheduler:
+#     """
+#     Linear warm-up followed by cosine annealing.
+#     Returns a multiplier for PyTorch LambdaLR.
+#     """
+
+#     def __init__(self, total_epochs, warmup_epochs, max_lr, min_lr=0.0):
+#         assert warmup_epochs < total_epochs
+
+#         self.total_epochs = total_epochs
+#         self.warmup_epochs = warmup_epochs
+#         self.max_lr = max_lr
+#         self.min_lr = min_lr
+
+#     def __call__(self, epoch):
+#         # Warm-up
+#         if epoch < self.warmup_epochs:
+#             lr = self.max_lr * (epoch + 1) / self.warmup_epochs
+
+#         # Cosine decay
+#         else:
+#             progress = (epoch - self.warmup_epochs) / (
+#                 self.total_epochs - self.warmup_epochs
+#             )
+#             cosine = 0.5 * (1 + math.cos(math.pi * progress))
+#             lr = self.min_lr + (self.max_lr - self.min_lr) * cosine
+
+#         # Return multiplier
+#         return lr / self.max_lr
+    
 class WarmupCosineScheduler:
-    def __init__(self, total_epochs, warmup_epochs, min_lr, max_lr):
+    def __init__(self, total_epochs, warmup_epochs, max_lr, min_lr=0.0, warmup_start_lr=1e-6):
         self.total_epochs = total_epochs
         self.warmup_epochs = warmup_epochs
-        self.min_lr = min_lr
         self.max_lr = max_lr
+        self.min_lr = min_lr
+        self.warmup_start_lr = warmup_start_lr
+
     def __call__(self, epoch):
         if epoch < self.warmup_epochs:
-            return self.min_lr + (self.max_lr - self.min_lr) * (epoch / self.warmup_epochs)
+            lr = self.warmup_start_lr + (self.max_lr - self.warmup_start_lr) * (epoch + 1) / self.warmup_epochs
         else:
             progress = (epoch - self.warmup_epochs) / (self.total_epochs - self.warmup_epochs)
             cosine = 0.5 * (1 + math.cos(math.pi * progress))
-            return self.min_lr + (self.max_lr - self.min_lr) * cosine
+            lr = self.min_lr + (self.max_lr - self.min_lr) * cosine
+
+        return lr / self.max_lr
+
+
+# max_lr = 5e-4
+# min_lr = 5e-7   (or 0)
+# warmup_epochs = 10
+# warmup_start_lr = 1e-6
