@@ -134,16 +134,15 @@ def main():
             sustain_epochs=5,
             exp_decay=0.8
         )
-        scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
     else:
-        # lr_schedule = WarmupCosineScheduler(
-        #     warmup_epochs=10,
-        #     total_epochs=end_epoch,
-        #     min_lr=0.0001,
-        #     max_lr=0.0005
-        # )
-        scheduler = CosineAnnealingLR(optimizer, T_max=end_epoch)
-
+        lr_schedule = WarmupCosineScheduler(
+            start_lr=0.00001,
+            max_lr=0.00005,
+            min_lr=0.00001,
+            rampup_epochs=5,
+            total_epochs=50
+        )
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
     best_acc = 0
 
     if resume == True:
