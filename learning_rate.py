@@ -37,11 +37,12 @@ class PiecewiseScheduler:
         return lr / self.max_lr  
     
 class WarmupCosineScheduler:
-    def __init__(self, start_lr, max_lr, min_lr, rampup_epochs, total_epochs):
+    def __init__(self, start_lr, max_lr, min_lr, rampup_epochs, sustain_epochs, total_epochs):
         self.start_lr = start_lr
         self.max_lr = max_lr
         self.min_lr = min_lr
         self.rampup_epochs = rampup_epochs
+        self.sustain_epochs = sustain_epochs
         self.total_epochs = total_epochs
     def __call__(self, epoch):
         # Phase 1: Linear warm-up
@@ -52,11 +53,12 @@ class WarmupCosineScheduler:
                 * epoch
                 + self.start_lr
             )
-
+        elif epoch < self.rampup_epochs + self.sustain_epochs:
+            lr = self.max_lr
         # Phase 2: Cosine annealing
         else:
-            cosine_epoch = epoch - self.rampup_epochs
-            cosine_total = self.total_epochs - self.rampup_epochs
+            cosine_epoch = epoch - (self.rampup_epochs + self.sustain_epochs)
+            cosine_total = self.total_epochs - (self.rampup_epochs + self.sustain_epochs)
 
             lr = self.min_lr + 0.5 * (self.max_lr - self.min_lr) * (
                 1 + math.cos(math.pi * cosine_epoch / cosine_total)

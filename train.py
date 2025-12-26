@@ -95,6 +95,13 @@ def main():
     model_type = int(config["TRAIN"]["TRAIN_PARA"]["MODEL_TYPE"])
     if model_type == 8:
         img_size = [224, 224]
+
+    #Learning_rate
+    if model_type not in [8, 9]:
+        Learning_rate_para = config["TRAIN"]["LEARNING_RATE"]["PieceWise"]
+    else:
+        Learning_rate_para = config["TRAIN"]["LEARNING_RATE"]["WarmupCosine"]
+
     #Optional
     save_checkpoint = config["TRAIN"]["OPTIONAL"]["SAVE_CHECKPOINT"]
     save_best = config["TRAIN"]["OPTIONAL"]["SAVE_BEST"]
@@ -127,21 +134,24 @@ def main():
 
     if model_type not in [8, 9]:
         lr_schedule = PiecewiseScheduler(
-            start_lr=0.0001,
-            max_lr=0.0005,
-            min_lr=0.0001,
-            rampup_epochs=10,
-            sustain_epochs=5,
-            exp_decay=0.8
+            start_lr=Learning_rate_para["START_LR"],
+            max_lr=Learning_rate_para["MAX_LR"],
+            min_lr=Learning_rate_para["MIN_LR"],
+            rampup_epochs=Learning_rate_para["RAMPUP_EPOCHS"],
+            sustain_epochs=Learning_rate_para["SUSTAIN_EPOCHS"],
+            exp_decay=Learning_rate_para["EXP_DECAY"]
         )
+        print("Training using PiecewiseScheduler")
     else:
         lr_schedule = WarmupCosineScheduler(
-            start_lr=0.00001,
-            max_lr=0.00005,
-            min_lr=0.00001,
-            rampup_epochs=5,
-            total_epochs=50
+            start_lr=Learning_rate_para["START_LR"],
+            max_lr=Learning_rate_para["MAX_LR"],
+            min_lr=Learning_rate_para["MIN_LR"],
+            rampup_epochs=Learning_rate_para["RAMPUP_EPOCHS"],
+            sustain_epochs=Learning_rate_para["SUSTAIN_EPOCHS"],
+            total_epochs=end_epoch
         )
+        print("Training using WarmupCosineScheduler")
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_schedule)
     best_acc = 0
 
