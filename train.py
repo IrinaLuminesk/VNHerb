@@ -130,7 +130,7 @@ def main():
 
     eval_criterion = nn.CrossEntropyLoss()
     train_criterion = SoftTargetCrossEntropy()
-    optimizer = optim.AdamW(model.parameters(), lr=0.0005, weight_decay=1e-2)
+    optimizer = optim.AdamW(model.parameters(), lr=Learning_rate_para["MAX_LR"], weight_decay=1e-2)
 
     if model_type not in [8, 9]:
         lr_schedule = PiecewiseScheduler(
