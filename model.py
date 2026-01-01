@@ -75,7 +75,7 @@ class Model(nn.Module):
                 return model
             
             case 4: #EfficientNetB4
-                model = efficientnet_b4(weights=EfficientNet_B4_Weights)
+                model = efficientnet_b4(weights=EfficientNet_B4_Weights.DEFAULT)
 
                 in_features = model.classifier[1].in_features #1792
 
