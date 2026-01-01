@@ -25,13 +25,26 @@ class MetricCal():
         self.correct += (pred_class == true_class).sum().item()
         self.total += batch_size
 
-        for c in range(self.num_classes):
-            tp = ((pred_class == c) & (true_class == c)).sum().item()
-            fp = ((pred_class == c) & (true_class != c)).sum().item()
-            fn = ((pred_class != c) & (true_class == c)).sum().item()
-            self.tp_per_class[c] += tp
-            self.fp_per_class[c] += fp
-            self.fn_per_class[c] += fn
+        # for c in range(self.num_classes):
+        #     tp = ((pred_class == c) & (true_class == c)).sum().item()
+        #     fp = ((pred_class == c) & (true_class != c)).sum().item()
+        #     fn = ((pred_class != c) & (true_class == c)).sum().item()
+        #     self.tp_per_class[c] += tp
+        #     self.fp_per_class[c] += fp
+        #     self.fn_per_class[c] += fn
+        
+        pred = pred_class.detach().cpu()
+        true = true_class.detach().cpu()
+        
+        # Confusion matrix update
+        cm = torch.bincount(
+            self.num_classes * true + pred,
+            minlength=self.num_classes ** 2
+        ).reshape(self.num_classes, self.num_classes)
+        
+        self.tp_per_class += cm.diag()
+        self.fp_per_class += cm.sum(dim=0) - cm.diag()
+        self.fn_per_class += cm.sum(dim=1) - cm.diag()
 
     @property
     def avg_loss(self):
