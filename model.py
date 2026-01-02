@@ -30,6 +30,7 @@ class Model(nn.Module):
                     nn.Linear(1024, self.num_classes),
                 )
                 model.fc = fc
+                print("Training on Resnet50 architecture")
                 return model
             case 2: #VGG16
                 vgg16_weights = VGG16_Weights.DEFAULT
@@ -50,6 +51,7 @@ class Model(nn.Module):
                     nn.Dropout(0.4),
                     nn.Linear(1024, self.num_classes)
                 )
+                print("Training on VGG16 architecture")
                 return model
             
             case 3: #Xception
@@ -166,6 +168,7 @@ class Model(nn.Module):
                     nn.Dropout(0.1),
                     nn.Linear(1024, self.num_classes)
                 )
+                print("Training on Swin architecture")
                 return model
     def forward(self, x):
         return self.model(x)

@@ -42,9 +42,9 @@ class MetricCal():
             minlength=self.num_classes ** 2
         ).reshape(self.num_classes, self.num_classes)
         
-        self.tp_per_class += cm.diag()
-        self.fp_per_class += cm.sum(dim=0) - cm.diag()
-        self.fn_per_class += cm.sum(dim=1) - cm.diag()
+        self.tp_per_class += cm.diag().float()
+        self.fp_per_class += (cm.sum(dim=0) - cm.diag()).float()
+        self.fn_per_class += (cm.sum(dim=1) - cm.diag()).float()
 
     @property
     def avg_loss(self):
