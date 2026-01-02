@@ -75,7 +75,7 @@ class DatasetLoader():
                 shuffle=True,
                 num_workers=4,          # START HERE
                 pin_memory=True,
-                persistent_workers=True,
+                persistent_workers=False, #Chỉnh cái này thành False để tránh hết Ram
                 prefetch_factor=2
             )
         else:
@@ -90,7 +90,7 @@ class DatasetLoader():
                 shuffle=False,
                 num_workers=2,
                 pin_memory=True,
-                persistent_workers=True
+                persistent_workers=False #Chỉnh cái này thành False để tránh hết Ram
             )
         print()
         return loader

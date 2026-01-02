@@ -1,7 +1,8 @@
 import argparse
 import os
+import random
 from typing import Sequence
-from sympy import Float
+import numpy as np
 from tqdm import tqdm
 from Aug.BatchWiseAug import BatchWiseAug
 from Metrics.MetricCal import MetricCal
@@ -13,7 +14,6 @@ from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.optim.lr_scheduler import CosineAnnealingLR
 
 from timm.loss.cross_entropy import SoftTargetCrossEntropy
 
@@ -32,8 +32,8 @@ def parse_args():
     return config
 
 def set_seed(seed=42):
-    # random.seed(seed)
-    # np.random.seed(seed)
+    random.seed(seed)
+    np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
