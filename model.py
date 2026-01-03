@@ -2,7 +2,7 @@ import torch.nn as nn
 from torchvision.models import resnet50, ResNet50_Weights,\
     densenet201, DenseNet201_Weights,\
     vgg16, VGG16_Weights, \
-    convnext_base, ConvNeXt_Base_Weights,\
+    alexnet, AlexNet_Weights,\
     mobilenet_v2, MobileNet_V2_Weights, \
     swin_v2_b, Swin_V2_B_Weights, \
     efficientnet_b4, EfficientNet_B4_Weights, \
@@ -123,19 +123,20 @@ class Model(nn.Module):
                 print("Training on MobileNetV2 architecture")
                 return model
 
-            case 7: #convnext base
-                convnext_weight = ConvNeXt_Base_Weights.DEFAULT
-                model = convnext_base(weights= convnext_weight)
+            case 7: #AlexNet
+                alexnet_weight = AlexNet_Weights.DEFAULT
+                model = alexnet(weights= alexnet_weight)
 
-                convnext_classifier = list(model.classifier.children())[:2]
-                in_features = model.classifier[2].in_features #1024
+                in_features = model.classifier[1].in_features #9216
 
                 model.classifier = nn.Sequential(
-                    *convnext_classifier,
+                    nn.Linear(in_features, 1024, bias=True),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
                     nn.Dropout(0.4),
-                    nn.Linear(in_features, self.num_classes)
+                    nn.Linear(1024, self.num_classes)
                 )
-                print("Training on convnextBase architecture")
+                print("Training on AlexNet architecture")
                 return model
             
             case 8: #ViT
