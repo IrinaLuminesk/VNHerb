@@ -6,7 +6,8 @@ from torchvision.models import resnet50, ResNet50_Weights,\
     mobilenet_v2, MobileNet_V2_Weights, \
     swin_v2_b, Swin_V2_B_Weights, \
     efficientnet_b4, EfficientNet_B4_Weights, \
-    vit_b_16, ViT_B_16_Weights
+    vit_b_16, ViT_B_16_Weights, \
+    inception_v3, Inception_V3_Weights
 import timm         
 
 class Model(nn.Module):
@@ -170,6 +171,20 @@ class Model(nn.Module):
                     nn.Linear(1024, self.num_classes)
                 )
                 print("Training on Swin architecture")
+                return model
+            case 10: #Inception-v3
+                inception_v3_weight = Inception_V3_Weights.DEFAULT
+                model = inception_v3(weights=inception_v3_weight)
+
+                in_features = model.fc.in_features #2048
+                model.fc = nn.Sequential(
+                    nn.Linear(in_features, 1024, bias=True),
+                    nn.BatchNorm1d(1024),
+                    nn.ReLU(),
+                    nn.Dropout(0.4),
+                    nn.Linear(1024, self.num_classes)
+                )
+                print("Training on Inception V3 architecture")
                 return model
     def forward(self, x):
         return self.model(x)
