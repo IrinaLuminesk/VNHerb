@@ -7,9 +7,10 @@ from tqdm import tqdm
 from Aug.BatchWiseAug import BatchWiseAug
 from Metrics.MetricCal import MetricCal
 from learning_rate import PiecewiseScheduler, WarmupCosineScheduler
-from model import Model
+# from model import Model
 from utils.DatasetLoader import DatasetLoader
 from utils.Utilities import Get_Max_Acc, Loading_Checkpoint, Saving_Best, Saving_Checkpoint, Saving_Metric, Saving_Metric2, YAML_Reader, get_mean_std
+from CBAM_Resnet import Model as CBAM_Resnet
 
 import torch
 import torch.nn as nn
@@ -126,7 +127,8 @@ def main():
 
     batchWiseAug = BatchWiseAug(config=config, num_classes=len(CLASSES))
 
-    model = Model(len(CLASSES), model_type).to(device)
+    # model = Model(len(CLASSES), model_type).to(device)
+    model = CBAM_Resnet(len(CLASSES)).to(device)
 
     eval_criterion = nn.CrossEntropyLoss()
     train_criterion = SoftTargetCrossEntropy()
