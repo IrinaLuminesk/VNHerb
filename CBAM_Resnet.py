@@ -7,7 +7,8 @@ from utils.CBAM import ChannelAttention, SpatialAttention
 class Bottleneck_custom(nn.Module):
     expansion = 4
 
-    def __init__(self, inplanes, planes, stride=1, downsample=None):
+    def __init__(self, inplanes, planes, stride=1, downsample=None,
+                 groups=1, base_width=64, dilation=1, norm_layer=None):
         super(Bottleneck_custom, self).__init__()
         self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes)
@@ -55,7 +56,7 @@ class Model(nn.Module):
         self.num_classes = num_classes
         self.model = self.build_model() 
     def build_model(self):
-        model = ResNet(block=Bottleneck_custome, layers=[3, 4, 6, 3])
+        model = ResNet(block=Bottleneck_custom, layers=[3, 4, 6, 3])
         
         resnet_weights = ResNet50_Weights.DEFAULT
         pretrained_state_dict = resnet_weights.get_state_dict() #State dùng để load vào cùng với CBAM
