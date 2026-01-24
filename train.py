@@ -41,14 +41,15 @@ def set_seed(seed=42):
     # torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device, num_classes):
+def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, optimizer, device, num_classes, ):
     model.train()
     metrics = MetricCal(num_classes=num_classes)
     for inputs, targets in tqdm(loader, total=len(loader), desc="Training epoch [{0}/{1}]".
                                 format(epoch, end_epoch)):
 
         inputs, targets = inputs.to(device, non_blocking=True), targets.to(device, non_blocking=True)
-        inputs, targets = batchWiseAug(inputs, targets)
+        if batchWiseAug != None:
+            inputs, targets = batchWiseAug(inputs, targets)
 
         optimizer.zero_grad()
         outputs = model(inputs)
@@ -56,7 +57,7 @@ def train(epoch: int, end_epoch: int, batchWiseAug, model, loader, criterion, op
         loss.backward()
         optimizer.step()
 
-        metrics.update(loss=loss, outputs=outputs, targets=targets, type="soft")
+        metrics.update(loss=loss, outputs=outputs, targets=targets, type="soft" if batchWiseAug != None else "hard")
     return metrics
 
 def validate(epoch, end_epoch, model, loader, criterion, device, num_classes):
@@ -87,6 +88,8 @@ def main():
 
     #Training parameters
     img_size = config["TRAIN"]["DATA"]["IMAGE_SIZE"]
+    enabled_transform = config["TRAIN"]["TRANSFORM"]
+    enabled_batchwise_transform = config["AUG"]["ENABLED"]
     begin_epoch = config["TRAIN"]["TRAIN_PARA"]["BEGIN_EPOCH"] 
     end_epoch = config["TRAIN"]["TRAIN_PARA"]["END_EPOCH"]
     resume = config["TRAIN"]["TRAIN_PARA"]["RESUME"]
@@ -119,19 +122,23 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    train_data = DatasetLoader(path=train_path, batch_size=batch_size, std=std, mean=mean, img_size=img_size)
+    train_data = DatasetLoader(path=train_path, batch_size=batch_size, std=std, mean=mean, img_size=img_size, transform=enabled_transform)
     test_data = DatasetLoader(path=test_path, batch_size=batch_size, std=std, mean=mean, img_size=img_size)
 
     training_loader = train_data.dataset_loader("train")
     testing_loader = test_data.dataset_loader("test")
 
-    batchWiseAug = BatchWiseAug(config=config, num_classes=len(CLASSES))
+    batchWiseAug = None
+    if enabled_batchwise_transform:
+        batchWiseAug = BatchWiseAug(config=config, num_classes=len(CLASSES))
 
     # model = Model(len(CLASSES), model_type).to(device)
     model = CBAM_Resnet(len(CLASSES)).to(device)
 
     eval_criterion = nn.CrossEntropyLoss()
-    train_criterion = SoftTargetCrossEntropy()
+    train_criterion = nn.CrossEntropyLoss()
+    if enabled_batchwise_transform:
+        train_criterion = SoftTargetCrossEntropy()
     optimizer = optim.AdamW(model.parameters(), lr=Learning_rate_para["MAX_LR"], weight_decay=1e-2)
 
     if model_type not in [8, 9]:
