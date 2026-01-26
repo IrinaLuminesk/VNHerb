@@ -83,7 +83,7 @@ class DatasetLoader():
                 training_dataset,
                 batch_size=self.batch_size,
                 shuffle=True,
-                num_workers=4,          # START HERE
+                num_workers=2,          # START HERE
                 pin_memory=True,
                 persistent_workers=False, #Chỉnh cái này thành False để tránh hết Ram
                 prefetch_factor=2
