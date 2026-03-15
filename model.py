@@ -1,5 +1,5 @@
 import torch.nn as nn
-from torchvision.models import resnet50, ResNet50_Weights,\
+from torchvision.models import resnet18, ResNet18_Weights,\
     densenet201, DenseNet201_Weights,\
     vgg16, VGG16_Weights, \
     alexnet, AlexNet_Weights,\
@@ -19,19 +19,19 @@ class Model(nn.Module):
     def build_model(self):
         match self.model_type:
             case 1: #Resnet50
-                resnet_weights = ResNet50_Weights.DEFAULT
-                model = resnet50(weights=resnet_weights)
+                resnet_weights = ResNet18_Weights.DEFAULT
+                model = resnet18(weights=resnet_weights)
 
-                in_features = model.fc.in_features #2048
+                in_features = model.fc.in_features #512
                 fc = nn.Sequential(
-                    nn.Linear(in_features, 1024),
-                    nn.BatchNorm1d(1024),
+                    nn.Linear(in_features, 512),
+                    nn.BatchNorm1d(512),
                     nn.ReLU(),
                     nn.Dropout(0.4),
-                    nn.Linear(1024, self.num_classes),
+                    nn.Linear(512, self.num_classes),
                 )
                 model.fc = fc
-                print("Training on Resnet50 architecture")
+                print("Training on Resnet18 architecture")
                 return model
             case 2: #VGG16
                 vgg16_weights = VGG16_Weights.DEFAULT
